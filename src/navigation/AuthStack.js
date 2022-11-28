@@ -1,6 +1,7 @@
 import React, { useEffect, useState} from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
-import Login from '../screens/Login';
+
+// import Login from '../screens/Login';
 import Welcome from '../screens/Welcome';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
@@ -25,9 +26,10 @@ const AuthStack = () => {
         return null;
     } else if (isFirstLaunch == true) {
         routName = 'Welcome';
-    } else {
-        routName = 'Login';
-    }
+    } 
+    // else {
+    //     routName = 'Login';
+    // }
 
     return (
         <Stack.Navigator
@@ -36,7 +38,7 @@ const AuthStack = () => {
                 headerShown: false
             }}>
                 <Stack.Screen name='Welcome' component={Welcome}/>
-                <Stack.Screen name='Login' component={Login}/>
+               
             
         </Stack.Navigator>
     )
