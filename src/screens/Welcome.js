@@ -1,13 +1,13 @@
 import { StyleSheet, Text, View, Dimensions, TouchableOpacity } from 'react-native';
 import React from 'react';
-// import { useNavigation } from '@react-navigation/native';
+import { useNavigation } from '@react-navigation/native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
 const SCREENHEIGHT = Dimensions.get('window').height;
 const SCREENWIDTH = Dimensions.get('window').width;
 
 const Welcome = () => {
-    // const navigation = useNavigation();
+    const navigation = useNavigation();
 
     return (
         <View>
@@ -19,11 +19,11 @@ const Welcome = () => {
                     บันทึกความดันโลหิต
                 </Text>
 
-                <TouchableOpacity style={styles.button} >
+                <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('Signup')}>
                     <Text style={[styles.text, {
                         fontFamily: 'AlongSansExtraBold',
                         fontSize: 20,
-                        color: 'black',
+                
                         top: 0,
                         alignSelf: 'center'
                     }]}>
@@ -79,6 +79,18 @@ const styles = StyleSheet.create({
     },
 
     button: {
+        backgroundColor: '#5DB075',
+        width: '80%',
+        height: 55,
+        alignItems: 'center',
+        justifyContent: 'center',
+        alignSelf: 'center',
+        borderRadius: 75,
+        top: 70,
+        color: 'white',
+
+    },
+    button_hover:{
         backgroundColor: 'white',
         width: '80%',
         height: 55,
@@ -87,5 +99,7 @@ const styles = StyleSheet.create({
         alignSelf: 'center',
         borderRadius: 75,
         top: 70,
+        color: 'black',
+
     }
 })
