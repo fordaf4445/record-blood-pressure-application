@@ -1,8 +1,6 @@
 import React from 'react';
 import { Button, PermissionsAndroid, SafeAreaView, StatusBar, StyleSheet, Text, View} from 'react-native';
 import AuthStack from './src/navigation/AuthStack';
-import Singup from './src/screens/Signup';
-import EventView from './__tests__/test';
 import { NavigationContainer } from '@react-navigation/native';
 const App = () => {
 

@@ -1,8 +1,7 @@
 import React, { useEffect, useState} from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
-
-import Signup from '../screens/Signup';
 import Welcome from '../screens/Welcome';
+import Signup from '../screens/Signup';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const Stack = createStackNavigator();
@@ -39,7 +38,6 @@ const AuthStack = () => {
             }}>
                 <Stack.Screen name='Welcome' component={Welcome}/>
                 <Stack.Screen name='Signup' component={Signup}/>
-            
         </Stack.Navigator>
     )
 }

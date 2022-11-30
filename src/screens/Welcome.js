@@ -1,105 +1,110 @@
-import { StyleSheet, Text, View, Dimensions, TouchableOpacity } from 'react-native';
-import React from 'react';
+import { StyleSheet, View, Dimensions, TouchableOpacity, TextInput, ScrollView, } from 'react-native';
+import React, { useState } from 'react';
 import { useNavigation } from '@react-navigation/native';
 import Icon from 'react-native-vector-icons/FontAwesome';
-
-const SCREENHEIGHT = Dimensions.get('window').height;
-const SCREENWIDTH = Dimensions.get('window').width;
+import { Button, Text } from '@rneui/base';
 
 const Welcome = () => {
     const navigation = useNavigation();
-
+    const [password, setPassword] = useState('');
     return (
-        <View>
-            <View style={styles.iconView}><Icon name='heartbeat' style={styles.icon} /></View>
+        <ScrollView >
+            <View style={styles.container}>
+                <View style={styles.iconView}>
+                    <Icon name='heartbeat' style={styles.icon} />
+                </View>
+                <View style={styles.container}>
+                    <Text style={styles.textMain}>แอปพลิเคชัน</Text>
+                    <Text style={styles.textMain}>บันทึกความดันโลหิต</Text>
+                </View>
+                <View style={{ flex: 3, alignItems: 'center' }}>
+                    <Text style={styles.textSecond}>เข้าสู่ระบบ</Text>
+                    <TextInput
+                        style={styles.inputView}
+                        placeholder="Email"
+                        placeholderTextColor="gray"
+                    />
+                    <TextInput
+                        style={styles.inputView}
+                        placeholder="Password"
+                        placeholderTextColor="gray"
+                        name="password"
+                        autoCapitalize="none"
+                        autoCorrect={false}
+                        textContentType="newPassword"
+                        secureTextEntry
+                        value={password}
+                        enablesReturnKeyAutomatically
+                        onChangeText={(text) => setPassword(text)}
+                    />
+                    <Button
+                        onPress={() => { navigation.navigate('Login') }}
+                        title="เข้าสู่ระบบ"
+                        titleStyle={{ fontFamily:'NotoSansThai-Bold'}}
+                        buttonStyle={{
+                            backgroundColor: '#5DB075',
+                            borderRadius: 30,
+                            height: 50,
+                            width: 343,
+                        }}
+                        containerStyle={{
+                            // marginHorizontal: 50,
+                            marginVertical: 10,
+                            marginTop: 20,
+                            alignItems: 'center',
 
-            <View style={styles.textContainer}>
-                <Text style={styles.text}>
-                    แอปพลิเคชัน{'\n'}
-                    บันทึกความดันโลหิต
-                </Text>
-
-                <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('Signup')}>
-                    <Text style={[styles.text, {
-                        fontFamily: 'AlongSansExtraBold',
-                        fontSize: 20,
-                
-                        top: 0,
-                        alignSelf: 'center'
-                    }]}>
-                        ลงทะเบียน
+                        }}
+                    />
+                    <Text style={styles.textThree} onPress={() => { navigation.navigate('Signup') }}>
+                        Don’t have any account? Sign Up
                     </Text>
-                </TouchableOpacity>
-
-                <TouchableOpacity >
-                    <Text style={[styles.text, {
-                        fontFamily: 'AlongSansSemiBold',
-                        fontSize: 20,
-                        color: 'white',
-                        top: 100,
-                        alignSelf: 'center',
-
-                    }]}>
-                        เข้าสู่ระบบ
-                    </Text>
-                </TouchableOpacity>
+                </View>
             </View>
-        </View>
+        </ScrollView>
     )
 }
 
 export default Welcome
 
 const styles = StyleSheet.create({
+    container: {
+        flex: 1,
+        padding: 35,
+        alignItems: 'center',
+    },
     iconView: {
         justifyContent: "center",
         alignItems: "center",
-        height: SCREENHEIGHT / 1.75,
-        width: SCREENWIDTH,
     },
     icon: {
         fontSize: 250,
         color: "#5DB075",
     },
-
-    textContainer: {
-        height: SCREENHEIGHT,
-        width: SCREENWIDTH,
-        backgroundColor: "#5DB075",
-        top: SCREENHEIGHT - (SCREENHEIGHT),
-        borderTopLeftRadius: 75,
-        borderTopRightRadius: 75,
+    textMain: {
+        fontSize: 30,
+        fontFamily: 'NotoSansThai-Bold',
     },
-    text: {
-        fontFamily: 'pd-ebi',
-        fontSize: 38,
-        color: 'white',
-        top: 35,
-        textAlign: 'center'
-    },
-
-    button: {
-        backgroundColor: '#5DB075',
-        width: '80%',
-        height: 55,
-        alignItems: 'center',
-        justifyContent: 'center',
-        alignSelf: 'center',
-        borderRadius: 75,
-        top: 70,
-        color: 'white',
-
-    },
-    button_hover:{
-        backgroundColor: 'white',
-        width: '80%',
-        height: 55,
-        alignItems: 'center',
-        justifyContent: 'center',
-        alignSelf: 'center',
-        borderRadius: 75,
-        top: 70,
+    textSecond: {
+        fontSize: 24,
+        fontFamily: 'NotoSansThai-Bold',
         color: 'black',
 
-    }
+    },
+    textThree: {
+        color: '#5DB075',
+        top: 10,
+        fontFamily:'NotoSansThai-SemiBold',
+    },
+    inputView: {
+        backgroundColor: '#F6F6F6',
+        borderRadius: 15,
+        height: 50,
+        borderWidth: 1,
+        borderColor: '#E8E8E8',
+        padding: 15,
+        marginTop: 20,
+        width: 343,
+        fontSize: 16,
+        fontFamily:'NotoSansThai-SemiBold',
+    },
 })
