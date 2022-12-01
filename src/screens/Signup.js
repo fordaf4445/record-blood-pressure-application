@@ -44,13 +44,13 @@ const Signup = () => {
                 <View style={styles.innerContainerSmall}>
                     <TextInput style={styles.inputSmall}
                         keyboardType='numeric'
-                        maxLength={3}> </TextInput>
+                        maxLength={3}></TextInput>
                     <View style={styles.textSmall}>
                         <Text style={styles.textSmall}>kg.</Text>
                     </View>
                     <TextInput style={[styles.inputSmall, { marginLeft: 30 }]}
                         keyboardType='numeric'
-                        maxLength={3}> </TextInput>
+                        maxLength={3}></TextInput>
                     <View style={styles.textSmall}>
                         <Text>cm.</Text>
                     </View>
@@ -62,15 +62,34 @@ const Signup = () => {
                 <View style={styles.innerContainerSmall}>
                     <TextInput style={styles.inputSmall}
                         keyboardType='numeric'
-                        maxLength={3}> </TextInput>
+                        maxLength={3}></TextInput>
                     <BouncyCheckbox
-                        size={20}
-                        fillColor="red"
-                        unfillColor="#FFFFFF"
+                        style={{ marginLeft: 60 }}
                         text="ชาย"
+                        textStyle={{
+                            fontFamily: "NotoSansThai-Regular", color: "black",
+                            textDecorationLine: "none",
+                        }}
+                        textContainerStyle={{ marginLeft: 5 }}
+                        size={22}
+                        fillColor="#5DB075"
+                        unfillColor="#FFFFFF"
                         iconStyle={{ borderColor: "red" }}
-                        innerIconStyle={{ borderWidth: 1 }}
-                        textStyle={{ fontFamily: "NotoSansThai-Bold" }}
+                        innerIconStyle={{ borderWidth: 2, }}
+                    />
+                    <BouncyCheckbox
+                        style={{ marginLeft: 30 }}
+                        text="หญิง"
+                        textStyle={{
+                            fontFamily: "NotoSansThai-Regular", color: "black",
+                            textDecorationLine: "none",
+                        }}
+                        textContainerStyle={{ marginLeft: 5 }}
+                        size={22}
+                        fillColor="#5DB075"
+                        unfillColor="#FFFFFF"
+                        iconStyle={{ borderColor: "red" }}
+                        innerIconStyle={{ borderWidth: 2, }}
                     />
                 </View>
                 <View style={{ flex: 1, justifyContent: 'flex-end' }}>
