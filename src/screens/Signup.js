@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
-import { View, StyleSheet, TextInput, ScrollView } from 'react-native';
+import { View, StyleSheet, TextInput, ScrollView, CheckBox } from 'react-native';
 import { Button, Input, makeStyles, Text } from '@rneui/base';
 import { useNavigation } from '@react-navigation/native';
 import { ThemeProvider } from '@rneui/themed';
+import BouncyCheckbox from "react-native-bouncy-checkbox";
 
 // const navigation = useNavigation();
 const Signup = () => {
@@ -12,7 +13,7 @@ const Signup = () => {
 
 
             <View style={styles.container}>
-                <Text h1> ลงทะเบียน </Text>
+                <Text style={styles.textMain}> ลงทะเบียน </Text>
                 <TextInput
                     style={styles.inputView}
                     placeholder="Username"
@@ -38,7 +39,7 @@ const Signup = () => {
                 />
                 <View style={styles.innerContainer}>
                     <Text style={styles.textcolor}>น้ำหนัก</Text>
-                    <Text style={[styles.textcolor, { marginLeft: 125 }]}>ส่วนสูง</Text>
+                    <Text style={[styles.textcolor, { marginLeft: 130 }]}>ส่วนสูง</Text>
                 </View>
                 <View style={styles.innerContainerSmall}>
                     <TextInput style={styles.inputSmall}
@@ -48,21 +49,29 @@ const Signup = () => {
                         <Text style={styles.textSmall}>kg.</Text>
                     </View>
                     <TextInput style={[styles.inputSmall, { marginLeft: 30 }]}
-                    keyboardType='numeric'
-                    maxLength={3}> </TextInput>
+                        keyboardType='numeric'
+                        maxLength={3}> </TextInput>
                     <View style={styles.textSmall}>
                         <Text>cm.</Text>
                     </View>
                 </View>
                 <View style={styles.innerContainer}>
                     <Text style={styles.textcolor}>อายุ</Text>
-                    <Text style={[styles.textcolor, { marginLeft: 145 }]}>เพศ</Text>
+                    <Text style={[styles.textcolor, { marginLeft: 150 }]}>เพศ</Text>
                 </View>
                 <View style={styles.innerContainerSmall}>
                     <TextInput style={styles.inputSmall}
-                    keyboardType='numeric'
-                    maxLength={3}> </TextInput>
-
+                        keyboardType='numeric'
+                        maxLength={3}> </TextInput>
+                    <BouncyCheckbox
+                        size={25}
+                        fillColor="red"
+                        unfillColor="#FFFFFF"
+                        text="ชาย"
+                        iconStyle={{ borderColor: "red" }}
+                        innerIconStyle={{ borderWidth: 1 }}
+                        textStyle={{ fontFamily: "NotoSansThai-Bold" }}
+                    />
                 </View>
                 <View style={{ flex: 1, justifyContent: 'flex-end' }}>
                     <Button
@@ -79,7 +88,7 @@ const Signup = () => {
                             marginTop: 20,
                             alignItems: 'center',
                         }}
-                        titleStyle={{ fontWeight: 'bold' }} />
+                        titleStyle={{ fontFamily: 'NotoSansThai-SemiBold' }} />
                 </View>
             </View>
 
@@ -110,6 +119,7 @@ const styles = StyleSheet.create({
     textcolor: {
         color: '#5DB075',
         fontSize: 16,
+        fontFamily: 'NotoSansThai-SemiBold'
     },
     innerContainer: {
         width: "100%",
@@ -132,6 +142,10 @@ const styles = StyleSheet.create({
         padding: 15,
         width: 112,
         fontSize: 20,
+    },
+    textMain: {
+        fontSize: 35,
+        fontFamily: 'NotoSansThai-SemiBold'
     },
     textSmall: {
         marginLeft: 5,
