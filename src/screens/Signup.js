@@ -64,7 +64,7 @@ const Signup = () => {
                         keyboardType='numeric'
                         maxLength={3}> </TextInput>
                     <BouncyCheckbox
-                        size={25}
+                        size={20}
                         fillColor="red"
                         unfillColor="#FFFFFF"
                         text="ชาย"
