@@ -38,7 +38,7 @@ const Welcome = () => {
                         onChangeText={(text) => setPassword(text)}
                     />
                     <Button
-                        onPress={() => { navigation.navigate('Login') }}
+                        onPress={() => { navigation.navigate('TapStack') }}
                         title="เข้าสู่ระบบ"
                         titleStyle={{ fontFamily:'NotoSansThai-Bold'}}
                         buttonStyle={{

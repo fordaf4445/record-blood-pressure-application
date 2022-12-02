@@ -1,11 +1,12 @@
 import React, { useEffect, useState} from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import { NavigationContainer } from '@react-navigation/native';
 import Welcome from '../screens/Welcome';
 import Signup from '../screens/Signup';
-import AsyncStorage from '@react-native-async-storage/async-storage';
+import TapStack from './TapStack';
 
 const Stack = createStackNavigator();
-
 const AuthStack = () => {
     const [isFirstLaunch ,setIsFirstLaunch] = useState(null);
     let routName;
@@ -38,6 +39,7 @@ const AuthStack = () => {
             }}>
                 <Stack.Screen name='Welcome' component={Welcome}/>
                 <Stack.Screen name='Signup' component={Signup}/>
+                <Stack.Screen name='TapStack'component={TapStack}/>
         </Stack.Navigator>
     )
 }

@@ -1,6 +1,7 @@
 import React from 'react';
 import { Button, PermissionsAndroid, SafeAreaView, StatusBar, StyleSheet, Text, View} from 'react-native';
 import AuthStack from './src/navigation/AuthStack';
+import TapStack from './src/navigation/TapStack'
 import { NavigationContainer } from '@react-navigation/native';
 const App = () => {
 
@@ -33,7 +34,8 @@ const App = () => {
 
   return(
     <NavigationContainer>
-      <AuthStack/>
+      {/* <AuthStack/> */}
+      <TapStack/>
     </NavigationContainer>
   )
 }
