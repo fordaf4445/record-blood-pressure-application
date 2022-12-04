@@ -13,10 +13,13 @@ const Tab = createBottomTabNavigator();
 const TapStack = () => {
     return (
         <Tab.Navigator
+            
+            initialRouteName='Profile'
             screenOptions={{
                 tabBarActiveTintColor: '#5DB075',
                 tabBarStyle: { height: 70 },
-                tabBarLabelStyle : {marginBottom:10,marginTop:-7}
+                tabBarLabelStyle : {marginBottom:10,marginTop:-7},
+                headerShown: false,
             }}
         >
             <Tab.Screen name='Prosess' component={Prosess}
