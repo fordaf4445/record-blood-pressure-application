@@ -7,7 +7,7 @@ import BouncyCheckbox from "react-native-bouncy-checkbox";
 import Inicon from 'react-native-vector-icons/dist/Ionicons'
 import Calendar from '../../components/ProfileComponents/Calendar';
 import Savefile from '../../components/ProfileComponents/Savefile';
-
+import Title from '../../components/ProfileComponents/Title';
 
 
 const Profile = () => {
@@ -34,12 +34,7 @@ const Profile = () => {
                 <View style={{ flex: 6, alignItems: 'center' }}>
                     <Text style={styles.textUsername}>Usernames</Text>
                     <Text style={{ fontSize: 16, fontFamily: 'NotoSansThai-Bold' }}>ข้อมูลส่วนตัว</Text>
-                    <View style={{ flexDirection: 'row', }}>
-                        <Text>น้ำหนัก</Text><Text> 42</Text><Text>  กก.</Text><Text>  ส่วนสูง</Text><Text>  158</Text><Text>  ซม.</Text>
-                    </View>
-                    <View style={{ flexDirection: 'row', right: 35, }}>
-                        <Text>อายุ</Text><Text> 26</Text><Text>  ปี</Text><Text>  เพศ</Text><Text>  หญิง</Text>
-                    </View>
+                    <Title/>
                         <Button
                             title={<Calendar/>}
                             icon={{

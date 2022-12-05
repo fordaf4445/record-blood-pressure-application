@@ -10,15 +10,15 @@ const History = () => {
     const [email, setEmail] = useState('');
     const [password, setPasword] = useState('');
     const [userName, setUserName] = useState('');
-
+    
     function addDataUser() {
         firestore()
             .collection('dataUser')
             .add([{
                 email: email,
                 password: password,
-                userName: userName
-            }].f)
+                userName: userName,
+            }])
             .then(() => {
                 console.log('Data User added!!');
             });

@@ -14,7 +14,7 @@ const TapStack = () => {
     return (
         <Tab.Navigator
             
-            initialRouteName='Profile'
+            initialRouteName='Statistics'
             screenOptions={{
                 tabBarActiveTintColor: '#5DB075',
                 tabBarStyle: { height: 70 },
