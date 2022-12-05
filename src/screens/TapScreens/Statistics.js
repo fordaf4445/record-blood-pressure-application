@@ -4,6 +4,7 @@ import { Button, Input, makeStyles, Text } from '@rneui/base';
 import { useNavigation } from '@react-navigation/native';
 import { ThemeProvider } from '@rneui/themed';
 import { ProgressChart } from 'react-native-chart-kit';
+import ProgressChartComponent from '../../components/StatisticsComponents/ProgressChartComponent';
 
 const Statistics = () => {
     return (
@@ -11,9 +12,11 @@ const Statistics = () => {
             <View style={styles.titleBar}>
                 <Text style={styles.textHeader}>สถิติ</Text>
             </View>
-            <View>
-                
+            <View style={{alignItems:'center'}}>
+               <ProgressChartComponent/> 
+               <Text style={{position:'absolute',top:100,right:330}}>test</Text>
             </View>
+
         </View>
     )
 }
