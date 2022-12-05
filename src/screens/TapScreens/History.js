@@ -14,11 +14,11 @@ const History = () => {
     function addDataUser() {
         firestore()
             .collection('dataUser')
-            .add([{
+            .add({
                 email: email,
                 password: password,
                 userName: userName,
-            }])
+            })
             .then(() => {
                 console.log('Data User added!!');
             });
