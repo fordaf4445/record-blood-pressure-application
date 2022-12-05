@@ -1,10 +1,13 @@
 import React, { useState } from 'react';
 import { View, StyleSheet, TextInput, ScrollView, CheckBox, Image } from 'react-native';
-import { Button, Input, makeStyles, Text } from '@rneui/base';
+import { Button, Input, makeStyles, Text, Icon } from '@rneui/base';
 import { useNavigation } from '@react-navigation/native';
 import { ThemeProvider } from '@rneui/themed';
 import BouncyCheckbox from "react-native-bouncy-checkbox";
 import Inicon from 'react-native-vector-icons/dist/Ionicons'
+import Calendar from '../../components/ProfileComponents/Calendar';
+import Savefile from '../../components/ProfileComponents/Savefile';
+
 
 
 const Profile = () => {
@@ -37,6 +40,45 @@ const Profile = () => {
                     <View style={{ flexDirection: 'row', right: 35, }}>
                         <Text>อายุ</Text><Text> 26</Text><Text>  ปี</Text><Text>  เพศ</Text><Text>  หญิง</Text>
                     </View>
+                        <Button
+                            title={<Calendar/>}
+                            icon={{
+                                name: 'calendar',
+                                type: 'antdesign',
+                                size: 40,
+                            }}
+                            iconContainerStyle={{ right: 40 }}
+                            buttonStyle={{
+                                borderBottomWidth: 1,
+                                borderColor: 'black',
+                                backgroundColor: ''
+                            }}
+                            containerStyle={{
+                                width: '90%',
+                                top: 20
+                            }}
+                        />
+                        <Button
+                            title={<Savefile/>}
+                            icon={{
+                                name: 'file-send-outline',
+                                type: 'material-community',
+                                size: 45,
+                                
+                            }}
+                            iconContainerStyle={{ right: 40 }}
+                            buttonStyle={{
+                                borderBottomWidth: 1,
+                                borderColor: 'black',
+                                backgroundColor: ''
+                            }}
+                            containerStyle={{
+                                width: '90%',
+                                top: 20,
+                                // right: 10,
+                                
+                            }}
+                        />
                 </View>
             </View>
         </View>
