@@ -24,7 +24,7 @@ const Statistics = () => {
             </View>
             <View style={{ flex: 1 }}>
                 <View style={[{ flex: 1,backgroundColor:'pink'},styles.borderPieChart]}>
-
+                    {/* react-native-charts-wrapper */}
                 </View>
                 <View style={[{ flex: 1, alignItems: 'center' },styles.borderPieChart]}>
                     <PieChartComponent />
