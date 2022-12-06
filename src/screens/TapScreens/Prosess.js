@@ -2,16 +2,31 @@ import React, { useState } from 'react';
 import { View, StyleSheet, Image } from 'react-native';
 import { Button, Input, makeStyles, Text } from '@rneui/base';
 import ButtonComponent from '../../components/ButtonComponent';
+import { useNavigation } from '@react-navigation/native';
+
+
 
 const Prosess = () => {
 
+    const navigation = useNavigation();
+
     return (
         <View style={styles.container}>
-            <View style={{ flex:1,alignItems: 'center',justifyContent:'space-around'}}>
-                <View style={{flex:3,justifyContent:'center'}}>
+            <View style={{ flex: 1, alignItems: 'center', justifyContent: 'space-around' }}>
+                <View style={{ flex: 3, justifyContent: 'center' }}>
                     <Image source={require("../../../assets/image/wifi-connection.png")}
                         style={{ width: 200, height: 200 }} />
                     <Text></Text>
+                </View>
+                <View style={{ bottom: 20 }}>
+                    <ButtonComponent
+                        label={"ทดสอบป้อนข้อมูล"}
+                        style={{ backgroundColor: "red" }}
+                        onPress={() => {
+                            navigation.navigate('InputDataTest');
+                        }}
+                    />
+                    <Text>^^^^^^^ไม่มีเครื่องวัดความดันหรออีดอก กดปุ่มบนสิ^^^^^^^</Text>
                 </View>
                 <View>
                     <ButtonComponent
