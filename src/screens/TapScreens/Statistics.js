@@ -5,7 +5,10 @@ import { useNavigation } from '@react-navigation/native';
 import { ThemeProvider } from '@rneui/themed';
 import { ProgressChart } from 'react-native-chart-kit';
 import ProgressChartComponent from '../../components/StatisticsComponents/ProgressChartComponent';
-
+import TextStatus from '../../components/StatisticsComponents/TextStatus';
+import NumberStatusSYS from '../../components/StatisticsComponents/NumberStatusSYS';
+import NumberStatusDIA from '../../components/StatisticsComponents/NumberStatusDIA';
+import NumberStatusPLUSE from '../../components/StatisticsComponents/NumberStatusPLUSE';
 const Statistics = () => {
     return (
         <View style={styles.container}>
@@ -14,7 +17,10 @@ const Statistics = () => {
             </View>
             <View style={{alignItems:'center'}}>
                <ProgressChartComponent/> 
-               <Text style={{position:'absolute',top:100,right:330}}>test</Text>
+               <NumberStatusSYS/>
+               <NumberStatusDIA/>
+               <NumberStatusPLUSE/>
+               <TextStatus/>
             </View>
 
         </View>

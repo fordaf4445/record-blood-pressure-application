@@ -54,8 +54,8 @@ const ProgressChartComponent = () => {
           data={dataSYS}
           width={135}
           height={135}
-          strokeWidth={5}
-          radius={50}
+          strokeWidth={7}
+          radius={45}
           chartConfig={chartConfigSYS}
           hideLegend={true}
         />
@@ -63,8 +63,8 @@ const ProgressChartComponent = () => {
           data={dataDIA}
           width={135}
           height={135}
-          strokeWidth={5}
-          radius={50}
+          strokeWidth={7}
+          radius={45}
           chartConfig={chartConfigDIA}
           hideLegend={true}
         />
@@ -72,8 +72,8 @@ const ProgressChartComponent = () => {
           data={dataPULSE}
           width={135}
           height={135}
-          strokeWidth={5}
-          radius={50}
+          strokeWidth={7}
+          radius={45}
           chartConfig={chartConfigPULSE}
           hideLegend={true}
         />
