@@ -1,62 +1,27 @@
-import React, { useState } from 'react';
-import { View, StyleSheet, TextInput, ScrollView, CheckBox } from 'react-native';
-import { Button, Input, makeStyles, Text } from '@rneui/base';
-import { useNavigation } from '@react-navigation/native';
-import { ThemeProvider } from '@rneui/themed';
-import BouncyCheckbox from "react-native-bouncy-checkbox";
-import firestore from '@react-native-firebase/firestore';
+import { StyleSheet, Text, View } from 'react-native'
+import React from 'react'
 
 const History = () => {
-    const [email, setEmail] = useState('');
-    const [password, setPasword] = useState('');
-    const [userName, setUserName] = useState('');
-    
-    function addDataUser() {
-        firestore()
-            .collection('dataUser')
-            .add({
-                email: email,
-                password: password,
-                userName: userName,
-            })
-            .then(() => {
-                console.log('Data User added!!');
-            });
-    }
-    return (
-        <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
-            <Text style={{ fontSize: 40, }}>History</Text>
-            <Input style={styles.inputText}
-                placeholder='Email'
-                value={email} onChangeText={(email) => { setEmail(email) }} />
-            <Input style={styles.inputText}
-                placeholder='Password'
-                value={password} onChangeText={(password) => {setPasword(password)}}/>
-            <Input style={styles.inputText}
-                placeholder='Username'
-                value={userName} onChangeText={(Username) => {setUserName(Username)}}/>
-            <Button onPress={addDataUser}> Submit </Button>
-        </View>
-    )
-
+  return (
+    <View style={styles.container}>
+        
+    </View>
+  )
 }
 
-export default History;
+export default History
 
 const styles = StyleSheet.create({
     container: {
-        marginRight: 50,
-        marginLeft: 50,
+        flex: 1,
     },
-    textContainer: {
-        marginTop: 100,
-        marginBottom: 'auto',
-        marginLeft: 'auto',
-        marginRight: 'auto',
-        fontSize: 50,
-
+    titleBar: {
+        alignItems: 'center',
+        marginTop: 20,
+        marginHorizontal: 16,
     },
-    inputText: {
-        marginTop: 15,
-    }
+    textHeader: {
+        fontSize: 35,
+        fontFamily: 'NotoSansThai-Bold',
+    },
 })
