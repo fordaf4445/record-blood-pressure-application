@@ -12,7 +12,7 @@ import InputDataTest from '../components/ProcessComponents/InputDataTest';
 
 
 
-const Stack = createStackNavigator();
+
 const Tab = createBottomTabNavigator();
 const TapStack = () => {
     return (
