@@ -8,9 +8,9 @@ const InputDataTest = () => {
 
     return (
         <View>
-            <Text>InputDataTest</Text>
+            <Text style={{fontSize:50,justifyContent:'center',alignItems:'center'}}>InputDataTest</Text>
         </View>
     )
 }
 
-export default InputDataTest
+export default InputDataTest;

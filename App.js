@@ -34,9 +34,10 @@ const App = () => {
 
   return(
     <NavigationContainer>
-      <AuthStack/>
       {/* <TapStack/> */}
+      <AuthStack/>
     </NavigationContainer>
+   
   )
 }
 
