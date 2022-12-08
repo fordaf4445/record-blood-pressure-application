@@ -1,7 +1,6 @@
 import React, { useEffect, useState} from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { NavigationContainer } from '@react-navigation/native';
 import Welcome from '../screens/Welcome';
 import Signup from '../screens/Signup';
 import TapStack from './TapStack';
