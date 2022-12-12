@@ -2,12 +2,37 @@ import React, { useState } from 'react';
 import { View, StyleSheet, TextInput, ScrollView, CheckBox } from 'react-native';
 import { Button, Input, makeStyles, Text } from '@rneui/base';
 import { useNavigation } from '@react-navigation/native';
-import { ThemeProvider } from '@rneui/themed';
 import BouncyCheckbox from "react-native-bouncy-checkbox";
+import firestore from '@react-native-firebase/firestore';
 
-// const navigation = useNavigation();
+
 const Signup = () => {
+    const [username, setUsername] = useState('');
+    const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const [age, setAge] = useState('');
+    const [hight, setHight] = useState('');
+    const [sex, setSex] = useState('');
+    const [weight, setWeight] = useState('');
+    const navigation = useNavigation();
+
+    function addDataUser() {
+        firestore()
+        .collection('dataUser')
+        .add({
+            username : username,
+            email : email,
+            password : password,
+            userDetail : {
+                age: age,
+                hight: hight,
+                sex: sex,
+                weight: weight,
+            }
+        })
+        navigation.navigate('TapStack')
+    }
+    
     return (
         <View style={{ flex: 1 }}>
 
@@ -18,24 +43,24 @@ const Signup = () => {
                     style={styles.inputView}
                     placeholder="Username"
                     placeholderTextColor="gray"
+                    value={username} 
+                    onChangeText={(username) => {setUsername(username)}}
                 />
                 <TextInput
                     style={styles.inputView}
                     placeholder="Email"
                     placeholderTextColor="gray"
+                    value={email} 
+                    onChangeText={(email) => {setEmail(email)}}
                 />
                 <TextInput
                     style={styles.inputView}
                     placeholder="Password"
                     placeholderTextColor="gray"
-                    name="password"
                     autoCapitalize="none"
-                    autoCorrect={false}
-                    textContentType="newPassword"
                     secureTextEntry
                     value={password}
-                    enablesReturnKeyAutomatically
-                    onChangeText={(text) => setPassword(text)}
+                    onChangeText={(password) => setPassword(password)}
                 />
                 <View style={styles.innerContainer}>
                     <Text style={styles.textcolor}>น้ำหนัก</Text>
@@ -44,13 +69,17 @@ const Signup = () => {
                 <View style={styles.innerContainerSmall}>
                     <TextInput style={styles.inputSmall}
                         keyboardType='numeric'
-                        maxLength={3}></TextInput>
+                        maxLength={3}
+                        value={weight}
+                        onChangeText={(weight) => {setWeight(weight)}}></TextInput>
                     <View style={styles.textSmall}>
                         <Text style={styles.textSmall}>kg.</Text>
                     </View>
                     <TextInput style={[styles.inputSmall, { marginLeft: 30 }]}
                         keyboardType='numeric'
-                        maxLength={3}></TextInput>
+                        maxLength={3}
+                        value={hight}
+                        onChangeText={(hight) => {setHight(hight)}}></TextInput>
                     <View style={styles.textSmall}>
                         <Text>cm.</Text>
                     </View>
@@ -62,7 +91,9 @@ const Signup = () => {
                 <View style={styles.innerContainerSmall}>
                     <TextInput style={styles.inputSmall}
                         keyboardType='numeric'
-                        maxLength={3}></TextInput>
+                        maxLength={3}
+                        value={age}
+                        onChangeText={(age) => {setAge(age)}}></TextInput>
                     <BouncyCheckbox
                         style={{ marginLeft: 60 }}
                         text="ชาย"
@@ -76,6 +107,8 @@ const Signup = () => {
                         unfillColor="#FFFFFF"
                         iconStyle={{ borderColor: "red" }}
                         innerIconStyle={{ borderWidth: 2, }}
+                        value={sex}
+                        onPress={() => {setSex("male")}}
                     />
                     <BouncyCheckbox
                         style={{ marginLeft: 30 }}
@@ -90,6 +123,8 @@ const Signup = () => {
                         unfillColor="#FFFFFF"
                         iconStyle={{ borderColor: "red" }}
                         innerIconStyle={{ borderWidth: 2, }}
+                        value={sex}
+                        onPress={() => {setSex("female")}}
                     />
                 </View>
                 <View style={{ flex: 1, justifyContent: 'flex-end' }}>
@@ -107,7 +142,8 @@ const Signup = () => {
                             marginTop: 20,
                             alignItems: 'center',
                         }}
-                        titleStyle={{ fontFamily: 'NotoSansThai-SemiBold' }} />
+                        titleStyle={{ fontFamily: 'NotoSansThai-SemiBold' }}
+                        onPress={addDataUser} />
                 </View>
             </View>
 

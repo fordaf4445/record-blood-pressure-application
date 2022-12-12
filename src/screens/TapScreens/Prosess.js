@@ -22,7 +22,7 @@ const Prosess = () => {
                         title={"ทดสอบข้อมูลเพิ่ม"}
                         titleStyle={{ fontFamily: 'NotoSansThai-Bold' }}
                         buttonStyle={{
-                            backgroundColor: '#5DB075',
+                            backgroundColor: 'red',
                             borderRadius: 30,
                             height: 50,
                             width: 212,

@@ -3,6 +3,7 @@ import { Button, PermissionsAndroid, SafeAreaView, StatusBar, StyleSheet, Text, 
 import AuthStack from './src/navigation/AuthStack';
 import TapStack from './src/navigation/TapStack'
 import { NavigationContainer } from '@react-navigation/native';
+import TestFireStore from './src/screens/TapScreens/testfirestore'
 const App = () => {
 
   // const androidPermissions = async () => {
@@ -34,8 +35,9 @@ const App = () => {
 
   return(
     <NavigationContainer>
-      {/* <TapStack/> */}
-      <AuthStack/>
+      <TapStack/>
+      {/* <AuthStack/> */}
+      {/* <TestFireStore/> */}
     </NavigationContainer>
    
   )

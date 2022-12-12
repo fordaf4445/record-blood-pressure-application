@@ -32,7 +32,7 @@ const Profile = () => {
             <View style={{ flex: 2 }}>
                 <View style={{ flex: 1, }}></View>
                 <View style={{ flex: 6, alignItems: 'center' }}>
-                    <Text style={styles.textUsername}>Usernames</Text>
+                    <Text style={styles.textUsername} >user</Text>
                     <Text style={{ fontSize: 16, fontFamily: 'NotoSansThai-Bold' }}>ข้อมูลส่วนตัว</Text>
                     <Title/>
                         <Button
