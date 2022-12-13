@@ -1,12 +1,15 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { View, StyleSheet, TextInput, ScrollView, CheckBox } from 'react-native';
 import { Button, Input, makeStyles, Text } from '@rneui/base';
 import { useNavigation } from '@react-navigation/native';
 import BouncyCheckbox from "react-native-bouncy-checkbox";
 import firestore from '@react-native-firebase/firestore';
+import { AuthContext} from '../auth/AuthProvider'
 
 
 const Signup = () => {
+    const navigation = useNavigation();
+    
     const [username, setUsername] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
@@ -14,7 +17,7 @@ const Signup = () => {
     const [hight, setHight] = useState('');
     const [sex, setSex] = useState('');
     const [weight, setWeight] = useState('');
-    const navigation = useNavigation();
+    const { signup } = useContext(AuthContext);
 
     function addDataUser() {
         firestore()
@@ -30,7 +33,12 @@ const Signup = () => {
                 weight: weight,
             }
         })
-        navigation.navigate('TapStack')
+        // navigation.navigate('TapStack')
+    };
+
+    const touchSignUp = () => {
+        signup( email, password);
+        addDataUser();
     }
     
     return (
@@ -143,7 +151,7 @@ const Signup = () => {
                             alignItems: 'center',
                         }}
                         titleStyle={{ fontFamily: 'NotoSansThai-SemiBold' }}
-                        onPress={addDataUser} />
+                        onPress={touchSignUp} />
                 </View>
             </View>
 

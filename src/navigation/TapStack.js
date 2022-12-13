@@ -22,7 +22,7 @@ function ProsessInputData() {
             <ProsessInputDataStack.Screen
                 name="Prosess"
                 component={Prosess}
-                options={{headerShown: false}} />
+                options={{ headerShown: false }} />
             <ProsessInputDataStack.Screen
                 name="InputDataTest"
                 component={InputDataTest} />

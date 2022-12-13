@@ -2,22 +2,33 @@ import React, { useState } from 'react';
 import { View, StyleSheet, TextInput, ScrollView, CheckBox, Image } from 'react-native';
 import { Button, Input, makeStyles, Text, Icon } from '@rneui/base';
 import { useNavigation } from '@react-navigation/native';
-import { ThemeProvider } from '@rneui/themed';
 import BouncyCheckbox from "react-native-bouncy-checkbox";
 import Inicon from 'react-native-vector-icons/dist/Ionicons'
 import Calendar from '../../components/ProfileComponents/Calendar';
 import Savefile from '../../components/ProfileComponents/Savefile';
 import Title from '../../components/ProfileComponents/Title';
-
+import { AuthContext } from '../../auth/AuthProvider';
+import { useContext } from 'react';
 
 const Profile = () => {
+
+    const navigation = useNavigation();
+
+    const { signout } = useContext(AuthContext);
+
+    const touchSignout = () => {
+        signout();
+        navigation.navigate('Welcome');
+    }
+
     return (
         <View style={styles.container}>
             <View style={{ backgroundColor: '#5DB075', flex: 1 }}>
                 <View style={[styles.titleBar]}>
                     <Text style={styles.text}>setting</Text>
                     <Text style={styles.textHeader}>Profile</Text>
-                    <Text style={styles.text}>Logout</Text>
+                    <Text style={styles.text}
+                     onPress={touchSignout}>Logout</Text>
                 </View>
                 <View style={{ alignSelf: "center", top: 20 }}>
                     <View style={styles.profileImage}>
@@ -34,46 +45,46 @@ const Profile = () => {
                 <View style={{ flex: 6, alignItems: 'center' }}>
                     <Text style={styles.textUsername} >user</Text>
                     <Text style={{ fontSize: 16, fontFamily: 'NotoSansThai-Bold' }}>ข้อมูลส่วนตัว</Text>
-                    <Title/>
-                        <Button
-                            title={<Calendar/>}
-                            icon={{
-                                name: 'calendar',
-                                type: 'antdesign',
-                                size: 40,
-                            }}
-                            iconContainerStyle={{ right: 40 }}
-                            buttonStyle={{
-                                borderBottomWidth: 1,
-                                borderColor: 'black',
-                                backgroundColor: ''
-                            }}
-                            containerStyle={{
-                                width: '90%',
-                                top: 20
-                            }}
-                        />
-                        <Button
-                            title={<Savefile/>}
-                            icon={{
-                                name: 'file-send-outline',
-                                type: 'material-community',
-                                size: 45,
-                                
-                            }}
-                            iconContainerStyle={{ right: 40 }}
-                            buttonStyle={{
-                                borderBottomWidth: 1,
-                                borderColor: 'black',
-                                backgroundColor: ''
-                            }}
-                            containerStyle={{
-                                width: '90%',
-                                top: 20,
-                                // right: 10,
-                                
-                            }}
-                        />
+                    <Title />
+                    <Button
+                        title={<Calendar />}
+                        icon={{
+                            name: 'calendar',
+                            type: 'antdesign',
+                            size: 40,
+                        }}
+                        iconContainerStyle={{ right: 40 }}
+                        buttonStyle={{
+                            borderBottomWidth: 1,
+                            borderColor: 'black',
+                            backgroundColor: ''
+                        }}
+                        containerStyle={{
+                            width: '90%',
+                            top: 20
+                        }}
+                    />
+                    <Button
+                        title={<Savefile />}
+                        icon={{
+                            name: 'file-send-outline',
+                            type: 'material-community',
+                            size: 45,
+
+                        }}
+                        iconContainerStyle={{ right: 40 }}
+                        buttonStyle={{
+                            borderBottomWidth: 1,
+                            borderColor: 'black',
+                            backgroundColor: ''
+                        }}
+                        containerStyle={{
+                            width: '90%',
+                            top: 20,
+                            // right: 10,
+
+                        }}
+                    />
                 </View>
             </View>
         </View>
