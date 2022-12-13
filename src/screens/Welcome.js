@@ -1,12 +1,21 @@
-import { StyleSheet, View, Dimensions, TouchableOpacity, TextInput, ScrollView, } from 'react-native';
-import React, { useState } from 'react';
+import { Alert, StyleSheet, View, Dimensions, TouchableOpacity, TextInput, ScrollView, } from 'react-native';
+import React, { useState, useContext } from 'react';
 import { useNavigation } from '@react-navigation/native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import { Button, Text } from '@rneui/base';
+import { AuthContext } from '../auth/AuthProvider';
 
 const Welcome = () => {
     const navigation = useNavigation();
     const [password, setPassword] = useState('');
+    const [email, setEmail] = useState('');
+    const { signin } = useContext(AuthContext);
+
+    const touchSignIn = () => {
+        signin(email, password);
+        // navigation.navigate('TapStack');
+    }
+
     return (
         <ScrollView >
             <View style={styles.container}>
@@ -23,6 +32,8 @@ const Welcome = () => {
                         style={styles.inputView}
                         placeholder="Email"
                         placeholderTextColor="gray"
+                        value={email}
+                        onChangeText={(email) => { setEmail(email) }}
                     />
                     <TextInput
                         style={styles.inputView}
@@ -35,12 +46,12 @@ const Welcome = () => {
                         secureTextEntry
                         value={password}
                         enablesReturnKeyAutomatically
-                        onChangeText={(text) => setPassword(text)}
+                        onChangeText={(password) => setPassword(password)}
                     />
                     <Button
-                        onPress={() => { navigation.navigate('TapStack') }}
+                        onPress={touchSignIn}
                         title="เข้าสู่ระบบ"
-                        titleStyle={{ fontFamily:'NotoSansThai-Bold'}}
+                        titleStyle={{ fontFamily: 'NotoSansThai-Bold' }}
                         buttonStyle={{
                             backgroundColor: '#5DB075',
                             borderRadius: 30,
@@ -93,7 +104,7 @@ const styles = StyleSheet.create({
     textThree: {
         color: '#5DB075',
         top: 10,
-        fontFamily:'NotoSansThai-SemiBold',
+        fontFamily: 'NotoSansThai-SemiBold',
     },
     inputView: {
         backgroundColor: '#F6F6F6',
@@ -105,6 +116,6 @@ const styles = StyleSheet.create({
         marginTop: 20,
         width: 343,
         fontSize: 16,
-        fontFamily:'NotoSansThai-SemiBold',
+        fontFamily: 'NotoSansThai-SemiBold',
     },
 })

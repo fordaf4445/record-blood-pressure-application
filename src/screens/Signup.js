@@ -8,7 +8,7 @@ import { AuthContext} from '../auth/AuthProvider'
 
 
 const Signup = () => {
-    const navigation = useNavigation();
+    // const navigation = useNavigation();
     
     const [username, setUsername] = useState('');
     const [email, setEmail] = useState('');

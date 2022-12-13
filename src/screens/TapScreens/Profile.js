@@ -12,13 +12,13 @@ import { useContext } from 'react';
 
 const Profile = () => {
 
-    const navigation = useNavigation();
+    // const navigation = useNavigation();
 
     const { signout } = useContext(AuthContext);
 
     const touchSignout = () => {
         signout();
-        navigation.navigate('Welcome');
+        // navigation.navigate('Welcome');
     }
 
     return (
