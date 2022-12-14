@@ -7,6 +7,7 @@ import TapStack from './TapStack';
 
 export default function Routes() {
     const { user, setUser } = useContext(AuthContext);
+    // const [user, setUser] = useState();
     const [initializing, setInitializing] = useState(true);
 
     const onAuthStateChanged = (user) => {

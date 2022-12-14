@@ -4,6 +4,7 @@ import { useNavigation } from '@react-navigation/native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import { Button, Text } from '@rneui/base';
 import { AuthContext } from '../auth/AuthProvider';
+import auth from '@react-native-firebase/auth';
 
 const Welcome = () => {
     const navigation = useNavigation();

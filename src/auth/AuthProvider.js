@@ -6,7 +6,7 @@ export const AuthContext = createContext({});
 
 export const AuthProvider = ({ children }) => {
     const [user, setUser] = useState(null);
-    
+
     return (
         <AuthContext.Provider
             value={{
@@ -15,18 +15,19 @@ export const AuthProvider = ({ children }) => {
                 signin: async (email, password) => {
                     try {
                         await auth().signInWithEmailAndPassword(email, password);
-                        console.log("signIn");
                     } catch (err) {
-                        console.log('signInWithEmailAndPassword fail');
+                        console.log('signInWithEmailAndPassword fail'),
+                            Alert.alert("เข้าสู้ระบบไม่สำเร็จ", "อีเมลหรือรหัสผ่านของคุณไม่ถูกต้อง             โปรดลองอีกครั้ง",
+                            );
                     }
                 },
 
                 signup: async (email, password) => {
                     try {
                         await auth().createUserWithEmailAndPassword(email, password);
-                        console.log("signUp");
                     } catch (err) {
                         console.log('createUserWithEmailAndPassword fail');
+
                     }
 
                 },
@@ -34,7 +35,6 @@ export const AuthProvider = ({ children }) => {
                 signout: async () => {
                     try {
                         await auth().signOut();
-                        console.log("signOut");
                     } catch (err) {
                         console.log('singOut error');
                     }
