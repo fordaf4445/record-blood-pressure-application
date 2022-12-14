@@ -10,35 +10,35 @@ import { AuthContext} from '../auth/AuthProvider'
 const Signup = () => {
     // const navigation = useNavigation();
     
-    const [username, setUsername] = useState('');
-    const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
-    const [age, setAge] = useState('');
-    const [hight, setHight] = useState('');
-    const [sex, setSex] = useState('');
-    const [weight, setWeight] = useState('');
+    const {username, setUsername} = useContext(AuthContext);
+    const {email, setEmail} = useContext(AuthContext);
+    const {password, setPassword} = useContext(AuthContext);
+    const {age, setAge} = useContext(AuthContext);
+    const {hight, setHight} = useContext(AuthContext);
+    const {sex, setSex} = useContext(AuthContext);
+    const {weight, setWeight} = useContext(AuthContext);
     const { signup } = useContext(AuthContext);
 
-    function addDataUser() {
-        firestore()
-        .collection('dataUser')
-        .add({
-            username : username,
-            email : email,
-            password : password,
-            userDetail : {
-                age: age,
-                hight: hight,
-                sex: sex,
-                weight: weight,
-            }
-        })
-        // navigation.navigate('TapStack')
-    };
+    // function addDataUser() {
+    //     firestore()
+    //     .collection('dataUser')
+    //     .add({
+    //         username : username,
+    //         email : email,
+    //         password : password,
+    //         userDetail : {
+    //             age: age,
+    //             hight: hight,
+    //             sex: sex,
+    //             weight: weight,
+    //         }
+    //     })
+    //     // navigation.navigate('TapStack')
+    // };
 
     const touchSignUp = () => {
         signup( email, password);
-        addDataUser();
+        // addDataUser();
     }
     
     return (

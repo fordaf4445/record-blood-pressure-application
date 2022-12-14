@@ -1,25 +1,33 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useContext} from 'react';
 import { View, StyleSheet, TextInput, ScrollView, CheckBox, Image } from 'react-native';
 import { Button, Input, makeStyles, Text, Icon } from '@rneui/base';
-import { useNavigation } from '@react-navigation/native';
-import BouncyCheckbox from "react-native-bouncy-checkbox";
 import Inicon from 'react-native-vector-icons/dist/Ionicons'
 import Calendar from '../../components/ProfileComponents/Calendar';
 import Savefile from '../../components/ProfileComponents/Savefile';
 import Title from '../../components/ProfileComponents/Title';
 import { AuthContext } from '../../auth/AuthProvider';
-import { useContext } from 'react';
-
+import auth, { firebase } from '@react-native-firebase/auth';
 const Profile = () => {
-
-    // const navigation = useNavigation();
-
-    const { signout } = useContext(AuthContext);
 
     const touchSignout = () => {
         signout();
         // navigation.navigate('Welcome');
     }
+    const { signout } = useContext(AuthContext);
+    const [name, setName] = useState('');
+
+    useEffect(() => {
+        firebase.firestore().collection('dataUser')
+        .doc(firebase.auth().currentUser.uid).get()
+        .then((snapshot) => {
+            if(snapshot.exists) {
+                setName(snapshot.data())
+            }
+            else {
+                console.log('User does not exist');
+            }
+        })
+    }, [])
 
     return (
         <View style={styles.container}>
@@ -43,7 +51,7 @@ const Profile = () => {
             <View style={{ flex: 2 }}>
                 <View style={{ flex: 1, }}></View>
                 <View style={{ flex: 6, alignItems: 'center' }}>
-                    <Text style={styles.textUsername} >user</Text>
+                    <Text style={styles.textUsername} >{name.username}</Text>
                     <Text style={{ fontSize: 16, fontFamily: 'NotoSansThai-Bold' }}>ข้อมูลส่วนตัว</Text>
                     <Title />
                     <Button
