@@ -1,7 +1,6 @@
 import React, { createContext, useState } from 'react';
 import auth, { firebase } from '@react-native-firebase/auth';
 import { Alert, Text, View, StyleSheet } from 'react-native';
-import firestore from '@react-native-firebase/firestore'
 
 export const AuthContext = createContext({});
 
@@ -17,8 +16,8 @@ export const AuthProvider = ({ children }) => {
     return (
         <AuthContext.Provider
             value={{
-                user,setUser,username,setUsername,email,setEmail,password,setPassword,
-                age,setAge,hight,setHight,sex,setSex,weight,setWeight,
+                user, setUser, username, setUsername, email, setEmail, password, setPassword,
+                age, setAge, hight, setHight, sex, setSex, weight, setWeight,
                 signin: async (email, password) => {
                     try {
                         await auth().signInWithEmailAndPassword(email, password);
@@ -32,18 +31,24 @@ export const AuthProvider = ({ children }) => {
                 signup: async (email, password) => {
                     try {
                         await auth().createUserWithEmailAndPassword(email, password)
-                        .then(() => {
-                            firebase.firestore().collection('dataUser')
-                            .doc(firebase.auth().currentUser.uid)
-                            .set({
-                                email,
-                                password,
-                                username : username,
+                            .then(() => {
+                                firebase.firestore().collection('dataUser')
+                                    .doc(firebase.auth().currentUser.uid)
+                                    .set({
+                                        email,
+                                        password,
+                                        username: username,
+                                        userDetail: {
+                                            weight: weight,
+                                            hight: hight,
+                                            age: age,
+                                            sex: sex,
+                                        }
+                                    })
                             })
-                        })
                     } catch (err) {
-                        console.log('createUserWithEmailAndPassword fail');
-
+                        console.log(err.messege);
+                        Alert.alert("ลงทะเบียนไม่สำเร็จ");
                     }
 
                 },

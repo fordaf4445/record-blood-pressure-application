@@ -11,7 +11,6 @@ const Profile = () => {
 
     const touchSignout = () => {
         signout();
-        // navigation.navigate('Welcome');
     }
     const { signout } = useContext(AuthContext);
     const [name, setName] = useState('');
@@ -27,7 +26,7 @@ const Profile = () => {
                 console.log('User does not exist');
             }
         })
-    }, [])
+    }, []);
 
     return (
         <View style={styles.container}>
@@ -50,7 +49,7 @@ const Profile = () => {
             </View>
             <View style={{ flex: 2 }}>
                 <View style={{ flex: 1, }}></View>
-                <View style={{ flex: 6, alignItems: 'center' }}>
+                <View style={{ flex: 7, alignItems: 'center'}}>
                     <Text style={styles.textUsername} >{name.username}</Text>
                     <Text style={{ fontSize: 16, fontFamily: 'NotoSansThai-Bold' }}>ข้อมูลส่วนตัว</Text>
                     <Title />

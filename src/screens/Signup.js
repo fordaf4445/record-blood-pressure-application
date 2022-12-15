@@ -116,7 +116,7 @@ const Signup = () => {
                         iconStyle={{ borderColor: "red" }}
                         innerIconStyle={{ borderWidth: 2, }}
                         value={sex}
-                        onPress={() => {setSex("male")}}
+                        onPress={() => {setSex("ชาย")}}
                     />
                     <BouncyCheckbox
                         style={{ marginLeft: 30 }}
@@ -132,7 +132,7 @@ const Signup = () => {
                         iconStyle={{ borderColor: "red" }}
                         innerIconStyle={{ borderWidth: 2, }}
                         value={sex}
-                        onPress={() => {setSex("female")}}
+                        onPress={() => {setSex("หญิง")}}
                     />
                 </View>
                 <View style={{ flex: 1, justifyContent: 'flex-end' }}>
