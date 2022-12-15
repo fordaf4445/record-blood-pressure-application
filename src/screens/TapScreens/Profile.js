@@ -14,7 +14,7 @@ const Profile = () => {
     }
     const { signout } = useContext(AuthContext);
     const [name, setName] = useState('');
-
+    const [image, setImage] = useState('https://sv1.picz.in.th/images/2022/12/15/GIGhwg.png');
     useEffect(() => {
         firebase.firestore().collection('dataUser')
         .doc(firebase.auth().currentUser.uid).get()
@@ -39,7 +39,7 @@ const Profile = () => {
                 </View>
                 <View style={{ alignSelf: "center", top: 20 }}>
                     <View style={styles.profileImage}>
-                        <Image source={require('../../../assets/image/309636722_486518313145837_1138442271353624644_n.jpg')}
+                        <Image source={{ uri: image}}
                             style={styles.image} />
                     </View>
                     <View style={styles.add}>
