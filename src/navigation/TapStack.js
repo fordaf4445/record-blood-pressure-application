@@ -10,11 +10,13 @@ import History from '../screens/TapScreens/History';
 import Statistics from '../screens/TapScreens/Statistics';
 import Profile from '../screens/TapScreens/Profile';
 
+import SettingComponent from '../components/ProfileComponents/SettingComponent';
 import InputDataTest from '../components/ProcessComponents/InputDataTest';
 
 const Tab = createBottomTabNavigator();
 
 const ProsessInputDataStack = createStackNavigator();
+const ProfileStack = createStackNavigator();
 
 function ProsessInputData() {
     return (
@@ -25,10 +27,31 @@ function ProsessInputData() {
                 options={{ headerShown: false }} />
             <ProsessInputDataStack.Screen
                 name="InputDataTest"
-                component={InputDataTest} />
+                component={InputDataTest}
+                options={{
+                    title: "เพิ่มข้อมูลแบบไม่ใช้บลูทูธ"
+                }}/>
         </ProsessInputDataStack.Navigator>
     )
 };
+
+function ProfileComponent() {
+    return (
+        <ProfileStack.Navigator>
+            <ProfileStack.Screen
+                name="Profile"
+                component={Profile}
+                options={{ headerShown: false }}/>
+            <ProfileStack.Screen
+                name="SettingComponent"
+                component={SettingComponent}
+                options={{
+                    title: "ตั้งค่าผู้ใช้งาน"
+                }}/>
+                
+        </ProfileStack.Navigator>
+    )
+}
 
 export default function TapStack() {
     return (
@@ -40,7 +63,9 @@ export default function TapStack() {
                 tabBarStyle: { height: 70 },
                 tabBarLabelStyle: { marginBottom: 10, marginTop: -7 },
                 headerShown: false,
+                tabBarHideOnKeyboard: true,
             }}
+           
 
         >
             <Tab.Screen name='ProsessInputData' component={ProsessInputData}
@@ -70,7 +95,7 @@ export default function TapStack() {
                     )
                 }}
             />
-            <Tab.Screen name='Profile' component={Profile}
+            <Tab.Screen name='ProfileComponent' component={ProfileComponent}
                 options={{
                     tabBarLabel: 'Profile',
                     // tabBarShowLabel: false,

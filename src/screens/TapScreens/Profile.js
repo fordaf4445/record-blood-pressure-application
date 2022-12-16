@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext} from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { View, StyleSheet, TextInput, ScrollView, CheckBox, Image } from 'react-native';
 import { Button, Input, makeStyles, Text, Icon } from '@rneui/base';
 import Inicon from 'react-native-vector-icons/dist/Ionicons'
@@ -7,39 +7,41 @@ import Savefile from '../../components/ProfileComponents/Savefile';
 import Title from '../../components/ProfileComponents/Title';
 import { AuthContext } from '../../auth/AuthProvider';
 import auth, { firebase } from '@react-native-firebase/auth';
+import { useNavigation } from '@react-navigation/native';
+
 const Profile = () => {
 
-    const touchSignout = () => {
-        signout();
-    }
+    const touchSignout = () => { signout(); }
+    const navigation = useNavigation();
     const { signout } = useContext(AuthContext);
     const [name, setName] = useState('');
     const [image, setImage] = useState('https://sv1.picz.in.th/images/2022/12/15/GIGhwg.png');
     useEffect(() => {
         firebase.firestore().collection('dataUser')
-        .doc(firebase.auth().currentUser.uid).get()
-        .then((snapshot) => {
-            if(snapshot.exists) {
-                setName(snapshot.data())
-            }
-            else {
-                console.log('User does not exist');
-            }
-        })
+            .doc(firebase.auth().currentUser.uid).get()
+            .then((snapshot) => {
+                if (snapshot.exists) {
+                    setName(snapshot.data())
+                }
+                else {
+                    console.log('User does not exist');
+                }
+            })
     }, []);
 
     return (
         <View style={styles.container}>
             <View style={{ backgroundColor: '#5DB075', flex: 1 }}>
                 <View style={[styles.titleBar]}>
-                    <Text style={styles.text}>setting</Text>
+                    <Text style={styles.text}
+                        onPress={() => {navigation.navigate('SettingComponent')}}>setting</Text>
                     <Text style={styles.textHeader}>Profile</Text>
                     <Text style={styles.text}
-                     onPress={touchSignout}>Logout</Text>
+                        onPress={touchSignout}>Logout</Text>
                 </View>
                 <View style={{ alignSelf: "center", top: 20 }}>
                     <View style={styles.profileImage}>
-                        <Image source={{ uri: image}}
+                        <Image source={{ uri: image }}
                             style={styles.image} />
                     </View>
                     <View style={styles.add}>
@@ -49,7 +51,7 @@ const Profile = () => {
             </View>
             <View style={{ flex: 2 }}>
                 <View style={{ flex: 1, }}></View>
-                <View style={{ flex: 7, alignItems: 'center'}}>
+                <View style={{ flex: 7, alignItems: 'center' }}>
                     <Text style={styles.textUsername} >{name.username}</Text>
                     <Text style={{ fontSize: 16, fontFamily: 'NotoSansThai-Bold' }}>ข้อมูลส่วนตัว</Text>
                     <Title />
