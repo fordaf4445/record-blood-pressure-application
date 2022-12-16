@@ -1,6 +1,6 @@
 import { View, Text, StyleSheet, TextInput, ScrollView } from 'react-native'
 import React, { useState } from 'react'
-
+import { Button } from '@rneui/base';
 
 const InputDataTest = () => {
 
@@ -11,19 +11,54 @@ const InputDataTest = () => {
     return (
 
         <View style={styles.container}>
-            <View style={{ flex: 1, alignItems: "flex-start", left: 50 }}>
-                <View>
+            <View style={{ flex: 1, alignItems: "flex-start", left: 50, top: 20 }}>
+                <View style={{ flexDirection: "row" }}>
                     <TextInput style={styles.inputSYS}
                         keyboardType='numeric' />
+                    <View style={{ top: 20, left: 25 }}>
+                        <Text style={{ fontSize: 20, fontWeight: "bold", color: "red" }}>
+                            SYS
+                        </Text>
+                        <Text>
+                            mmgh
+                        </Text>
+                    </View>
                 </View>
-                <View>
+                <View style={{ flexDirection: "row" }}>
                     <TextInput style={styles.inputDIA}
                         keyboardType='numeric' />
+                    <View style={{ top: 20, left: 25 }}>
+                        <Text style={{ fontSize: 20, fontWeight: "bold", color: "#B8DE9A" }}>
+                            DIA
+                        </Text>
+                        <Text>
+                            mmgh
+                        </Text>
+                    </View>
                 </View>
-                <View>
+                <View style={{ flexDirection: "row" }}>
                     <TextInput style={styles.inputBPM}
                         keyboardType='numeric' />
+                    <View style={{ top: 20, left: 25 }}>
+                        <Text style={{ fontSize: 20, fontWeight: "bold", color: "#71C7E2" }}>
+                            PLUSE
+                        </Text>
+                        <Text>
+                            bpm
+                        </Text>
+                    </View>
                 </View>
+            </View>
+            <View style={{ alignItems: "center",bottom:20 }}>
+                <Button
+                    title={"เพิ่ม"}
+                    titleStyle={{ fontFamily: 'NotoSansThai-Bold' }}
+                    buttonStyle={{
+                        backgroundColor: '#5DB075',
+                        borderRadius: 30,
+                        height: 50,
+                        width: 200,
+                    }} />
             </View>
         </View>
     )

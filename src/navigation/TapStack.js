@@ -29,8 +29,18 @@ function ProsessInputData() {
                 name="InputDataTest"
                 component={InputDataTest}
                 options={{
-                    title: "เพิ่มข้อมูลแบบไม่ใช้บลูทูธ"
-                }}/>
+                    title: "เพิ่มข้อมูลความดันโลหิต",
+                    headerTitleStyle:{
+                        fontFamily:"NotoSansThai-Bold",
+                        color:"white"
+                    },
+                    headerStyle:{
+                        height: 60,
+                        backgroundColor: "#5DB075"
+                    },
+                    headerBackTitleVisible:false,
+                }}
+                />
         </ProsessInputDataStack.Navigator>
     )
 };
