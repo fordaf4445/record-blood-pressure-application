@@ -19,6 +19,7 @@ const InputDataTest = () => {
                 SYS: sys,
                 DIA: dia,
                 BPM: bpm,
+                timestamp: firebase.firestore.FieldValue.serverTimestamp()
             })
             .then(function (docRef) {
                 console.log("Document written with ID: ", docRef.id);
