@@ -1,4 +1,4 @@
-import { View, Text, StyleSheet, TextInput, Alert, ScrollView } from 'react-native'
+import { View, Text, StyleSheet, TextInput, Alert, ScrollView, KeyboardAvoidingView, TouchableWithoutFeedback, Keyboard } from 'react-native'
 import React, { useState } from 'react'
 import { Button } from '@rneui/base';
 import { firebase } from '@react-native-firebase/auth';
@@ -9,7 +9,7 @@ const InputDataTest = () => {
     const [dia, setDia] = useState('');
     const [bpm, setBpm] = useState('');
     const db = firebase.firestore();
-    
+
     function addInformationFireStore() {
         db.collection('dataUser')
             .doc(firebase.auth().currentUser.uid)
@@ -26,67 +26,70 @@ const InputDataTest = () => {
                 const newId = "no." + docRef.id;
                 docRef.update({ id: newId });
             })
-            .catch(function(err) {
-                    console.log("Error adding information: ", err);
-                    Alert.alert("เพิ่มข้อมูลไม่สำเร็จ !!")
+            .catch(function (err) {
+                console.log("Error adding information: ", err);
+                Alert.alert("เพิ่มข้อมูลไม่สำเร็จ !!")
             })
     }
     return (
-        <View style={styles.container}>
-            <View style={{ flex: 1, alignItems: "flex-start", left: 50, top: 20 }}>
-                <View style={{ flexDirection: "row" }}>
-                    <TextInput style={styles.inputSYS}
-                        keyboardType='numeric'
-                        onChangeText={(sys) => setSys(sys)} />
-                    <View style={{ top: 20, left: 25 }}>
-                        <Text style={{ fontSize: 20, fontWeight: "bold", color: "red" }}>
-                            SYS
-                        </Text>
-                        <Text>
-                            mmgh
-                        </Text>
+
+        <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+            <View style={styles.container}>
+                <View style={{ flex: 1, left: 50, top: 20 }}>
+                    <View style={{ flexDirection: "row" }}>
+                        <TextInput style={styles.inputSYS}
+                            keyboardType='numeric'
+                            onChangeText={(sys) => setSys(sys)} />
+                        <View style={{ top: 20, left: 25 }}>
+                            <Text style={{ fontSize: 20, fontWeight: "bold", color: "red" }}>
+                                SYS
+                            </Text>
+                            <Text>
+                                mmgh
+                            </Text>
+                        </View>
                     </View>
-                </View>
-                <View style={{ flexDirection: "row" }}>
-                    <TextInput style={styles.inputDIA}
-                        keyboardType='numeric'
-                        onChangeText={(dia) => setDia(dia)}  />
-                    <View style={{ top: 20, left: 25 }}>
-                        <Text style={{ fontSize: 20, fontWeight: "bold", color: "#B8DE9A" }}>
-                            DIA
-                        </Text>
-                        <Text>
-                            mmgh
-                        </Text>
+                    <View style={{ flexDirection: "row" }}>
+                        <TextInput style={styles.inputDIA}
+                            keyboardType='numeric'
+                            onChangeText={(dia) => setDia(dia)} />
+                        <View style={{ top: 20, left: 25 }}>
+                            <Text style={{ fontSize: 20, fontWeight: "bold", color: "#B8DE9A" }}>
+                                DIA
+                            </Text>
+                            <Text>
+                                mmgh
+                            </Text>
+                        </View>
                     </View>
-                </View>
-                <View style={{ flexDirection: "row" }}>
-                    <TextInput style={styles.inputBPM}
-                        keyboardType='numeric' 
-                        onChangeText={(bpm) => setBpm(bpm)} />
-                    <View style={{ top: 20, left: 25 }}>
-                        <Text style={{ fontSize: 20, fontWeight: "bold", color: "#71C7E2" }}>
-                            PLUSE
-                        </Text>
-                        <Text>
-                            bpm
-                        </Text>
+                    <View style={{ flexDirection: "row" }}>
+                        <TextInput style={styles.inputBPM}
+                            keyboardType='numeric'
+                            onChangeText={(bpm) => setBpm(bpm)} />
+                        <View style={{ top: 20, left: 25 }}>
+                            <Text style={{ fontSize: 20, fontWeight: "bold", color: "#71C7E2" }}>
+                                PLUSE
+                            </Text>
+                            <Text>
+                                bpm
+                            </Text>
+                        </View>
+                    </View>
+                    <View style={{ alignItems: "center", left: -50, top: 350 }}>
+                        <Button
+                            title={"เพิ่ม"}
+                            titleStyle={{ fontFamily: 'NotoSansThai-Bold' }}
+                            buttonStyle={{
+                                backgroundColor: '#5DB075',
+                                borderRadius: 30,
+                                height: 50,
+                                width: 200,
+                            }}
+                            onPress={addInformationFireStore} />
                     </View>
                 </View>
             </View>
-            <View style={{ alignItems: "center", bottom: 20 }}>
-                <Button
-                    title={"เพิ่ม"}
-                    titleStyle={{ fontFamily: 'NotoSansThai-Bold' }}
-                    buttonStyle={{
-                        backgroundColor: '#5DB075',
-                        borderRadius: 30,
-                        height: 50,
-                        width: 200,
-                    }}
-                    onPress={addInformationFireStore} />
-            </View>
-        </View>
+        </TouchableWithoutFeedback>
     )
 }
 
