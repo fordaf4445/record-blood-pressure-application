@@ -5,6 +5,7 @@ import { createStackNavigator } from '@react-navigation/stack';
 import Icon from 'react-native-vector-icons/dist/FontAwesome';
 import Ionicons from 'react-native-vector-icons/dist/Ionicons';
 import FontAwessome5 from 'react-native-vector-icons/dist/FontAwesome5';
+import FontAwesome from 'react-native-vector-icons/dist/FontAwesome';
 import Prosess from '../screens/TapScreens/Prosess';
 import History from '../screens/TapScreens/History';
 import Statistics from '../screens/TapScreens/Statistics';
@@ -38,7 +39,8 @@ function ProsessInputData() {
                         height: 60,
                         backgroundColor: "#5DB075"
                     },
-                    headerBackTitleVisible:false,
+                    // headerTintColor: "#fff",
+                    headerBackImage: () => (<FontAwesome name="chevron-left"  color={"white"} size={25} />),
                 }}
                 />
         </ProsessInputDataStack.Navigator>
