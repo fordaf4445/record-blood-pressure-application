@@ -23,8 +23,6 @@ const InputDataTest = () => {
             .then(function (docRef) {
                 console.log("Document written with ID: ", docRef.id);
                 Alert.alert("เพิ่มข้อมูลสำเร็จ")
-                const newId = "no." + docRef.id;
-                docRef.update({ id: newId });
             })
             .catch(function (err) {
                 console.log("Error adding information: ", err);
