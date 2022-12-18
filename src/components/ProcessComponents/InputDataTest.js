@@ -1,35 +1,51 @@
 import { View, Text, StyleSheet, TextInput, Alert, ScrollView, KeyboardAvoidingView, TouchableWithoutFeedback, Keyboard } from 'react-native'
 import React, { useState } from 'react'
-import { Button } from '@rneui/base';
+import { Button, darkColors } from '@rneui/base';
 import { firebase } from '@react-native-firebase/auth';
+import { SlideFromRightIOS } from '@react-navigation/stack/lib/typescript/src/TransitionConfigs/TransitionPresets';
 
 const InputDataTest = () => {
-
-    const [sys, setSys] = useState('');
-    const [dia, setDia] = useState('');
-    const [bpm, setBpm] = useState('');
     const db = firebase.firestore();
+    const [sys, setSys] = useState(null);
+    const [dia, setDia] = useState(null);
+    const [bpm, setBpm] = useState(null);
+    // const [type, setType] = useState(null);
 
     function addInformationFireStore() {
+        let type;
+        if (sys > 160) {
+            type = "ความดันโลหิตสูง ระยะที่ 2"
+        } else if (sys >= 141) {
+            type = "ความดันโลหิตสูง ระยะที่ 1"
+        } else if (sys >= 121) {
+            type = "ความดันโลหิตสูงขั้นต้น"
+        } else if (sys >= 91) {
+            type = "ปกติ"
+        } else {
+            type = "ความดันโลหิตต่ำ"
+        }
         db.collection('dataUser')
             .doc(firebase.auth().currentUser.uid)
             .collection('BloodPressure')
             .add({
-                field: "value",
                 SYS: sys,
                 DIA: dia,
                 BPM: bpm,
-                timestamp: firebase.firestore.FieldValue.serverTimestamp()
+                timestamp: firebase.firestore.FieldValue.serverTimestamp(),
+                TYPE: type,
             })
             .then(function (docRef) {
                 console.log("Document written with ID: ", docRef.id);
                 Alert.alert("เพิ่มข้อมูลสำเร็จ")
+
             })
             .catch(function (err) {
                 console.log("Error adding information: ", err);
                 Alert.alert("เพิ่มข้อมูลไม่สำเร็จ !!")
             })
+        { type }
     }
+
     return (
 
         <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
@@ -38,7 +54,8 @@ const InputDataTest = () => {
                     <View style={{ flexDirection: "row" }}>
                         <TextInput style={styles.inputSYS}
                             keyboardType='numeric'
-                            onChangeText={(sys) => setSys(sys)} />
+                            onChangeText={(sys) => setSys(sys)}
+                        />
                         <View style={{ top: 20, left: 25 }}>
                             <Text style={{ fontSize: 20, fontWeight: "bold", color: "red" }}>
                                 SYS
@@ -51,7 +68,8 @@ const InputDataTest = () => {
                     <View style={{ flexDirection: "row" }}>
                         <TextInput style={styles.inputDIA}
                             keyboardType='numeric'
-                            onChangeText={(dia) => setDia(dia)} />
+                            onChangeText={(dia) => setDia(dia)}
+                        />
                         <View style={{ top: 20, left: 25 }}>
                             <Text style={{ fontSize: 20, fontWeight: "bold", color: "#B8DE9A" }}>
                                 DIA
@@ -90,7 +108,9 @@ const InputDataTest = () => {
             </View>
         </TouchableWithoutFeedback>
     )
+
 }
+
 
 export default InputDataTest;
 
