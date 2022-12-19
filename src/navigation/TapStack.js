@@ -69,7 +69,7 @@ export default function TapStack() {
     return (
         <Tab.Navigator
 
-            initialRouteName='Prosess'
+            initialRouteName='History'
             screenOptions={{
                 tabBarActiveTintColor: '#5DB075',
                 tabBarStyle: { height: 70 },
