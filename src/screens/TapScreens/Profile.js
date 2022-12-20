@@ -18,10 +18,10 @@ const Profile = () => {
     const [image, setImage] = useState('https://sv1.picz.in.th/images/2022/12/15/GIGhwg.png');
     useEffect(() => {
         firebase.firestore().collection('dataUser')
-            .doc(firebase.auth().currentUser.uid).get()
-            .then((snapshot) => {
-                if (snapshot.exists) {
-                    setName(snapshot.data())
+            .doc(firebase.auth().currentUser.uid)
+            .onSnapshot((docsnapshot) => {
+                if (docsnapshot.exists) {
+                    setName(docsnapshot.data())
                 }
                 else {
                     console.log('User does not exist');
