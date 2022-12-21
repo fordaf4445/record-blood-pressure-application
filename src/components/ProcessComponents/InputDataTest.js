@@ -59,8 +59,8 @@ const InputDataTest = () => {
 
     function createAlert() {
         Alert.alert(
-            "Alert Title",
-            "My Alert Msg",
+            "เพิ่มข้อมูลสำเร็จ",
+            "",
             [
                 {
                     text: "Cancel",
