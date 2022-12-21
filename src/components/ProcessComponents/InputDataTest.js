@@ -1,5 +1,5 @@
 import { View, Text, StyleSheet, TextInput, Alert, ScrollView, KeyboardAvoidingView, TouchableWithoutFeedback, Keyboard } from 'react-native'
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { Button, darkColors } from '@rneui/base';
 import { firebase } from '@react-native-firebase/auth';
 import { SlideFromRightIOS } from '@react-navigation/stack/lib/typescript/src/TransitionConfigs/TransitionPresets';
@@ -9,7 +9,17 @@ const InputDataTest = () => {
     const [sys, setSys] = useState(null);
     const [dia, setDia] = useState(null);
     const [bpm, setBpm] = useState(null);
-    // const [type, setType] = useState(null);
+    const [currentDate, setCurrentDate] = useState(null);
+    const [valueClear, setValueClear ] = useState(null);
+
+    useEffect(() => {
+        const interval = setInterval(() => {
+            var date = new Date().toLocaleDateString();
+            var time = new Date().toLocaleTimeString();
+            setCurrentDate(date + " " + time);
+        }, 1000);
+        return () => clearInterval(interval);
+    }, [])
 
     function addInformationFireStore() {
         let type;
@@ -31,7 +41,7 @@ const InputDataTest = () => {
                 SYS: sys,
                 DIA: dia,
                 BPM: bpm,
-                timestamp: firebase.firestore.FieldValue.serverTimestamp(),
+                timestamp: currentDate,
                 TYPE: type,
             })
             .then(function (docRef) {
@@ -52,14 +62,14 @@ const InputDataTest = () => {
             "Alert Title",
             "My Alert Msg",
             [
-              {
-                text: "Cancel",
-                onPress: () => console.log("Cancel Pressed"),
-                style: "cancel"
-              },
-              { text: "OK", onPress: () => console.log("OK Pressed") }
+                {
+                    text: "Cancel",
+                    onPress: () => console.log("Cancel Pressed"),
+                    style: "cancel"
+                },
+                { text: "OK", onPress: () => {setSys(null),setDia(null),setBpm(null)} }
             ]
-          );
+        );
     }
 
     return (
@@ -71,6 +81,7 @@ const InputDataTest = () => {
                         <TextInput style={styles.inputSYS}
                             keyboardType='numeric'
                             onChangeText={(sys) => setSys(sys)}
+                            value={sys}
                         />
                         <View style={{ top: 20, left: 25 }}>
                             <Text style={{ fontSize: 20, fontWeight: "bold", color: "red" }}>
@@ -85,6 +96,7 @@ const InputDataTest = () => {
                         <TextInput style={styles.inputDIA}
                             keyboardType='numeric'
                             onChangeText={(dia) => setDia(dia)}
+                            value={dia}
                         />
                         <View style={{ top: 20, left: 25 }}>
                             <Text style={{ fontSize: 20, fontWeight: "bold", color: "#B8DE9A" }}>
@@ -98,7 +110,9 @@ const InputDataTest = () => {
                     <View style={{ flexDirection: "row" }}>
                         <TextInput style={styles.inputBPM}
                             keyboardType='numeric'
-                            onChangeText={(bpm) => setBpm(bpm)} />
+                            onChangeText={(bpm) => setBpm(bpm)}
+                            value={bpm} 
+                            />
                         <View style={{ top: 20, left: 25 }}>
                             <Text style={{ fontSize: 20, fontWeight: "bold", color: "#71C7E2" }}>
                                 PLUSE

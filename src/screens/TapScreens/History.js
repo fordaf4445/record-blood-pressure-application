@@ -76,6 +76,7 @@ const History = () => {
                         <Text style={{color:"red"}}>SYS: {item.SYS}</Text>
                         <Text>DIA: {item.DIA}</Text>
                         <Text>BPM: {item.BPM}</Text>
+                        <Text>TIME: {item.timestamp}</Text>
                     </View>
                     )}
                 // keyExtractor={(item) => item.id}
