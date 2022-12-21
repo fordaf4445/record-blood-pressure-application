@@ -36,7 +36,8 @@ const InputDataTest = () => {
             })
             .then(function (docRef) {
                 console.log("Document written with ID: ", docRef.id);
-                Alert.alert("เพิ่มข้อมูลสำเร็จ")
+                // Alert.alert("เพิ่มข้อมูลสำเร็จ")
+                createAlert();
 
             })
             .catch(function (err) {
@@ -44,6 +45,21 @@ const InputDataTest = () => {
                 Alert.alert("เพิ่มข้อมูลไม่สำเร็จ !!")
             })
         { type }
+    }
+
+    function createAlert() {
+        Alert.alert(
+            "Alert Title",
+            "My Alert Msg",
+            [
+              {
+                text: "Cancel",
+                onPress: () => console.log("Cancel Pressed"),
+                style: "cancel"
+              },
+              { text: "OK", onPress: () => console.log("OK Pressed") }
+            ]
+          );
     }
 
     return (

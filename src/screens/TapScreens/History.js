@@ -5,24 +5,51 @@ import auth, { firebase } from '@react-native-firebase/auth';
 const History = () => {
 
     const [loading, setLoading] = useState(true);
-    const [users, setUser] = useState([]);
+    const [bloodPressure, seBloodPressure] = useState([]);
 
 
 
+    // useEffect(() => {
+    //     const getData = firebase.firestore();
+    //     const subscriber = getData.collection("dataUser")
+    //     .onSnapshot(querySnapshot => {
+    //         const users = [];
+
+    //         querySnapshot.forEach(documentSnapshot => {
+    //             users.push({
+    //                 ...documentSnapshot.data(),
+    //                 key: documentSnapshot.id,
+    //             });
+    //         });
+
+    //         setUser(users);
+    //         setLoading(false);
+    //     });
+
+    // return () => subscriber();
+    // },[]);
+
+    // if (loading) {
+    //     return <ActivityIndicator />
+    // }
     useEffect(() => {
         const getData = firebase.firestore();
         const subscriber = getData.collection("dataUser")
+        .doc(firebase.auth().currentUser.uid)
+        .collection('BloodPressure')
+        .orderBy("timestamp","desc")
         .onSnapshot(querySnapshot => {
-            const users = [];
+            const bloodPressure = [];
 
             querySnapshot.forEach(documentSnapshot => {
-                users.push({
+                bloodPressure.push({
                     ...documentSnapshot.data(),
                     key: documentSnapshot.id,
+                    
                 });
             });
 
-            setUser(users);
+            seBloodPressure(bloodPressure);
             setLoading(false);
         });
 
@@ -32,7 +59,7 @@ const History = () => {
     if (loading) {
         return <ActivityIndicator />
     }
-
+    
     return (
         <View style={styles.container}>
             <View style={styles.titleBar}>
@@ -43,13 +70,16 @@ const History = () => {
             </View>
             <View style={styles.borderHistory}>
                 <FlatList
-                data={users}
+                data={bloodPressure}
                 renderItem={({item}) => (
-                    <View style={{height: 50, flex: 1, alignItems: 'center', justifyContent: 'center'}}>
-                        <Text style={{color:"red"}}>User Email: {item.email}</Text>
-                        <Text>User Name: {item.username}</Text>
+                    <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
+                        <Text style={{color:"red"}}>SYS: {item.SYS}</Text>
+                        <Text>DIA: {item.DIA}</Text>
+                        <Text>BPM: {item.BPM}</Text>
                     </View>
-                )}/>
+                    )}
+                // keyExtractor={(item) => item.id}
+                />
             </View>
         </View>
     )
