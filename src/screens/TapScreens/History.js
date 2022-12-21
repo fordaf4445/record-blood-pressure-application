@@ -7,31 +7,6 @@ const History = () => {
     const [loading, setLoading] = useState(true);
     const [bloodPressure, seBloodPressure] = useState([]);
 
-
-
-    // useEffect(() => {
-    //     const getData = firebase.firestore();
-    //     const subscriber = getData.collection("dataUser")
-    //     .onSnapshot(querySnapshot => {
-    //         const users = [];
-
-    //         querySnapshot.forEach(documentSnapshot => {
-    //             users.push({
-    //                 ...documentSnapshot.data(),
-    //                 key: documentSnapshot.id,
-    //             });
-    //         });
-
-    //         setUser(users);
-    //         setLoading(false);
-    //     });
-
-    // return () => subscriber();
-    // },[]);
-
-    // if (loading) {
-    //     return <ActivityIndicator />
-    // }
     useEffect(() => {
         const getData = firebase.firestore();
         const subscriber = getData.collection("dataUser")
