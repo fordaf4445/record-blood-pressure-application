@@ -6,7 +6,6 @@ const History = () => {
 
     const [loading, setLoading] = useState(true);
     const [bloodPressure, setloodPressure] = useState([]);
-    const [styleColor, setStyleColor] = useState('')
 
     useEffect(() => {
         const getData = firebase.firestore();
