@@ -112,6 +112,7 @@ const styles = StyleSheet.create({
         borderRadius: 15,
         margin: 20,
         paddingTop: 10,
+        paddingBottom: 5,
         borderColor: '#e8e8e8',
         backgroundColor: 'white',
     },
@@ -151,7 +152,7 @@ const styles = StyleSheet.create({
     textSYSDIA: {
         fontFamily: "NotoSansThai-Regular",
         color: "white",
-        fontSize: 14,
+        fontSize: 15,
     },
     textType: {
         fontFamily: "NotoSansThai-Regular",
