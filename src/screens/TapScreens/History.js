@@ -1,6 +1,8 @@
-import { StyleSheet, Text, View, FlatList, ActivityIndicator } from 'react-native'
+import { StyleSheet, Text, View, FlatList, ActivityIndicator, TouchableOpacity } from 'react-native'
 import React, { useState, useEffect } from 'react'
 import auth, { firebase } from '@react-native-firebase/auth';
+import {GestureHandlerRootView,Swipeable} from 'react-native-gesture-handler';
+import Icon from 'react-native-vector-icons/FontAwesome';
 
 const History = () => {
 
@@ -34,11 +36,22 @@ const History = () => {
     if (loading) {
         return <ActivityIndicator />
     }
-
+    function deleteItem() {
+        return (
+            <View style={styles.deleteContainer}>
+                <TouchableOpacity>
+                    <Icon
+                    name='trash'
+                    size={20}
+                    color="white"/>
+                </TouchableOpacity>
+            </View>
+        )
+    }
 
 
     function renderItem(item) {
-        
+
         let colorBoloodPresure;
         if (item.SYS > 160) {
             colorBoloodPresure = "#EF553C"
@@ -52,21 +65,27 @@ const History = () => {
             colorBoloodPresure = "#71C7E2"
         }
         return (
-            <View style={styles.cradFlatlist}>
-                <View style={[styles.cradBloodPressure,{backgroundColor:colorBoloodPresure}]}>
-                    <View style={styles.cradSYS}>
-                        <Text style={styles.textSYSDIA}>{item.SYS}</Text>
+            <GestureHandlerRootView>
+            <Swipeable 
+            renderRightActions={deleteItem}>
+                <View style={styles.cradFlatlist}>
+                    <View style={[styles.cradBloodPressure, { backgroundColor: colorBoloodPresure }]}>
+                        <View style={styles.cradSYS}>
+                            <Text style={styles.textSYSDIA}>{item.SYS}</Text>
+                        </View>
+                        <Text style={styles.textSYSDIA}>{item.DIA}</Text>
                     </View>
-                    <Text style={styles.textSYSDIA}>{item.DIA}</Text>
-                </View>
-                <View style={{ flex: 5, justifyContent: "center" }}>
-                    <Text style={styles.textType}>   {item.TYPE}</Text>
-                    <View style={{ flexDirection: "row" }}>
-                        <Text style={styles.textTimeBpm}>   {item.timestamp}</Text>
-                        <Text style={styles.textTimeBpm}> | {item.BPM} bpm</Text>
+                    <View style={{ flex: 5, justifyContent: "center" }}>
+                        <Text style={styles.textType}>   {item.TYPE}</Text>
+                        {/* <Text style={styles.textType}>   {item.key}</Text> */}
+                        <View style={{ flexDirection: "row" }}>
+                            <Text style={styles.textTimeBpm}>   {item.timestamp}</Text>
+                            <Text style={styles.textTimeBpm}> | {item.BPM} bpm</Text>
+                        </View>
                     </View>
                 </View>
-            </View>
+            </Swipeable>
+            </GestureHandlerRootView>
         )
     }
 
@@ -82,7 +101,7 @@ const History = () => {
                 <FlatList
                     data={bloodPressure}
                     renderItem={({ item }) => renderItem(item)}
-                // keyExtractor={(item) => item.id}
+                    keyExtractor={(item) => item.key}
                 />
             </View>
         </View>
@@ -162,5 +181,14 @@ const styles = StyleSheet.create({
         fontFamily: "NotoSansThai-Regular",
         fontSize: 14,
     },
-
+    deleteContainer:{
+        justifyContent: "center",
+        alignItems: "center",
+        backgroundColor:"red",
+        width: "20%",
+        borderRadius: 10,
+        marginBottom: 10,
+        marginTop: 1,
+        marginRight: 10,
+    }
 });
