@@ -9,7 +9,6 @@ const InputDataTest = () => {
     const [dia, setDia] = useState(null);
     const [bpm, setBpm] = useState(null);
     const [currentDate, setCurrentDate] = useState(null);
-    const [valueClear, setValueClear ] = useState(null);
 
     useEffect(() => {
         const interval = setInterval(() => {
