@@ -10,31 +10,51 @@ const History = () => {
     useEffect(() => {
         const getData = firebase.firestore();
         const subscriber = getData.collection("dataUser")
-        .doc(firebase.auth().currentUser.uid)
-        .collection('BloodPressure')
-        .orderBy("timestamp","desc")
-        .onSnapshot(querySnapshot => {
-            const bloodPressure = [];
+            .doc(firebase.auth().currentUser.uid)
+            .collection('BloodPressure')
+            .orderBy("timestamp", "desc")
+            .onSnapshot(querySnapshot => {
+                const bloodPressure = [];
 
-            querySnapshot.forEach(documentSnapshot => {
-                bloodPressure.push({
-                    ...documentSnapshot.data(),
-                    key: documentSnapshot.id,
-                    
+                querySnapshot.forEach(documentSnapshot => {
+                    bloodPressure.push({
+                        ...documentSnapshot.data(),
+                        key: documentSnapshot.id,
+
+                    });
                 });
+
+                seBloodPressure(bloodPressure);
+                setLoading(false);
             });
 
-            seBloodPressure(bloodPressure);
-            setLoading(false);
-        });
-
-    return () => subscriber();
-    },[]);
+        return () => subscriber();
+    }, []);
 
     if (loading) {
         return <ActivityIndicator />
     }
-    
+
+    function renderItem(item) {
+        return (
+            <View style={styles.cradFlatlist}>
+                <View style={styles.cradBloodPressure}>
+                    <View style={styles.cradSYS}>
+                        <Text style={styles.textSYSDIA}>{item.SYS}</Text>
+                    </View>
+                    <Text style={styles.textSYSDIA}>{item.DIA}</Text>
+                </View>
+                <View style={{ flex: 5, justifyContent: "center" }}>
+                    <Text style={styles.textType}>   {item.TYPE}</Text>
+                    <View style={{ flexDirection: "row" }}>
+                        <Text style={styles.textTimeBpm}>   {item.timestamp}</Text>
+                        <Text style={styles.textTimeBpm}> | {item.BPM} bpm</Text>
+                    </View>
+                </View>
+            </View>
+        )
+    }
+
     return (
         <View style={styles.container}>
             <View style={styles.titleBar}>
@@ -45,15 +65,8 @@ const History = () => {
             </View>
             <View style={styles.borderHistory}>
                 <FlatList
-                data={bloodPressure}
-                renderItem={({item}) => (
-                    <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
-                        <Text style={{color:"red"}}>SYS: {item.SYS}</Text>
-                        <Text>DIA: {item.DIA}</Text>
-                        <Text>BPM: {item.BPM}</Text>
-                        <Text>TIME: {item.timestamp}</Text>
-                    </View>
-                    )}
+                    data={bloodPressure}
+                    renderItem={({ item }) => renderItem(item)}
                 // keyExtractor={(item) => item.id}
                 />
             </View>
@@ -84,17 +97,54 @@ const styles = StyleSheet.create({
         margin: 20,
         borderColor: '#e8e8e8',
         backgroundColor: 'white',
-
     },
     item: {
         backgroundColor: '#f9c2ff',
         padding: 20,
         marginVertical: 8,
         marginHorizontal: 16,
-
     },
     title: {
         fontSize: 32,
+    },
+    cradFlatlist: {
+        flex: 1,
+        marginLeft: 20,
+        marginRight: 20,
+        flexDirection: "row",
+        height: 65,
+        borderBottomWidth: 1,
+        borderBottomColor: "#D2CFC8"
+
+    },
+    cradBloodPressure: {
+        flex: 1,
+        backgroundColor: "pink",
+        alignItems: "center",
+        justifyContent: "center",
+        borderRadius: 10,
+        marginBottom: 5,
+        marginTop: 5,
+    },
+    cradSYS:{ 
+        borderBottomWidth: 1, 
+        borderBottomColor: "white", 
+        width: "80%", 
+        alignItems: "center", 
+    },
+    textSYSDIA: {
+        fontFamily: "NotoSansThai-Regular",
+        color: "white",
+        fontSize: 14,
+    },
+    textType: {
+        fontFamily: "NotoSansThai-Regular",
+        color: "black",
+        fontSize: 16,
+    },
+    textTimeBpm: {
+        fontFamily: "NotoSansThai-Regular",
+        fontSize: 14,
     },
 
 });
