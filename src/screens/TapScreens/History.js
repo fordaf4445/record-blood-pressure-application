@@ -43,7 +43,13 @@ const History = () => {
             db.collection('dataUser')
                 .doc(firebase.auth().currentUser.uid)
                 .collection('BloodPressure')
-                .doc(item.key).delete();
+                .doc(item.key).delete()
+                .then(() => {
+                    console.log('Item deleted successfully');
+                  })
+                  .catch((error) => {
+                    console.error('Error deleting item:', error);
+                  });
         }
 
         function deleteItem() {
