@@ -1,8 +1,7 @@
 import { View, Text, StyleSheet, TextInput, Alert, ScrollView, KeyboardAvoidingView, TouchableWithoutFeedback, Keyboard } from 'react-native'
 import React, { useState, useEffect } from 'react'
-import { Button, darkColors } from '@rneui/base';
+import { Button,} from '@rneui/base';
 import { firebase } from '@react-native-firebase/auth';
-import { SlideFromRightIOS } from '@react-navigation/stack/lib/typescript/src/TransitionConfigs/TransitionPresets';
 
 const InputDataTest = () => {
     const db = firebase.firestore();

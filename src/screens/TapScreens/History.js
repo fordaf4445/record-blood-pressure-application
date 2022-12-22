@@ -5,7 +5,8 @@ import auth, { firebase } from '@react-native-firebase/auth';
 const History = () => {
 
     const [loading, setLoading] = useState(true);
-    const [bloodPressure, seBloodPressure] = useState([]);
+    const [bloodPressure, setloodPressure] = useState([]);
+    const [styleColor, setStyleColor] = useState('')
 
     useEffect(() => {
         const getData = firebase.firestore();
@@ -24,7 +25,7 @@ const History = () => {
                     });
                 });
 
-                seBloodPressure(bloodPressure);
+                setloodPressure(bloodPressure);
                 setLoading(false);
             });
 
@@ -35,10 +36,25 @@ const History = () => {
         return <ActivityIndicator />
     }
 
+
+
     function renderItem(item) {
+        
+        let colorBoloodPresure;
+        if (item.SYS > 160) {
+            colorBoloodPresure = "#EF553C"
+        } else if (item.SYS >= 141) {
+            colorBoloodPresure = "#F1815C"
+        } else if (item.SYS >= 121) {
+            colorBoloodPresure = "#EEC151"
+        } else if (item.SYS >= 91) {
+            colorBoloodPresure = "#B8DE9A"
+        } else {
+            colorBoloodPresure = "#71C7E2"
+        }
         return (
             <View style={styles.cradFlatlist}>
-                <View style={styles.cradBloodPressure}>
+                <View style={[styles.cradBloodPressure,{backgroundColor:colorBoloodPresure}]}>
                     <View style={styles.cradSYS}>
                         <Text style={styles.textSYSDIA}>{item.SYS}</Text>
                     </View>
@@ -120,18 +136,17 @@ const styles = StyleSheet.create({
     },
     cradBloodPressure: {
         flex: 1,
-        backgroundColor: "pink",
         alignItems: "center",
         justifyContent: "center",
         borderRadius: 10,
         marginBottom: 5,
         marginTop: 5,
     },
-    cradSYS:{ 
-        borderBottomWidth: 1, 
-        borderBottomColor: "white", 
-        width: "80%", 
-        alignItems: "center", 
+    cradSYS: {
+        borderBottomWidth: 1,
+        borderBottomColor: "white",
+        width: "80%",
+        alignItems: "center",
     },
     textSYSDIA: {
         fontFamily: "NotoSansThai-Regular",
