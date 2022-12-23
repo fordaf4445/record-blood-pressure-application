@@ -200,7 +200,8 @@ const styles = StyleSheet.create({
         justifyContent: "center",
         alignItems: "center",
         backgroundColor: "red",
-        width: "20%",
-        borderRadius:100,
+        width: "15%",
+        height: "100%",
+        
     }
 });
