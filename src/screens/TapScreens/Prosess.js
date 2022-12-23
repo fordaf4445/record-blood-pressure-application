@@ -43,26 +43,6 @@ const Prosess = () => {
                         style={{ width: 200, height: 200 }} />
                     <Text></Text>
                 </View>
-                {/* <View style={{ bottom: 20,backgroundColor:"pink" }}>
-                    <Button
-                        onPress={ () => { navigation.navigate('InputDataTest')}}
-                        title={"ทดสอบข้อมูลเพิ่ม"}
-                        titleStyle={{ fontFamily: 'NotoSansThai-Bold' }}
-                        buttonStyle={{
-                            backgroundColor: 'red',
-                            borderRadius: 30,
-                            height: 50,
-                            width: 212,
-                        }}
-                        containerStyle={{
-                            // marginHorizontal: 50,
-                            marginVertical: 10,
-                            // marginTop: 20,
-                            alignItems: 'center',
-                        }}
-                    />
-                </View> */}
-
                 <GestureHandlerRootView style={{ top: 30 }}>
                     <Swipeable
                     renderRightActions={clickInput}>
