@@ -9,31 +9,31 @@ const Prosess = () => {
 
     const navigation = useNavigation();
     
-    // function clickInput() {
+    function clickInput() {
         
-    //     return (
-    //         <View style={{ height: 150,alignItems:"center",flex:1 }}>
-    //             <Button
-    //                 onPress={ () => { navigation.navigate('InputDataTest')}}
-    //                 title={"เพิ่มข้อมูลด้วยตัวเอง"}
-    //                 titleStyle={{ fontFamily: 'NotoSansThai-Bold' }}
-    //                 buttonStyle={{
-    //                     backgroundColor: 'red',
-    //                     borderRadius: 30,
-    //                     height: 50,
-    //                     width: 212,
-    //                 }}
-    //                 containerStyle={{
-    //                     // marginHorizontal: 50,
-    //                     marginVertical: 10,
-    //                     marginTop: 25,
-    //                     alignItems: 'center',
-    //                 }}
-    //             />
-    //             <Text style={[styles.text,{color:"red",}]}>กดเพื่อเพิ่มข้อมูลด้วยตัวเอง</Text>
-    //         </View>
-    //     )
-    // }
+        return (
+            <View style={{ height: 150,alignItems:"center",flex:1 }}>
+                <Button
+                    onPress={ () => { navigation.navigate('InputDataTest')}}
+                    title={"เพิ่มข้อมูลด้วยตัวเอง"}
+                    titleStyle={{ fontFamily: 'NotoSansThai-Bold' }}
+                    buttonStyle={{
+                        backgroundColor: 'red',
+                        borderRadius: 30,
+                        height: 50,
+                        width: 212,
+                    }}
+                    containerStyle={{
+                        // marginHorizontal: 50,
+                        marginVertical: 10,
+                        marginTop: 25,
+                        alignItems: 'center',
+                    }}
+                />
+                <Text style={[styles.text,{color:"red",}]}>กดเพื่อเพิ่มข้อมูลด้วยตัวเอง</Text>
+            </View>
+        )
+    }
 
     return (
         <View style={styles.container}>
@@ -43,9 +43,9 @@ const Prosess = () => {
                         style={{ width: 200, height: 200 }} />
                     <Text></Text>
                 </View>
-                {/* <GestureHandlerRootView style={{ top: 30 }}>
+                <GestureHandlerRootView style={{ top: 30 }}>
                     <Swipeable
-                    renderRightActions={clickInput}> */}
+                    renderRightActions={clickInput}>
                         <View style={{ height: 150, }}>
                             <Button
                                 title={"เชื่อมต่อบลูทูธ"}
@@ -65,8 +65,8 @@ const Prosess = () => {
                             />
                             <Text style={styles.text}>เชื่อมต่อบลูทูธเพื่อเพิ่มข้อมูลความดันโลหิต</Text>
                         </View>
-                    {/* </Swipeable>
-                </GestureHandlerRootView> */}
+                    </Swipeable>
+                </GestureHandlerRootView>
 
             </View>
 
@@ -85,6 +85,7 @@ const styles = StyleSheet.create({
         color: '#5DB075',
         top: 10,
         fontFamily: 'NotoSansThai-SemiBold',
+        backgroundColor:"#f2f2f2",
     },
     bottonStyle: {
 
