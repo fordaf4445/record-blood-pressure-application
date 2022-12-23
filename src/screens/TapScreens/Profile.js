@@ -11,7 +11,7 @@ import { useNavigation } from '@react-navigation/native';
 
 const Profile = () => {
 
-    const touchSignout = () => { signout(); }
+    const touchSignout = () => { signout();}
     const navigation = useNavigation();
     const { signout } = useContext(AuthContext);
     const [name, setName] = useState('');
