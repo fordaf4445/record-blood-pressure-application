@@ -46,7 +46,7 @@ const Signup = () => {
 
 
             <View style={styles.container}>
-                <Text style={styles.textMain}> ลงทะเบียน </Text>
+                {/* <Text style={styles.textMain}> ลงทะเบียน </Text> */}
                 <TextInput
                     style={styles.inputView}
                     placeholder="Username"

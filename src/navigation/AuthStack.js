@@ -4,7 +4,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import Signup from '../screens/Signup';
 import Welcome from '../screens/Welcome';
 import TapStack from './TapStack';
-
+import FontAwesome from 'react-native-vector-icons/dist/FontAwesome';
 
 
 
@@ -41,7 +41,23 @@ export default function AuthStack () {
                 headerShown: false
             }}>
                 <Stack.Screen name='Welcome' component={Welcome}/>
-                <Stack.Screen name='Signup' component={Signup}/>
+                <Stack.Screen name='Signup' component={Signup}
+                options={{
+                    headerShown:true,
+                    title: "ลงทะเบียน",
+                    headerTitleStyle:{
+                        fontFamily:"NotoSansThai-Bold",
+                        color:"white",
+                        fontSize: 30,
+                    },
+                    headerStyle:{
+                        height: 60,
+                        backgroundColor: "#5DB075",
+                        
+                    },
+                    // headerTintColor: "#fff",
+                    headerBackImage: () => (<FontAwesome name="chevron-left"  color={"white"} size={25} />),
+                }}/>
                 {/* <Stack.Screen name='TapStack'component={TapStack}/> */}
         </Stack.Navigator>
     )
