@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useContext } from 'react';
-import { View, StyleSheet, TextInput, ScrollView, CheckBox, Image } from 'react-native';
+import { View, StyleSheet, TextInput, ScrollView, CheckBox, Image, TouchableOpacity } from 'react-native';
 import { Button, Input, makeStyles, Text, Icon } from '@rneui/base';
 import Inicon from 'react-native-vector-icons/dist/Ionicons'
 import Calendar from '../../components/ProfileComponents/Calendar';
@@ -17,11 +17,11 @@ const Profile = () => {
     const [name, setName] = useState('');
     const [image, setImage] = useState('https://sv1.picz.in.th/images/2022/12/15/GIGhwg.png');
     useEffect(() => {
-        const unsubscribe = 
+        const unsubscribe =
             firebase.firestore().collection('dataUser')
                 .doc(firebase.auth().currentUser.uid)
                 .onSnapshot((docsnapshot) => {
-                        setName(docsnapshot.data())
+                    setName(docsnapshot.data())
                 });
         return () => unsubscribe();
     }, []);
@@ -30,11 +30,13 @@ const Profile = () => {
         <View style={styles.container}>
             <View style={{ backgroundColor: '#5DB075', flex: 1 }}>
                 <View style={[styles.titleBar]}>
-                    <Text style={styles.text}
-                        onPress={() => { navigation.navigate('SettingComponent') }}>setting</Text>
+                    <TouchableOpacity onPress={() => { navigation.navigate('SettingComponent') }}>
+                        <Text style={styles.text}>setting</Text>
+                    </TouchableOpacity>
                     <Text style={styles.textHeader}>Profile</Text>
-                    <Text style={styles.text}
-                        onPress={touchSignout}>Logout</Text>
+                    <TouchableOpacity onPress={touchSignout}>
+                        <Text style={styles.text}>Logout</Text>
+                    </TouchableOpacity>
                 </View>
                 <View style={{ alignSelf: "center", top: 20 }}>
                     <View style={styles.profileImage}>
