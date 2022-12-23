@@ -4,9 +4,9 @@ import React from 'react'
 const TextStatus = () => {
   return (
     <View style={styles.container}>
-      <Text style={{right:103,fontFamily:'NotoSansThai-Bold',color:'#FF0000'}}>SYS</Text>
-      <Text style={{left:7,fontFamily:'NotoSansThai-Bold',color:'#B8DE9A'}}>DIA</Text>
-      <Text style={{left:112,fontFamily:'NotoSansThai-Bold',color:'#23AFD6'}}>PLUSE</Text>
+      <Text style={{right:109,fontFamily:'NotoSansThai-Bold',color:'#FF0000'}}>SYS</Text>
+      <Text style={{left:3,fontFamily:'NotoSansThai-Bold',color:'#B8DE9A'}}>DIA</Text>
+      <Text style={{left:110,fontFamily:'NotoSansThai-Bold',color:'#23AFD6'}}>bpm</Text>
     </View>
   )
 }
