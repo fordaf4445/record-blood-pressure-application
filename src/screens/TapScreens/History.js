@@ -164,7 +164,8 @@ const styles = StyleSheet.create({
         flexDirection: "row",
         height: 65,
         borderBottomWidth: 1,
-        borderBottomColor: "#D2CFC8"
+        borderBottomColor: "#D2CFC8",
+        backgroundColor: "#FFFFFF",
 
     },
     cradBloodPressure: {
