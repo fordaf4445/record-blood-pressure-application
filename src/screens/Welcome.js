@@ -67,9 +67,12 @@ const Welcome = () => {
 
                         }}
                     />
-                    <Text style={styles.textThree} onPress={() => { navigation.navigate('Signup') }}>
-                        Don’t have any account? Sign Up
+                    <TouchableOpacity onPress={() => { navigation.navigate('Signup') }}>
+                    <Text style={styles.textThree}>
+                        ไม่มีบัญชีใช่ไหม ? กดลงชื่อเพื่อเข้าใช้
+                        {/* Don’t have account? Sign Up */}
                     </Text>
+                    </TouchableOpacity>
                 </View>
             </View>
         </ScrollView>
