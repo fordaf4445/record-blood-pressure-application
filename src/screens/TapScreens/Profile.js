@@ -11,22 +11,19 @@ import { useNavigation } from '@react-navigation/native';
 
 const Profile = () => {
 
-    const touchSignout = () => { signout();}
+    const touchSignout = () => { signout(); }
     const navigation = useNavigation();
     const { signout } = useContext(AuthContext);
     const [name, setName] = useState('');
     const [image, setImage] = useState('https://sv1.picz.in.th/images/2022/12/15/GIGhwg.png');
     useEffect(() => {
-        firebase.firestore().collection('dataUser')
-            .doc(firebase.auth().currentUser.uid)
-            .onSnapshot((docsnapshot) => {
-                if (docsnapshot.exists) {
-                    setName(docsnapshot.data())
-                }
-                else {
-                    console.log('User does not exist');
-                }
-            })
+        const unsubscribe = 
+            firebase.firestore().collection('dataUser')
+                .doc(firebase.auth().currentUser.uid)
+                .onSnapshot((docsnapshot) => {
+                        setName(docsnapshot.data())
+                });
+        return () => unsubscribe();
     }, []);
 
     return (
@@ -34,7 +31,7 @@ const Profile = () => {
             <View style={{ backgroundColor: '#5DB075', flex: 1 }}>
                 <View style={[styles.titleBar]}>
                     <Text style={styles.text}
-                        onPress={() => {navigation.navigate('SettingComponent')}}>setting</Text>
+                        onPress={() => { navigation.navigate('SettingComponent') }}>setting</Text>
                     <Text style={styles.textHeader}>Profile</Text>
                     <Text style={styles.text}
                         onPress={touchSignout}>Logout</Text>
