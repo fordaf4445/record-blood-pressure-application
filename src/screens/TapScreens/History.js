@@ -2,7 +2,7 @@ import { StyleSheet, Text, View, FlatList, ActivityIndicator, TouchableOpacity }
 import React, { useState, useEffect } from 'react'
 import auth, { firebase } from '@react-native-firebase/auth';
 import { GestureHandlerRootView, Swipeable } from 'react-native-gesture-handler';
-import Icon from 'react-native-vector-icons/FontAwesome';
+import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 
 const History = () => {
     const db = firebase.firestore()
@@ -57,7 +57,7 @@ const History = () => {
                 <View style={styles.deleteContainer}>
                     <TouchableOpacity
                         onPress={() => del(item)}>
-                        <Icon
+                        <FontAwesome5
                             name='trash'
                             size={20}
                             color="white" />
@@ -201,6 +201,6 @@ const styles = StyleSheet.create({
         alignItems: "center",
         backgroundColor: "red",
         width: "20%",
-
+        borderRadius:100,
     }
 });
