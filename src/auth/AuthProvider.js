@@ -13,11 +13,13 @@ export const AuthProvider = ({ children }) => {
     const [hight, setHight] = useState('');
     const [sex, setSex] = useState('');
     const [weight, setWeight] = useState('');
+    const [data, setData] = useState('');
+
     return (
         <AuthContext.Provider
             value={{
                 user, setUser, username, setUsername, email, setEmail, password, setPassword,
-                age, setAge, hight, setHight, sex, setSex, weight, setWeight,
+                age, setAge, hight, setHight, sex, setSex, weight, setWeight,data,setData,
                 signin: async (email, password) => {
                     try {
                         await auth().signInWithEmailAndPassword(email, password);
@@ -59,7 +61,8 @@ export const AuthProvider = ({ children }) => {
                     } catch (err) {
                         console.log('singOut error');
                     }
-                }
+                },
+
             }}>
             {children}
         </AuthContext.Provider>
