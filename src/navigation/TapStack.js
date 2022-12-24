@@ -58,7 +58,17 @@ function ProfileComponent() {
                 name="SettingComponent"
                 component={SettingComponent}
                 options={{
-                    title: "ตั้งค่าผู้ใช้งาน"
+                    title: "ตั้งค่าผู้ใช้งาน",
+                    headerTitleStyle:{
+                        fontFamily:"NotoSansThai-Bold",
+                        color:"white"
+                    },
+                    headerStyle:{
+                        height: 60,
+                        backgroundColor: "#5DB075"
+                    },
+                    // headerTintColor: "#fff",
+                    headerBackImage: () => (<FontAwesome name="chevron-left"  color={"white"} size={25} />),
                 }}/>
                 
         </ProfileStack.Navigator>
