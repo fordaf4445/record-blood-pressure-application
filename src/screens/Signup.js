@@ -47,6 +47,7 @@ const Signup = () => {
 
             <View style={styles.container}>
                 {/* <Text style={styles.textMain}> ลงทะเบียน </Text> */}
+                <Text style={[styles.textcolor,{top:15,right:132}]}>ยูสเซอร์เนม</Text>
                 <TextInput
                     style={styles.inputView}
                     placeholder="Username"
@@ -54,6 +55,7 @@ const Signup = () => {
                     value={username} 
                     onChangeText={(username) => {setUsername(username)}}
                 />
+                <Text style={[styles.textcolor,{top:15,right:153}]}>อีเมล</Text>
                 <TextInput
                     style={styles.inputView}
                     placeholder="Email"
@@ -61,6 +63,7 @@ const Signup = () => {
                     value={email} 
                     onChangeText={(email) => {setEmail(email)}}
                 />
+                <Text style={[styles.textcolor,{top:15,right:141}]}>พาสเวิร์ด</Text>
                 <TextInput
                     style={styles.inputView}
                     placeholder="Password"
