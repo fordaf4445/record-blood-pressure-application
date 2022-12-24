@@ -2,15 +2,16 @@ import { Alert, StyleSheet, View, Dimensions, TouchableOpacity, TextInput, Scrol
 import React, { useState, useContext } from 'react';
 import { useNavigation } from '@react-navigation/native';
 import Icon from 'react-native-vector-icons/FontAwesome';
+import Lonicons from 'react-native-vector-icons/Ionicons';
 import { Button, Text } from '@rneui/base';
 import { AuthContext } from '../auth/AuthProvider';
-import auth from '@react-native-firebase/auth';
 
 const Welcome = () => {
     const navigation = useNavigation();
     const [password, setPassword] = useState('');
     const [email, setEmail] = useState('');
     const { signin } = useContext(AuthContext);
+    const [secureTextEntry, setSecureTextEntry] = useState(true);
 
     const touchSignIn = () => {
         signin(email, password);
@@ -44,11 +45,15 @@ const Welcome = () => {
                         autoCapitalize="none"
                         autoCorrect={false}
                         textContentType="newPassword"
-                        secureTextEntry
+                        secureTextEntry={secureTextEntry}
                         value={password}
                         enablesReturnKeyAutomatically
                         onChangeText={(password) => setPassword(password)}
                     />
+                    <TouchableOpacity style={styles.secureIcon}
+                        onPress={() => { setSecureTextEntry((prev) => !prev) }}>
+                        <Lonicons name={ secureTextEntry? 'eye' : 'eye-off' } style={styles.eye}/>
+                    </TouchableOpacity>
                     <Button
                         onPress={touchSignIn}
                         title="เข้าสู่ระบบ"
@@ -68,10 +73,10 @@ const Welcome = () => {
                         }}
                     />
                     <TouchableOpacity onPress={() => { navigation.navigate('Signup') }}>
-                    <Text style={styles.textThree}>
-                        ไม่มีบัญชีใช่ไหม ? กดลงชื่อเพื่อเข้าใช้
-                        {/* Don’t have account? Sign Up */}
-                    </Text>
+                        <Text style={styles.textThree}>
+                            ไม่มีบัญชีใช่ไหม ? กดลงชื่อเพื่อเข้าใช้
+                            {/* Don’t have account? Sign Up */}
+                        </Text>
                     </TouchableOpacity>
                 </View>
             </View>
@@ -121,5 +126,13 @@ const styles = StyleSheet.create({
         width: 343,
         fontSize: 16,
         fontFamily: 'NotoSansThai-SemiBold',
+    },
+    secureIcon: {
+        position: 'absolute',
+        marginTop: 139,
+        left: 308,
+    },
+    eye:{
+        fontSize: 20,
     },
 })
