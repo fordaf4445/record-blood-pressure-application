@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useContext } from 'react';
-import { View, StyleSheet, TextInput, ScrollView, CheckBox, Image, TouchableOpacity } from 'react-native';
+import { View, StyleSheet, TextInput, ScrollView, CheckBox, Image, TouchableOpacity, ActivityIndicator } from 'react-native';
 import { Button, Input, makeStyles, Text, Icon } from '@rneui/base';
 import Inicon from 'react-native-vector-icons/dist/Ionicons'
 import Calendar from '../../components/ProfileComponents/Calendar';
@@ -16,15 +16,22 @@ const Profile = () => {
     const { signout } = useContext(AuthContext);
     const [name, setName] = useState('');
     const [image, setImage] = useState('https://sv1.picz.in.th/images/2022/12/15/GIGhwg.png');
+    const [loading, setLoading] = useState(true);
+
     useEffect(() => {
         const unsubscribe =
             firebase.firestore().collection('dataUser')
                 .doc(firebase.auth().currentUser.uid)
                 .onSnapshot((docsnapshot) => {
-                    setName(docsnapshot.data())
+                    setName(docsnapshot.data());
+                    setLoading(false);
                 });
         return () => unsubscribe();
     }, []);
+
+    if (loading) {
+        return <View style={styles.ActivityIndicatorContainer} ><ActivityIndicator /></View>
+    }
 
     return (
         <View style={styles.container}>
@@ -151,4 +158,9 @@ const styles = StyleSheet.create({
         fontFamily: 'NotoSansThai-Bold',
         color: 'black',
     },
+    ActivityIndicatorContainer: {
+        alignItems: 'center',
+        justifyContent: 'center',
+        fontSize: "large",
+    }
 })
