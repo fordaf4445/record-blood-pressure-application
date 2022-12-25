@@ -42,6 +42,7 @@ const Signup = () => {
     }
     
     return (
+        <ScrollView>
         <View style={{ flex: 1 }}>
 
 
@@ -159,6 +160,7 @@ const Signup = () => {
             </View>
 
         </View>
+        </ScrollView>
 
     )
 }

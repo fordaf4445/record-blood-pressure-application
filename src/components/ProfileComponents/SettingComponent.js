@@ -6,7 +6,6 @@ import { firebase } from '@react-native-firebase/auth';
 const SettingComponent = () => {
   const [userData, setUserData] = useState('');
   const db = firebase.firestore();
-  const [data, setData] = useState('');
 
   const getUser = async () => {
     db.collection('dataUser')
