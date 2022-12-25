@@ -49,8 +49,7 @@ const SettingComponent = () => {
       <View style={styles.container}>
         {/* <Text style={styles.textMain}> ลงทะเบียน </Text> */}
         <Text style={[styles.textcolor, { right: 153 }]}>อีเมล</Text>
-        <Text>{userData.email}</Text>
-        <Text style={{ fontSize: 20, marginLeft: -104, color: "black" }}></Text>
+        <Text style={{ fontSize: 20, marginLeft: -104, color: "black" }}>{userData.email}</Text>
         <Text style={[styles.textcolor, { top: 15, right: 132 }]}>ยูสเซอร์เนม</Text>
         <TextInput
           value={userData ? userData.username : ''}
@@ -92,7 +91,7 @@ const SettingComponent = () => {
             value={userData ? userData.age : ''}
             onChangeText={(txt) => setUserData({ ...userData , age : txt})}
           />
-          <Text style={[styles.inputSmall, { marginLeft: 59 }]}>{userData.sex}</Text>
+          <Text style={[styles.inputSmall2, { marginLeft: 59 }]}>{userData.sex}</Text>
         </View>
         <View style={{ flex: 1, top: 200, backgroundColor: "pink" }}>
           <Button
@@ -170,6 +169,14 @@ const styles = StyleSheet.create({
     padding: 10,
     width: 112,
     fontSize: 20,
+  },
+  inputSmall2: {
+    borderRadius: 15,
+    height: 50,
+    padding: 10,
+    width: 112,
+    fontSize: 20,
+    color:"black",
   },
   textMain: {
     fontSize: 35,
