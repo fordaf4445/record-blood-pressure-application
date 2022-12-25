@@ -4,46 +4,44 @@ import React, { useState, useEffect } from 'react'
 import { firebase } from '@react-native-firebase/auth';
 
 const SettingComponent = () => {
-  const [data, setData] = useState(null);
-  const [username, setUsername] = useState('');
-  const [hight, setHight] = useState(null);
-  const [weight, setWeight] = useState(null);
-  const [age, setAge] = useState(null);
-  const [loading, setLoading] = useState(true);
+  const [userData, setUserData] = useState('');
   const db = firebase.firestore();
 
-  const touchUpdate = () => {
+  const getUser = async () => {
+    db.collection('dataUser')
+      .doc(firebase.auth().currentUser.uid)
+      .get()
+      .then((documentSnapshot) => {
+        if (documentSnapshot.exists) {
+          console.log('User Data', documentSnapshot.data());
+          setUserData(documentSnapshot.data());
+        } else {
+          console.log('error get data');
+        }
+      })
+  }
+
+
+  const touchUpdate = async () => {
     db.collection('dataUser')
       .doc(firebase.auth().currentUser.uid)
       .update({
-        username: username,
-        'userDetail.age': age,
-        'userDetail.hight': hight,
-        'userDetail.weight': weight
+        username: userData.username,
+        'userDetail.hight': userData.userDetail.hight,
+        'userDetail.weight': userData.userDetail.weight,
+        'userDetail.age': userData.userDetail.age,
       })
-      .then(function (docRef) {
-        alert("อัพเดทข้อมูลสำเร็จ");
-        console.log("Updata Complete",);
-      })
-      .catch(function (err) {
-        alert("Error");
-        console.log(err);
+      .then(() => {
+        console.log('User Update Success');
+        alert('User Update Success');
       })
   }
 
   useEffect(() => {
-    const unsubscribe =
-      db.collection('dataUser')
-        .doc(firebase.auth().currentUser.uid)
-        .onSnapshot((docsnapshot) => {
-          setData(docsnapshot.data());
-          setLoading(false);
-        });
-    return () => unsubscribe();
-  }, [])
-  if (loading) {
-    return <View style={styles.ActivityIndicatorContainer} ><ActivityIndicator /></View>
-  }
+    getUser()
+  }, []);
+
+
   return (
     <View style={{ flex: 1 }}>
 
@@ -51,13 +49,13 @@ const SettingComponent = () => {
       <View style={styles.container}>
         {/* <Text style={styles.textMain}> ลงทะเบียน </Text> */}
         <Text style={[styles.textcolor, { right: 153 }]}>อีเมล</Text>
-        <Text style={{ fontSize: 20, marginLeft: -104, color: "black" }}>{data.email}</Text>
+        <Text style={{ fontSize: 20, marginLeft: -104, color: "black" }}></Text>
         <Text style={[styles.textcolor, { top: 15, right: 132 }]}>ยูสเซอร์เนม</Text>
         <TextInput
+          value={userData ? userData.username : ''}
+          onChangeText={(txt) => setUserData({ ...userData, username: txt })}
           style={styles.inputView}
-          placeholderTextColor="gray"
-          onChangeText={(username) => setUsername('' ? 'dfgfdg' : username)}
-        >{data.username}</TextInput>
+        />
         <View style={styles.innerContainer}>
           <Text style={styles.textcolor}>น้ำหนัก</Text>
           <Text style={[styles.textcolor, { marginLeft: 130 }]}>ส่วนสูง</Text>
@@ -66,15 +64,18 @@ const SettingComponent = () => {
           <TextInput style={styles.inputSmall}
             keyboardType='numeric'
             maxLength={3}
-            onChangeText={(weight) => { setWeight(weight) }}
-          >{data.userDetail.weight}</TextInput>
+            value={userData ? userData.userDetail.weight : ''}
+            onChangeText={(txt) => setUserData({ ...userData , userDetail: { ...userData.userDetail, weight : txt} })}
+          />
           <View style={styles.textSmall}>
             <Text style={styles.textSmall}>kg.</Text>
           </View>
           <TextInput style={[styles.inputSmall, { marginLeft: 30 }]}
             keyboardType='numeric'
             maxLength={3}
-            onChangeText={(hight) => { setHight(hight) }}>{data.userDetail.hight}</TextInput>
+            value={userData ? userData.userDetail.hight : ''}
+            onChangeText={(txt) => setUserData({ ...userData , userDetail: { ...userData.userDetail, hight : txt} })}
+          />
           <View style={styles.textSmall}>
             <Text>cm.</Text>
           </View>
@@ -87,8 +88,10 @@ const SettingComponent = () => {
           <TextInput style={styles.inputSmall}
             keyboardType='numeric'
             maxLength={3}
-            onChangeText={(age) => { setAge(age) }}>{data.userDetail.age}</TextInput>
-          <Text style={[styles.inputSmall, { marginLeft: 59 }]}>{data.userDetail.sex}</Text>
+            value={userData ? userData.userDetail.age : ''}
+            onChangeText={(txt) => setUserData({ ...userData , userDetail: { ...userData.userDetail, age : txt} })}
+          />
+          <Text style={[styles.inputSmall, { marginLeft: 59 }]}>{userData.username}</Text>
         </View>
         <View style={{ flex: 1, top: 200, backgroundColor: "pink" }}>
           <Button
@@ -106,7 +109,8 @@ const SettingComponent = () => {
               alignItems: 'center',
             }}
             titleStyle={{ fontFamily: 'NotoSansThai-SemiBold' }}
-            onPress={touchUpdate} />
+            onPress={touchUpdate}
+          />
         </View>
       </View>
 
