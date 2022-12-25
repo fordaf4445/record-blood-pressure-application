@@ -1,20 +1,21 @@
 import React, { useState } from 'react';
-import { View, StyleSheet, Image,Animated } from 'react-native';
+import { View, StyleSheet, Image, Animated } from 'react-native';
 import { Button, Input, makeStyles, Text } from '@rneui/base';
 import { useNavigation } from '@react-navigation/native';
 import { GestureHandlerRootView, Swipeable } from 'react-native-gesture-handler';
+import FontAwesome5 from 'react-native-vector-icons/dist/FontAwesome5';
 
 
 const Prosess = () => {
 
     const navigation = useNavigation();
-    
+
     function clickInput() {
-        
+
         return (
-            <View style={{ height: 150,alignItems:"center",flex:1 }}>
+            <View style={{ height: 150, alignItems: "center", flex: 1 }}>
                 <Button
-                    onPress={ () => { navigation.navigate('InputDataTest')}}
+                    onPress={() => { navigation.navigate('InputDataTest') }}
                     title={"เพิ่มข้อมูลด้วยตัวเอง"}
                     titleStyle={{ fontFamily: 'NotoSansThai-Bold' }}
                     buttonStyle={{
@@ -30,7 +31,7 @@ const Prosess = () => {
                         alignItems: 'center',
                     }}
                 />
-                <Text style={[styles.text,{color:"red",}]}>กดเพื่อเพิ่มข้อมูลด้วยตัวเอง</Text>
+                <Text style={[styles.text, { color: "red", }]}>กดเพื่อเพิ่มข้อมูลด้วยตัวเอง</Text>
             </View>
         )
     }
@@ -42,10 +43,14 @@ const Prosess = () => {
                     <Image source={require("../../../assets/image/wifi-connection.png")}
                         style={{ width: 200, height: 200 }} />
                     <Text></Text>
+                    <View style={styles.slideLeft}>
+                        <FontAwesome5 name='chevron-circle-left' style={{fontSize:20, color:"#5DB075"}}  />
+                        <Text style={{fontFamily:'NotoSansThai-SemiBold',color:'#5DB075'}}>  เลื่อนไปทางซ้ายเพื่อเพิ่มข้อมูลด้วยตัวเอง</Text>
+                    </View>
                 </View>
                 <GestureHandlerRootView style={{ top: 30 }}>
                     <Swipeable
-                    renderRightActions={clickInput}>
+                        renderRightActions={clickInput}>
                         <View style={{ height: 150, }}>
                             <Button
                                 title={"เชื่อมต่อบลูทูธ"}
@@ -85,9 +90,13 @@ const styles = StyleSheet.create({
         color: '#5DB075',
         top: 10,
         fontFamily: 'NotoSansThai-SemiBold',
-        backgroundColor:"#f2f2f2",
+        backgroundColor: "#f2f2f2",
     },
-    bottonStyle: {
+    slideLeft: {
+        position: 'absolute',
+        top: 500,
+        left:-35,
+        flexDirection:"row",
 
     },
 });
