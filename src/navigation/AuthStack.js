@@ -58,7 +58,6 @@ export default function AuthStack() {
                     // headerTintColor: "#fff",
                     headerBackImage: () => (<FontAwesome name="chevron-left" color={"white"} size={25} />),
                 }} />
-            {/* <Stack.Screen name='TapStack'component={TapStack}/> */}
         </Stack.Navigator>
     )
 }

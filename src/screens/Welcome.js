@@ -5,6 +5,7 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 import Lonicons from 'react-native-vector-icons/Ionicons';
 import { Button, Text } from '@rneui/base';
 import { AuthContext } from '../auth/AuthProvider';
+import { firebase } from '@react-native-firebase/auth';
 
 const Welcome = () => {
     const navigation = useNavigation();
@@ -16,6 +17,15 @@ const Welcome = () => {
     const touchSignIn = () => {
         signin(email, password);
         // navigation.navigate('TapStack');
+    }
+    const forgetPasswords = () => {
+        firebase.auth().sendPasswordResetEmail(email)
+        .then(() => {
+            alert('Passwords reset');
+        })
+        .catch((error) =>{
+            alert('Error: ' + error)
+        })
     }
 
     return (
@@ -53,6 +63,14 @@ const Welcome = () => {
                     <TouchableOpacity style={styles.secureIcon}
                         onPress={() => { setSecureTextEntry((prev) => !prev) }}>
                         <Lonicons name={ secureTextEntry? 'eye' : 'eye-off' } style={styles.eye}/>
+                    </TouchableOpacity>
+                    <TouchableOpacity onPress={() => { if (email == '') {
+                        Alert.alert("แจ้งเตือน","โปรดกรอกอีเมล")
+                    } else {forgetPasswords()}}}>
+                        <Text style={styles.textForgetPass}>
+                            ลืมรหัสผ่าน
+                            {/* Don’t have account? Sign Up */}
+                        </Text>
                     </TouchableOpacity>
                     <Button
                         onPress={touchSignIn}
@@ -134,5 +152,11 @@ const styles = StyleSheet.create({
     },
     eye:{
         fontSize: 20,
+    },
+    textForgetPass:{
+        color: '#5DB075',
+        top: 10,
+        fontFamily: 'NotoSansThai-SemiBold',
+        left:130,
     },
 })
