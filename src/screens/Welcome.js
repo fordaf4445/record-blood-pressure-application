@@ -21,12 +21,22 @@ const Welcome = () => {
     const forgetPasswords = () => {
         firebase.auth().sendPasswordResetEmail(email)
         .then(() => {
-            alert('Passwords reset');
+           alerForgetPasswords();
         })
         .catch((error) =>{
             alert('Error: ' + error)
         })
     }
+
+    const alerForgetPasswords = () => {
+        Alert.alert(
+          "เราได้ส่งอีเมลไปให้คุณแล้ว",
+          "โปรดตรวจสอบอีเมลทั้งหมดของคุณหรือจดหมายขยะเพื่อรีเซ็ตรหัสผ่าน",
+          [
+            { text: "OK", onPress: () => console.log("OK Pressed") }
+          ]
+        );
+      }
 
     return (
         <ScrollView >
@@ -69,7 +79,6 @@ const Welcome = () => {
                     } else {forgetPasswords()}}}>
                         <Text style={styles.textForgetPass}>
                             ลืมรหัสผ่าน
-                            {/* Don’t have account? Sign Up */}
                         </Text>
                     </TouchableOpacity>
                     <Button

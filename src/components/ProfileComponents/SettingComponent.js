@@ -52,7 +52,7 @@ const SettingComponent = () => {
 
   const alertResetPasswords = () => {
     Alert.alert(
-      "เราได้ส่งรหัสไปให้คุณที่ : " + userData.email,
+      "เราได้ส่งอีเมลไปให้คุณที่ : " + userData.email,
       "โปรดตรวจสอบอีเมลทั้งหมดของคุณหรือจดหมายขยะเพื่อรีเซ็ตรหัสผ่าน",
       [
         { text: "OK", onPress: () => console.log("OK Pressed") }
