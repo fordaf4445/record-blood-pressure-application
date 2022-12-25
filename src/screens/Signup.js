@@ -1,23 +1,24 @@
 import React, { useState, useContext } from 'react';
-import { View, StyleSheet, TextInput, ScrollView, CheckBox } from 'react-native';
+import { View, StyleSheet, TextInput, ScrollView, CheckBox, TouchableOpacity } from 'react-native';
 import { Button, Input, makeStyles, Text } from '@rneui/base';
 import { useNavigation } from '@react-navigation/native';
 import BouncyCheckbox from "react-native-bouncy-checkbox";
 import firestore from '@react-native-firebase/firestore';
-import { AuthContext} from '../auth/AuthProvider'
-
+import { AuthContext } from '../auth/AuthProvider';
+import Lonicons from 'react-native-vector-icons/Ionicons';
 
 const Signup = () => {
     // const navigation = useNavigation();
-    
-    const {username, setUsername} = useContext(AuthContext);
-    const {email, setEmail} = useContext(AuthContext);
-    const {password, setPassword} = useContext(AuthContext);
-    const {age, setAge} = useContext(AuthContext);
-    const {hight, setHight} = useContext(AuthContext);
-    const {sex, setSex} = useContext(AuthContext);
-    const {weight, setWeight} = useContext(AuthContext);
+
+    const { username, setUsername } = useContext(AuthContext);
+    const { email, setEmail } = useContext(AuthContext);
+    const { password, setPassword } = useContext(AuthContext);
+    const { age, setAge } = useContext(AuthContext);
+    const { hight, setHight } = useContext(AuthContext);
+    const { sex, setSex } = useContext(AuthContext);
+    const { weight, setWeight } = useContext(AuthContext);
     const { signup } = useContext(AuthContext);
+    const [secureTextEntry, setSecureTextEntry] = useState(true);
 
     // function addDataUser() {
     //     firestore()
@@ -37,129 +38,137 @@ const Signup = () => {
     // };
 
     const touchSignUp = () => {
-        signup( email, password);
+        signup(email, password);
         // addDataUser();
     }
-    
+
     return (
         <ScrollView>
-        <View style={{ flex: 1 }}>
+            <View style={{ flex: 1 }}>
 
 
-            <View style={styles.container}>
-                {/* <Text style={styles.textMain}> ลงทะเบียน </Text> */}
-                <Text style={[styles.textcolor,{top:15,right:132}]}>ยูสเซอร์เนม</Text>
-                <TextInput
-                    style={styles.inputView}
-                    placeholder="Username"
-                    placeholderTextColor="gray"
-                    value={username} 
-                    onChangeText={(username) => {setUsername(username)}}
-                />
-                <Text style={[styles.textcolor,{top:15,right:153}]}>อีเมล</Text>
-                <TextInput
-                    style={styles.inputView}
-                    placeholder="Email"
-                    placeholderTextColor="gray"
-                    value={email} 
-                    onChangeText={(email) => {setEmail(email)}}
-                />
-                <Text style={[styles.textcolor,{top:15,right:141}]}>พาสเวิร์ด</Text>
-                <TextInput
-                    style={styles.inputView}
-                    placeholder="Password"
-                    placeholderTextColor="gray"
-                    autoCapitalize="none"
-                    secureTextEntry
-                    value={password}
-                    onChangeText={(password) => setPassword(password)}
-                />
-                <View style={styles.innerContainer}>
-                    <Text style={styles.textcolor}>น้ำหนัก</Text>
-                    <Text style={[styles.textcolor, { marginLeft: 130 }]}>ส่วนสูง</Text>
-                </View>
-                <View style={styles.innerContainerSmall}>
-                    <TextInput style={styles.inputSmall}
-                        keyboardType='numeric'
-                        maxLength={3}
-                        value={weight}
-                        onChangeText={(weight) => {setWeight(weight)}}></TextInput>
-                    <View style={styles.textSmall}>
-                        <Text style={styles.textSmall}>kg.</Text>
-                    </View>
-                    <TextInput style={[styles.inputSmall, { marginLeft: 30 }]}
-                        keyboardType='numeric'
-                        maxLength={3}
-                        value={hight}
-                        onChangeText={(hight) => {setHight(hight)}}></TextInput>
-                    <View style={styles.textSmall}>
-                        <Text>cm.</Text>
-                    </View>
-                </View>
-                <View style={styles.innerContainer}>
-                    <Text style={styles.textcolor}>อายุ</Text>
-                    <Text style={[styles.textcolor, { marginLeft: 150 }]}>เพศ</Text>
-                </View>
-                <View style={styles.innerContainerSmall}>
-                    <TextInput style={styles.inputSmall}
-                        keyboardType='numeric'
-                        maxLength={3}
-                        value={age}
-                        onChangeText={(age) => {setAge(age)}}></TextInput>
-                    <BouncyCheckbox
-                        style={{ marginLeft: 60 }}
-                        text="ชาย"
-                        textStyle={{
-                            fontFamily: "NotoSansThai-Regular", color: "black",
-                            textDecorationLine: "none",
-                        }}
-                        textContainerStyle={{ marginLeft: 5 }}
-                        size={22}
-                        fillColor="#5DB075"
-                        unfillColor="#FFFFFF"
-                        iconStyle={{ borderColor: "red" }}
-                        innerIconStyle={{ borderWidth: 2, }}
-                        value={sex}
-                        onPress={() => {setSex("ชาย")}}
+                <View style={styles.container}>
+                    {/* <Text style={styles.textMain}> ลงทะเบียน </Text> */}
+                    <Text style={[styles.textcolor, { top: 15, right: 132 }]}>ยูสเซอร์เนม</Text>
+                    <TextInput
+                        style={styles.inputView}
+                        placeholder="Username"
+                        placeholderTextColor="gray"
+                        value={username}
+                        onChangeText={(username) => { setUsername(username) }}
                     />
-                    <BouncyCheckbox
-                        style={{ marginLeft: 30 }}
-                        text="หญิง"
-                        textStyle={{
-                            fontFamily: "NotoSansThai-Regular", color: "black",
-                            textDecorationLine: "none",
-                        }}
-                        textContainerStyle={{ marginLeft: 5 }}
-                        size={22}
-                        fillColor="#5DB075"
-                        unfillColor="#FFFFFF"
-                        iconStyle={{ borderColor: "red" }}
-                        innerIconStyle={{ borderWidth: 2, }}
-                        value={sex}
-                        onPress={() => {setSex("หญิง")}}
+                    <Text style={[styles.textcolor, { top: 15, right: 153 }]}>อีเมล</Text>
+                    <TextInput
+                        style={styles.inputView}
+                        placeholder="Email"
+                        placeholderTextColor="gray"
+                        value={email}
+                        onChangeText={(email) => { setEmail(email) }}
                     />
+                    <Text style={[styles.textcolor, { top: 15, right: 141 }]}>พาสเวิร์ด</Text>
+                    <TextInput
+                        style={styles.inputView}
+                        placeholder="Password"
+                        placeholderTextColor="gray"
+                        name="password"
+                        autoCapitalize="none"
+                        autoCorrect={false}
+                        textContentType="newPassword"
+                        secureTextEntry={secureTextEntry}
+                        value={password}
+                        enablesReturnKeyAutomatically
+                        onChangeText={(password) => setPassword(password)}
+                    />
+                    <TouchableOpacity style={styles.secureIcon}
+                        onPress={() => { setSecureTextEntry((prev) => !prev) }}>
+                        <Lonicons name={secureTextEntry ? 'eye' : 'eye-off'} style={styles.eye} />
+                    </TouchableOpacity>
+                    <View style={styles.innerContainer}>
+                        <Text style={styles.textcolor}>น้ำหนัก</Text>
+                        <Text style={[styles.textcolor, { marginLeft: 130 }]}>ส่วนสูง</Text>
+                    </View>
+                    <View style={styles.innerContainerSmall}>
+                        <TextInput style={styles.inputSmall}
+                            keyboardType='numeric'
+                            maxLength={3}
+                            value={weight}
+                            onChangeText={(weight) => { setWeight(weight) }}></TextInput>
+                        <View style={styles.textSmall}>
+                            <Text style={styles.textSmall}>kg.</Text>
+                        </View>
+                        <TextInput style={[styles.inputSmall, { marginLeft: 30 }]}
+                            keyboardType='numeric'
+                            maxLength={3}
+                            value={hight}
+                            onChangeText={(hight) => { setHight(hight) }}></TextInput>
+                        <View style={styles.textSmall}>
+                            <Text>cm.</Text>
+                        </View>
+                    </View>
+                    <View style={styles.innerContainer}>
+                        <Text style={styles.textcolor}>อายุ</Text>
+                        <Text style={[styles.textcolor, { marginLeft: 150 }]}>เพศ</Text>
+                    </View>
+                    <View style={styles.innerContainerSmall}>
+                        <TextInput style={styles.inputSmall}
+                            keyboardType='numeric'
+                            maxLength={3}
+                            value={age}
+                            onChangeText={(age) => { setAge(age) }}></TextInput>
+                        <BouncyCheckbox
+                            style={{ marginLeft: 60 }}
+                            text="ชาย"
+                            textStyle={{
+                                fontFamily: "NotoSansThai-Regular", color: "black",
+                                textDecorationLine: "none",
+                            }}
+                            textContainerStyle={{ marginLeft: 5 }}
+                            size={22}
+                            fillColor="#5DB075"
+                            unfillColor="#FFFFFF"
+                            iconStyle={{ borderColor: "red" }}
+                            innerIconStyle={{ borderWidth: 2, }}
+                            value={sex}
+                            onPress={() => { setSex("ชาย") }}
+                        />
+                        <BouncyCheckbox
+                            style={{ marginLeft: 30 }}
+                            text="หญิง"
+                            textStyle={{
+                                fontFamily: "NotoSansThai-Regular", color: "black",
+                                textDecorationLine: "none",
+                            }}
+                            textContainerStyle={{ marginLeft: 5 }}
+                            size={22}
+                            fillColor="#5DB075"
+                            unfillColor="#FFFFFF"
+                            iconStyle={{ borderColor: "red" }}
+                            innerIconStyle={{ borderWidth: 2, }}
+                            value={sex}
+                            onPress={() => { setSex("หญิง") }}
+                        />
+                    </View>
+                    <View style={{ flex: 1, justifyContent: 'flex-end' }}>
+                        <Button
+                            title="ยืนยัน"
+                            buttonStyle={{
+                                backgroundColor: '#5DB075',
+                                borderRadius: 30,
+                                height: 50,
+                                width: 343,
+                            }}
+                            containerStyle={{
+                                // marginHorizontal: 50,
+                                marginVertical: 10,
+                                marginTop: 20,
+                                alignItems: 'center',
+                            }}
+                            titleStyle={{ fontFamily: 'NotoSansThai-SemiBold' }}
+                            onPress={touchSignUp} />
+                    </View>
                 </View>
-                <View style={{ flex: 1, justifyContent: 'flex-end' }}>
-                    <Button
-                        title="ยืนยัน"
-                        buttonStyle={{
-                            backgroundColor: '#5DB075',
-                            borderRadius: 30,
-                            height: 50,
-                            width: 343,
-                        }}
-                        containerStyle={{
-                            // marginHorizontal: 50,
-                            marginVertical: 10,
-                            marginTop: 20,
-                            alignItems: 'center',
-                        }}
-                        titleStyle={{ fontFamily: 'NotoSansThai-SemiBold' }}
-                        onPress={touchSignUp} />
-                </View>
+
             </View>
-
-        </View>
         </ScrollView>
 
     )
@@ -219,6 +228,13 @@ const styles = StyleSheet.create({
         marginLeft: 5,
         justifyContent: 'center',
     },
-
+    secureIcon: {
+        position: 'absolute',
+        marginTop: 280,
+        left: 340,
+    },
+    eye:{
+        fontSize: 20,
+    },
 
 })
