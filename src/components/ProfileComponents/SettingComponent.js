@@ -1,4 +1,4 @@
-import { View, Text, TouchableOpacity, ActivityIndicator, StyleSheet, TextInput, } from 'react-native'
+import { View, Text, TouchableOpacity, ActivityIndicator, StyleSheet, TextInput, Alert } from 'react-native'
 import { Button } from '@rneui/base';
 import React, { useState, useEffect } from 'react'
 import { firebase } from '@react-native-firebase/auth';
@@ -6,6 +6,7 @@ import { firebase } from '@react-native-firebase/auth';
 const SettingComponent = () => {
   const [userData, setUserData] = useState('');
   const db = firebase.firestore();
+  const rePasswords = firebase.auth();
 
   const getUser = async () => {
     db.collection('dataUser')
@@ -20,7 +21,6 @@ const SettingComponent = () => {
         }
       })
   }
-
 
   const touchUpdate = async () => {
     db.collection('dataUser')
@@ -37,10 +37,28 @@ const SettingComponent = () => {
       })
   }
 
+  const touchResetPasswords = () => {
+    rePasswords.sendPasswordResetEmail(firebase.auth().currentUser.email)
+    .then(() => {
+      alertResetPasswords();
+    }).catch((error) => {
+      alert(error)
+    });
+  }
+
   useEffect(() => {
     getUser()
   }, []);
 
+  const alertResetPasswords = () => {
+    Alert.alert(
+      "เราได้ส่งรหัสไปให้คุณที่ : " + userData.email,
+      "โปรดตรวจสอบอีเมลทั้งหมดของคุณหรือจดหมายขยะเพื่อรีเซ็ตรหัสผ่าน",
+      [
+        { text: "OK", onPress: () => console.log("OK Pressed") }
+      ]
+    );
+  }
 
   return (
     <View style={{ flex: 1 }}>
@@ -93,7 +111,25 @@ const SettingComponent = () => {
           />
           <Text style={[styles.inputSmall2, { marginLeft: 59 }]}>{userData.sex}</Text>
         </View>
-        <View style={{ flex: 1, top: 200, backgroundColor: "pink" }}>
+        
+        <View style={{ flex: 1, top: 120,}}>
+        <Button
+            title="รีเซ็ตรหัสผ่าน"
+            buttonStyle={{
+              backgroundColor: 'red',
+              borderRadius: 30,
+              height: 50,
+              width: 343,
+            }}
+            containerStyle={{
+              // marginHorizontal: 50,
+              marginVertical: 10,
+              marginTop: 20,
+              alignItems: 'center',
+            }}
+            titleStyle={{ fontFamily: 'NotoSansThai-SemiBold' }}
+            onPress={touchResetPasswords}
+          />
           <Button
             title="ยืนยัน"
             buttonStyle={{
