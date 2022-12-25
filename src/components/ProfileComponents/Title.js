@@ -26,18 +26,18 @@ const Title = () => {
         <View style={{ top: 5 }}>
             <View style={{ flexDirection: 'row', }}>
                 <Text style={styles.textStyle}>น้ำหนัก</Text>
-                <Text style={styles.textStyle}>  {data.userDetail.weight}</Text>
+                <Text style={styles.textStyle}>  {data.weight}</Text>
                 <Text style={styles.textStyle}>  กก.</Text>
                 <Text style={styles.textStyle}>  ส่วนสูง</Text>
-                <Text style={styles.textStyle}>  {data.userDetail.hight}</Text>
+                <Text style={styles.textStyle}>  {data.hight}</Text>
                 <Text style={styles.textStyle}>  ซม.</Text>
             </View>
             <View style={{ flexDirection: 'row', }}>
                 <Text style={styles.textStyle}>อายุ</Text>
-                <Text style={styles.textStyle}>  {data.userDetail.age}</Text>
+                <Text style={styles.textStyle}>  {data.age}</Text>
                 <Text style={styles.textStyle}>  ปี</Text>
                 <Text style={styles.textStyle}>  เพศ</Text>
-                <Text style={styles.textStyle}>  {data.userDetail.sex}</Text>
+                <Text style={styles.textStyle}>  {data.sex}</Text>
             </View>
         </View>
     )

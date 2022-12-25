@@ -19,7 +19,7 @@ export const AuthProvider = ({ children }) => {
         <AuthContext.Provider
             value={{
                 user, setUser, username, setUsername, email, setEmail, password, setPassword,
-                age, setAge, hight, setHight, sex, setSex, weight, setWeight,data,setData,
+                age, setAge, hight, setHight, sex, setSex, weight, setWeight, data, setData,
                 signin: async (email, password) => {
                     try {
                         await auth().signInWithEmailAndPassword(email, password);
@@ -40,12 +40,10 @@ export const AuthProvider = ({ children }) => {
                                         email,
                                         password,
                                         username: username,
-                                        userDetail: {
-                                            weight: weight,
-                                            hight: hight,
-                                            age: age,
-                                            sex: sex,
-                                        }
+                                        weight: weight,
+                                        hight: hight,
+                                        age: age,
+                                        sex: sex,
                                     })
                             })
                     } catch (err) {

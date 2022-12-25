@@ -6,6 +6,7 @@ import { firebase } from '@react-native-firebase/auth';
 const SettingComponent = () => {
   const [userData, setUserData] = useState('');
   const db = firebase.firestore();
+  const [data, setData] = useState('');
 
   const getUser = async () => {
     db.collection('dataUser')
@@ -27,9 +28,9 @@ const SettingComponent = () => {
       .doc(firebase.auth().currentUser.uid)
       .update({
         username: userData.username,
-        'userDetail.hight': userData.userDetail.hight,
-        'userDetail.weight': userData.userDetail.weight,
-        'userDetail.age': userData.userDetail.age,
+        hight: userData.hight,
+        weight: userData.weight,
+        age: userData.age,
       })
       .then(() => {
         console.log('User Update Success');
@@ -65,8 +66,8 @@ const SettingComponent = () => {
           <TextInput style={styles.inputSmall}
             keyboardType='numeric'
             maxLength={3}
-            value={userData ? userData.userDetail.weight : ''}
-            onChangeText={(txt) => setUserData({ ...userData , userDetail: { ...userData.userDetail, weight : txt} })}
+            value={userData ? userData.weight : ''}
+            onChangeText={(txt) => setUserData({ ...userData ,  weight : txt })}
           />
           <View style={styles.textSmall}>
             <Text style={styles.textSmall}>kg.</Text>
@@ -74,8 +75,8 @@ const SettingComponent = () => {
           <TextInput style={[styles.inputSmall, { marginLeft: 30 }]}
             keyboardType='numeric'
             maxLength={3}
-            value={userData ? userData.userDetail.hight : ''}
-            onChangeText={(txt) => setUserData({ ...userData , userDetail: { ...userData.userDetail, hight : txt} })}
+            value={userData ? userData.hight : ''}
+            onChangeText={(txt) => setUserData({ ...userData ,  hight : txt})}
           />
           <View style={styles.textSmall}>
             <Text>cm.</Text>
@@ -89,10 +90,10 @@ const SettingComponent = () => {
           <TextInput style={styles.inputSmall}
             keyboardType='numeric'
             maxLength={3}
-            value={userData ? userData.userDetail.age : ''}
-            onChangeText={(txt) => setUserData({ ...userData , userDetail: { ...userData.userDetail, age : txt} })}
+            value={userData ? userData.age : ''}
+            onChangeText={(txt) => setUserData({ ...userData , age : txt})}
           />
-          <Text style={[styles.inputSmall, { marginLeft: 59 }]}>{userData.username}</Text>
+          <Text style={[styles.inputSmall, { marginLeft: 59 }]}>{userData.sex}</Text>
         </View>
         <View style={{ flex: 1, top: 200, backgroundColor: "pink" }}>
           <Button
