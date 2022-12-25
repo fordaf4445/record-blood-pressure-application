@@ -49,7 +49,7 @@ const SettingComponent = () => {
       <View style={styles.container}>
         {/* <Text style={styles.textMain}> ลงทะเบียน </Text> */}
         <Text style={[styles.textcolor, { right: 153 }]}>อีเมล</Text>
-        <Text>{userData.username}</Text>
+        <Text>{userData.email}</Text>
         <Text style={{ fontSize: 20, marginLeft: -104, color: "black" }}></Text>
         <Text style={[styles.textcolor, { top: 15, right: 132 }]}>ยูสเซอร์เนม</Text>
         <TextInput
