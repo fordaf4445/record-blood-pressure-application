@@ -1,4 +1,4 @@
-import { Alert, StyleSheet, View, Dimensions, TouchableOpacity, TextInput, ScrollView, } from 'react-native';
+import { Alert, StyleSheet, View, Dimensions, TouchableOpacity, TextInput, ScrollView, SafeAreaView } from 'react-native';
 import React, { useState, useContext } from 'react';
 import { useNavigation } from '@react-navigation/native';
 import Icon from 'react-native-vector-icons/FontAwesome';
@@ -39,7 +39,7 @@ const Welcome = () => {
       }
 
     return (
-        <ScrollView >
+        <SafeAreaView>
             <View style={styles.container}>
                 <View style={styles.iconView}>
                     <Icon name='heartbeat' style={styles.icon} />
@@ -107,7 +107,7 @@ const Welcome = () => {
                     </TouchableOpacity>
                 </View>
             </View>
-        </ScrollView>
+        </SafeAreaView>
     )
 }
 
