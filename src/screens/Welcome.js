@@ -82,7 +82,7 @@ const Welcome = () => {
                         </Text>
                     </TouchableOpacity>
                     <Button
-                        onPress={touchSignIn}
+                        onPress={() => { if (email == ''|| password == ''){ Alert.alert("แจ้งเตือน","โปรดกรอกอีเมลและรหัสผ่าน") }else{touchSignIn()}}}
                         title="เข้าสู่ระบบ"
                         titleStyle={{ fontFamily: 'NotoSansThai-Bold' }}
                         buttonStyle={{

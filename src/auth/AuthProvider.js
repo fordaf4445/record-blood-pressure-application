@@ -25,7 +25,7 @@ export const AuthProvider = ({ children }) => {
                         await auth().signInWithEmailAndPassword(email, password);
                     } catch (err) {
                         console.log('signInWithEmailAndPassword fail'),
-                            Alert.alert("เข้าสู้ระบบไม่สำเร็จ", "อีเมลหรือรหัสผ่านของคุณไม่ถูกต้อง             โปรดลองอีกครั้ง",
+                            Alert.alert("เข้าสู่ระบบไม่สำเร็จ", "อีเมลหรือรหัสผ่านของคุณไม่ถูกต้อง             โปรดลองอีกครั้ง",
                             );
                     }
                 },
