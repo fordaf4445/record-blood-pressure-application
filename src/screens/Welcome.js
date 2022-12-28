@@ -156,11 +156,11 @@ const styles = StyleSheet.create({
     },
     secureIcon: {
         position: 'absolute',
-        marginTop: 139,
+        marginTop: 136,
         left: 308,
     },
     eye:{
-        fontSize: 20,
+        fontSize: 25,
     },
     textForgetPass:{
         color: '#5DB075',

@@ -230,11 +230,11 @@ const styles = StyleSheet.create({
     },
     secureIcon: {
         position: 'absolute',
-        marginTop: 280,
+        marginTop: 276,
         left: 340,
     },
     eye:{
-        fontSize: 20,
+        fontSize: 25,
     },
 
 })
