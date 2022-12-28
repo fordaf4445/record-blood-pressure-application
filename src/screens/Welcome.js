@@ -39,7 +39,7 @@ const Welcome = () => {
       }
 
     return (
-        <SafeAreaView>
+        <ScrollView style={{flex:1}}>
             <View style={styles.container}>
                 <View style={styles.iconView}>
                     <Icon name='heartbeat' style={styles.icon} />
@@ -107,7 +107,7 @@ const Welcome = () => {
                     </TouchableOpacity>
                 </View>
             </View>
-        </SafeAreaView>
+        </ScrollView>
     )
 }
 
