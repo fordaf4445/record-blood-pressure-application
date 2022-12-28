@@ -63,12 +63,9 @@ const Profile = () => {
                     <Title />
                     <Button
                         title={<Calendar />}
-                        icon={{
-                            name: 'calendar',
-                            type: 'antdesign',
-                            size: 40,
-                        }}
-                        iconContainerStyle={{ right: 40 }}
+                        icon={
+                           <Inicon name='alarm-outline' style={{fontSize:45,color:"black",marginRight:65}}/>
+                        }
                         buttonStyle={{
                             borderBottomWidth: 1,
                             borderColor: 'black',
