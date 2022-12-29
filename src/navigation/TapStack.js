@@ -13,6 +13,7 @@ import Profile from '../screens/TapScreens/Profile';
 
 import SettingComponent from '../components/ProfileComponents/SettingComponent';
 import InputDataTest from '../components/ProcessComponents/InputDataTest';
+import CalendarComponent from '../components/ProfileComponents/CalendarComponent';
 
 const Tab = createBottomTabNavigator();
 
@@ -59,6 +60,22 @@ function ProfileComponent() {
                 component={SettingComponent}
                 options={{
                     title: "ตั้งค่าผู้ใช้งาน",
+                    headerTitleStyle:{
+                        fontFamily:"NotoSansThai-Bold",
+                        color:"white"
+                    },
+                    headerStyle:{
+                        height: 60,
+                        backgroundColor: "#5DB075"
+                    },
+                    // headerTintColor: "#fff",
+                    headerBackImage: () => (<FontAwesome name="chevron-left"  color={"white"} size={25} />),
+                }}/>
+            <ProfileStack.Screen
+                name="CalendarComponent"
+                component={CalendarComponent}
+                options={{
+                    title: "การแจ้งเตือน",
                     headerTitleStyle:{
                         fontFamily:"NotoSansThai-Bold",
                         color:"white"

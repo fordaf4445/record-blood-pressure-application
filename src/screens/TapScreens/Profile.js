@@ -75,6 +75,7 @@ const Profile = () => {
                             width: '90%',
                             top: 20
                         }}
+                        onPress={() => navigation.navigate('CalendarComponent')}
                     />
                     <Button
                         title={<Savefile />}
