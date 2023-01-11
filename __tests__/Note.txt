@@ -1,0 +1,18 @@
+11/01/2023 
+gradle version 7.5.1 
+        minSdkVersion = 21
+        compileSdkVersion = 31
+        targetSdkVersion = 31
+
+add kotlin version fix multiple kotlin versions
+    location: android/build.gradle 
+        kotlin_version = '1.6.10'
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
+
+create firebase message.
+    add Remote notification
+        change version analytics
+            location: android/build.gradle 
+                implementation 'com.google.firebase:firebase-analytics:21.2.0'
+
+install 
