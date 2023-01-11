@@ -1,4 +1,4 @@
-11/01/2023 
+11/01/2023 5:33 PM
 gradle version 7.5.1 
         minSdkVersion = 21
         compileSdkVersion = 31
@@ -12,7 +12,14 @@ add kotlin version fix multiple kotlin versions
 create firebase message.
     add Remote notification
         change version analytics
-            location: android/build.gradle 
+            location: android/app/build.gradle 
                 implementation 'com.google.firebase:firebase-analytics:21.2.0'
 
-install 
+install @react-native-firebase/messaging": "^16.5.0"
+        add version messaging
+            location: android/app/build.gradle
+                implementation 'com.google.firebase:firebase-messaging:23.1.1'
+
+try( run instanceVM is pass and APK in RealPhone is pass)
+cath( no error) 5:33 PM
+
