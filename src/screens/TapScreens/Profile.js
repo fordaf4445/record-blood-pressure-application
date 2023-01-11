@@ -2,7 +2,7 @@ import React, { useState, useEffect, useContext } from 'react';
 import { View, StyleSheet, TextInput, ScrollView, CheckBox, Image, TouchableOpacity, ActivityIndicator } from 'react-native';
 import { Button, Input, makeStyles, Text, Icon } from '@rneui/base';
 import Inicon from 'react-native-vector-icons/dist/Ionicons'
-import Calendar from '../../components/ProfileComponents/Calendar';
+import AlarmTitle from '../../components/ProfileComponents/AlarmTitle';
 import Savefile from '../../components/ProfileComponents/Savefile';
 import Title from '../../components/ProfileComponents/Title';
 import { AuthContext } from '../../auth/AuthProvider';
@@ -62,7 +62,7 @@ const Profile = () => {
                     <Text style={{ fontSize: 16, fontFamily: 'NotoSansThai-Bold' }}>ข้อมูลส่วนตัว</Text>
                     <Title />
                     <Button
-                        title={<Calendar />}
+                        title={<AlarmTitle />}
                         icon={
                            <Inicon name='alarm-outline' style={{fontSize:45,color:"black",marginRight:65}}/>
                         }
@@ -75,7 +75,7 @@ const Profile = () => {
                             width: '90%',
                             top: 20
                         }}
-                        onPress={() => navigation.navigate('CalendarComponent')}
+                        onPress={() => navigation.navigate('AlarmComponent')}
                     />
                     <Button
                         title={<Savefile />}

@@ -21,22 +21,18 @@ const Welcome = () => {
     const forgetPasswords = () => {
         firebase.auth().sendPasswordResetEmail(email)
         .then(() => {
-           alerForgetPasswords();
+            Alert.alert(
+                "เราได้ส่งอีเมลไปให้คุณแล้ว",
+                "โปรดตรวจสอบอีเมลทั้งหมดของคุณหรือจดหมายขยะเพื่อรีเซ็ตรหัสผ่าน",
+                [
+                  { text: "OK", onPress: () => console.log("OK Pressed") }
+                ]
+              );
         })
         .catch((error) =>{
             alert('Error: ' + error)
         })
     }
-
-    const alerForgetPasswords = () => {
-        Alert.alert(
-          "เราได้ส่งอีเมลไปให้คุณแล้ว",
-          "โปรดตรวจสอบอีเมลทั้งหมดของคุณหรือจดหมายขยะเพื่อรีเซ็ตรหัสผ่าน",
-          [
-            { text: "OK", onPress: () => console.log("OK Pressed") }
-          ]
-        );
-      }
 
     return (
         <ScrollView style={{flex:1}}>

@@ -1,5 +1,4 @@
 import React from 'react';
-import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { createStackNavigator } from '@react-navigation/stack';
 import Icon from 'react-native-vector-icons/dist/FontAwesome';
@@ -13,7 +12,7 @@ import Profile from '../screens/TapScreens/Profile';
 
 import SettingComponent from '../components/ProfileComponents/SettingComponent';
 import InputDataTest from '../components/ProcessComponents/InputDataTest';
-import CalendarComponent from '../components/ProfileComponents/CalendarComponent';
+import AlarmComponent from '../components/ProfileComponents/AlarmComponents/AlarmComponent';
 
 const Tab = createBottomTabNavigator();
 
@@ -72,8 +71,8 @@ function ProfileComponent() {
                     headerBackImage: () => (<FontAwesome name="chevron-left"  color={"white"} size={25} />),
                 }}/>
             <ProfileStack.Screen
-                name="CalendarComponent"
-                component={CalendarComponent}
+                name="AlarmComponent"
+                component={AlarmComponent}
                 options={{
                     title: "การแจ้งเตือน",
                     headerTitleStyle:{

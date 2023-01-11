@@ -1,7 +1,7 @@
 import { View, Text, StyleSheet} from 'react-native'
 import React from 'react'
 
-const Calendar = () => {
+const AlarmTitle = () => {
   return (
     <View style={{right:21}}>
       <Text style={{fontSize:16,fontFamily:"NotoSansThai-Bold",color:'black'}}>การแจ้งเตือน</Text>
@@ -11,7 +11,7 @@ const Calendar = () => {
   )
 }
 
-export default Calendar
+export default AlarmTitle
 
 const styles = StyleSheet.create({
     textStyle: {
