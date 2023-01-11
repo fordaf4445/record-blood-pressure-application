@@ -23,3 +23,27 @@ install @react-native-firebase/messaging": "^16.5.0"
 try( run instanceVM is pass and APK in RealPhone is pass)
 cath( no error) 5:33 PM
 
+
+11/01/2023 6:07 PM v.1.0.0
+install 
+    "@notifee/react-native": "^7.3.0",
+    "moment": "^2.29.4",
+    "moment-timezone": "^0.5.40",
+    "native-base": "^3.4.25",
+    "react-moment": "^1.1.2",
+    "react-native-wheel-picker-android": "^2.0.6"
+updates
+    @react-native-firebase/app": "^16.5.0",
+    "@react-native-firebase/auth": "^16.5.0",
+    "@react-native-firebase/firestore": "^16.5.0",
+changes
+ gradle version 7.5.1 
+        minSdkVersion = 21
+        compileSdkVersion = 33
+        targetSdkVersion = 33
+        fix Compatibility notifee version >= 6.0.0
+            [Android] BREAKING CHANGE: Added support for requesting permission on Android 13 via requestPermission, the minimum compileSdkVersion required has increased to 33. And, to support this feature, the targetSdkVersion must also be increased to 33.
+
+try( run instanceVM is pass and APK in RealPhone is pass)
+cath( no error) 6:29 PM
+
