@@ -46,3 +46,10 @@ changes
 
 try( run instanceVM is pass and APK in RealPhone is pass)
 cath( no error) 6:29 PM
+
+11/01/2023 7:03 PM v.1.0.1
+    change version 1.0.0 to 1.0.1
+    add Notification  
+    add Alaram Components
+    delete Calendar Components
+    
