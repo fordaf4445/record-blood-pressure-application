@@ -53,3 +53,27 @@ cath( no error) 6:29 PM
     add Alaram Components
     delete Calendar Components
     
+
+12/01/2023 4:57 PM v.1.0.1 
+    remove notifee
+    add Push Notification react-native 
+        detail --- https://github.com/zo0r/react-native-push-notification
+                android/build.gradle
+                    add ext {
+                                googlePlayServicesVersion = "<Your play services version>" // default: "+"
+                                firebaseMessagingVersion = "<Your Firebase version>" // default: "21.1.0"
+                            }
+                    add AndroidManifest android/app/src/main/AndroidManifest.xml
+                         ****Note Android 12 use android:exported="true" support
+                    add index.js 
+                        import PushNotification from "react-native-push-notification";
+                            onNotification: function (notification) {
+                            console.log("NOTIFICATION:", notification);
+                            }, requestPermissions: Platform.OS === 'ios',
+
+18/01/2023 01:00 AM v.1.0.1
+    finish : All notification finish 
+            1.but have a bug in the TIME not sorted by timeใ
+            2.Adding days is still not good. Still stuck that the numbers are strings that can't be compared.
+
+                    

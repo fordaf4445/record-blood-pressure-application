@@ -80,6 +80,7 @@ const InputDataTest = () => {
                             keyboardType='numeric'
                             onChangeText={(sys) => setSys(sys)}
                             value={sys}
+                            maxLength={3}
                         />
                         <View style={{ top: 20, left: 25 }}>
                             <Text style={{ fontSize: 20, fontWeight: "bold", color: "red" }}>
@@ -95,6 +96,7 @@ const InputDataTest = () => {
                             keyboardType='numeric'
                             onChangeText={(dia) => setDia(dia)}
                             value={dia}
+                            maxLength={3}
                         />
                         <View style={{ top: 20, left: 25 }}>
                             <Text style={{ fontSize: 20, fontWeight: "bold", color: "#B8DE9A" }}>
@@ -110,6 +112,7 @@ const InputDataTest = () => {
                             keyboardType='numeric'
                             onChangeText={(bpm) => setBpm(bpm)}
                             value={bpm} 
+                            maxLength={3}
                             />
                         <View style={{ top: 20, left: 25 }}>
                             <Text style={{ fontSize: 20, fontWeight: "bold", color: "#71C7E2" }}>
