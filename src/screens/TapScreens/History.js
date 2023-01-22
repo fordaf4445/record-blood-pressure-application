@@ -1,8 +1,9 @@
 import { StyleSheet, Text, View, FlatList, ActivityIndicator, TouchableOpacity } from 'react-native'
 import React, { useState, useEffect } from 'react'
-import auth, { firebase } from '@react-native-firebase/auth';
+import { firebase } from '@react-native-firebase/auth';
 import { GestureHandlerRootView, Swipeable } from 'react-native-gesture-handler';
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
+import moment from 'moment';
 
 const History = () => {
     const db = firebase.firestore()
@@ -24,7 +25,7 @@ const History = () => {
 
                     });
                 });
-
+                
                 setloodPressure(bloodPressure);
                 setLoading(false);
             });
@@ -34,8 +35,11 @@ const History = () => {
 
     if (loading) {
         return <ActivityIndicator />
-    }
+    };
 
+    const DatetoTime = currDate => {
+        return moment(currDate).format ('DD/MM/YY hh:mm A');
+    }
 
     function renderItem(item) {
 
@@ -93,7 +97,7 @@ const History = () => {
                         <View style={{ flex: 5, justifyContent: "center" }}>
                             <Text style={styles.textType}>   {item.TYPE}</Text>
                             <View style={{ flexDirection: "row" }}>
-                                <Text style={styles.textTimeBpm}>   {item.timestamp}</Text>
+                                <Text style={styles.textTimeBpm}>   {DatetoTime(item.timestamp)}</Text>
                                 <Text style={styles.textTimeBpm}> | {item.BPM} bpm</Text>
                             </View>
                         </View>
@@ -107,9 +111,6 @@ const History = () => {
         <View style={styles.container}>
             <View style={styles.titleBar}>
                 <Text style={styles.textHeader}>ประวัติ</Text>
-            </View>
-            <View>
-
             </View>
             <View style={styles.borderHistory}>
                 <FlatList
@@ -131,7 +132,6 @@ const styles = StyleSheet.create({
     titleBar: {
         alignItems: 'center',
         marginTop: 20,
-        marginHorizontal: 16,
     },
     textHeader: {
         fontSize: 35,

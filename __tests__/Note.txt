@@ -76,4 +76,11 @@ cath( no error) 6:29 PM
             1.but have a bug in the TIME not sorted by timeใ
             2.Adding days is still not good. Still stuck that the numbers are strings that can't be compared.
 
-                    
+19/01/2023 05:58 PM v.1.0.1 update to v.1.0.2
+    1.filter data to week,month,all
+    2.add filtered data to avgWeek,avgMonth
+    3.import progressChart to statistics Component 
+        progressChart have a bug can't run on real device.
+        bug fixes using add ling // -keep public class com.horcrux.svg.** { *; } //
+        in android/app/proguard-rules.pro
+

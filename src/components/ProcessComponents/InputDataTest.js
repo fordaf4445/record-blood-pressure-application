@@ -2,6 +2,8 @@ import { View, Text, StyleSheet, TextInput, Alert, ScrollView, KeyboardAvoidingV
 import React, { useState, useEffect } from 'react'
 import { Button,} from '@rneui/base';
 import { firebase } from '@react-native-firebase/auth';
+import moment from 'moment';
+
 
 const InputDataTest = () => {
     const db = firebase.firestore();
@@ -10,14 +12,16 @@ const InputDataTest = () => {
     const [bpm, setBpm] = useState(null);
     const [currentDate, setCurrentDate] = useState(null);
 
-    useEffect(() => {
-        const interval = setInterval(() => {
-            var date = new Date().toLocaleDateString();
-            var time = new Date().toLocaleTimeString();
-            setCurrentDate(date + " " + time);
-        }, 1000);
-        return () => clearInterval(interval);
-    }, [])
+    
+
+    // useEffect(() => {
+    //     const interval = setInterval(() => {
+    //         var date = new Date().toLocaleDateString();
+    //         var time = new Date().toLocaleTimeString();
+    //         setCurrentDate(date + " " + time);
+    //     }, 1000);
+    //     return () => clearInterval(interval);
+    // }, [])
 
     function addInformationFireStore() {
         let type;
@@ -39,18 +43,19 @@ const InputDataTest = () => {
                 SYS: sys,
                 DIA: dia,
                 BPM: bpm,
-                timestamp: currentDate,
+                timestamp: Date.now(),
                 TYPE: type,
             })
             .then(function (docRef) {
                 console.log("Document written with ID: ", docRef.id);
                 // Alert.alert("เพิ่มข้อมูลสำเร็จ")
                 createAlert();
+                
 
             })
             .catch(function (err) {
                 console.log("Error adding information: ", err);
-                Alert.alert("เพิ่มข้อมูลไม่สำเร็จ !!")
+                Alert.alert("เพิ่มข้อมูลไม่สำเร็จ !!"+ err.message)
             })
         { type }
     }
@@ -60,11 +65,6 @@ const InputDataTest = () => {
             "เพิ่มข้อมูลสำเร็จ",
             "",
             [
-                {
-                    text: "Cancel",
-                    onPress: () => console.log("Cancel Pressed"),
-                    style: "cancel"
-                },
                 { text: "OK", onPress: () => {setSys(null),setDia(null),setBpm(null)} }
             ]
         );

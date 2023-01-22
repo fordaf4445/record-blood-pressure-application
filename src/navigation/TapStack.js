@@ -95,7 +95,7 @@ export default function TapStack() {
     return (
         <Tab.Navigator
 
-            initialRouteName='ProfileComponent'
+            initialRouteName='Statistics'
             screenOptions={{
                 tabBarActiveTintColor: '#5DB075',
                 tabBarStyle: { height: 70 },
