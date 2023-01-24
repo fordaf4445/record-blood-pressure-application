@@ -12,7 +12,9 @@ const InputDataTest = () => {
     const [bpm, setBpm] = useState(null);
     const [currentDate, setCurrentDate] = useState(null);
 
-    
+    const dateToTime = current => {
+        return moment(current).format('L LT');
+    }
 
     // useEffect(() => {
     //     const interval = setInterval(() => {
@@ -45,6 +47,7 @@ const InputDataTest = () => {
                 BPM: bpm,
                 timestamp: Date.now(),
                 TYPE: type,
+                TIME: dateToTime(Date.now()),
             })
             .then(function (docRef) {
                 console.log("Document written with ID: ", docRef.id);

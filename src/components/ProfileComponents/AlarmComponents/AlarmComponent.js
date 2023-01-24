@@ -25,7 +25,6 @@ import Feather from 'react-native-vector-icons/Feather';
 import { AlarmModal, EditAlarm } from './modal';
 import PushNotification from 'react-native-push-notification';
 import moment from 'moment';
-import { space } from 'native-base/lib/typescript/theme/styled-system';
 
 const AlarmComponent = () => {
   const [alarmList, setAlarmList] = useState([]);
@@ -151,7 +150,7 @@ const AlarmComponent = () => {
 
                 alarmList.sort((a, b) => a.id - b.id).map((alarm) => {
 
-
+      
                   return (
                       <HStack style={styles.cradList} justifyContent="space-between" key={alarm.id} >
                         <TouchableOpacity style={{flexDirection:"row"}}
