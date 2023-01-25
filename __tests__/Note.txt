@@ -73,7 +73,7 @@ cath( no error) 6:29 PM
 
 18/01/2023 01:00 AM v.1.0.1
     finish : All notification finish 
-            1.but have a bug in the TIME not sorted by timeใ
+            1.but have a bug in the TIME not sorted by time
             2.Adding days is still not good. Still stuck that the numbers are strings that can't be compared.
 
 19/01/2023 05:58 PM v.1.0.1 update to v.1.0.2
@@ -84,3 +84,10 @@ cath( no error) 6:29 PM
         bug fixes using add ling // -keep public class com.horcrux.svg.** { *; } //
         in android/app/proguard-rules.pro
 
+25/01/2023 03:39 PM v.1.0.2
+    bug : 1.have a bug in the TIME not sorted by time
+          2.Adding days is still not good. Still stuck that the numbers are strings that can't be compared.
+    finish : add react-native chart-kit completely 
+             components statistics complete v.1.0.2
+    test : run emulator pass 
+           run realdevice pass 

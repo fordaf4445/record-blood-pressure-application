@@ -4,10 +4,11 @@ import {
   NativeBaseProvider,
   HStack,
   VStack,
+  ScrollView,
 } from 'native-base';
 import { firebase } from '@react-native-firebase/auth';
 import moment from 'moment';
-import { ProgressChart, LineChart } from 'react-native-chart-kit';
+import { ProgressChart, LineChart, PieChart } from 'react-native-chart-kit';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 
 const Statistics = () => {
@@ -27,6 +28,13 @@ const Statistics = () => {
   const [lineChartDIA, setLineChartDIA] = useState([0]);
   const [lineChartBPM, setLineChartBPM] = useState([0]);
   const [LineChartCount, setLineChartCount] = useState(0);
+
+  const [count, setCount] = useState(0);
+  const [lowBloodPressure, setLowBloodPressure] = useState(0);
+  const [normalBloodPressure, setNormalBloodPressure] = useState(0);
+  const [elevatedBloodPressure, setElevatedBloodPressure] = useState(0);
+  const [highBloodPressure1, setHighBloodPressure1] = useState(0);
+  const [highBloodPressure2, setHighBloodPressure2] = useState(0);
 
   const db = firebase.firestore();
 
@@ -101,6 +109,11 @@ const Statistics = () => {
           setLineChartSYS(bloodPressure.sort((a, b) => a.timestamp - b.timestamp).map(item => item.SYS))
           setLineChartDIA(bloodPressure.sort((a, b) => a.timestamp - b.timestamp).map(item => item.DIA))
           setLineChartBPM(bloodPressure.sort((a, b) => a.timestamp - b.timestamp).map(item => item.BPM))
+          setLowBloodPressure(bloodPressure.filter(item => { return (item.TYPE === 'ความดันโลหิตต่ำ') }).length)
+          setNormalBloodPressure(bloodPressure.filter(item => { return (item.TYPE === 'ปกติ') }).length)
+          setElevatedBloodPressure(bloodPressure.filter(item => { return (item.TYPE === 'ความดันโลหิตสูงขั้นต้น') }).length)
+          setHighBloodPressure1(bloodPressure.filter(item => { return (item.TYPE === 'ความดันโลหิตสูง ระยะที่ 1') }).length)
+          setHighBloodPressure2(bloodPressure.filter(item => { return (item.TYPE === 'ความดันโลหิตสูง ระยะที่ 2') }).length)
           setLineChartCount(bloodPressure.length)
         };
         bloodPressure.length != 0 ? (avg()) : (setAvgSYS(0), setAvgDIA(0), setAvgBPM(0))
@@ -113,6 +126,11 @@ const Statistics = () => {
     const Week = bloodPressure.filter(item => {
       return item.timestamp >= startofWeek && item.timestamp <= endofWeek;
     });
+    //'ความดันโลหิตสูง ระยะที่ 2'
+    const count = Week.filter(item => {
+      return (item.TYPE === 'ความดันโลหิตสูง ระยะที่ 2')
+    }).length;
+    setCount(count);
 
     const avg = () => {
       const initialValue = { SYS: 0, DIA: 0, BPM: 0 }
@@ -138,6 +156,11 @@ const Statistics = () => {
       setLineChartSYS(Week.sort((a, b) => a.timestamp - b.timestamp).map(item => item.SYS))
       setLineChartDIA(Week.sort((a, b) => a.timestamp - b.timestamp).map(item => item.DIA))
       setLineChartBPM(Week.sort((a, b) => a.timestamp - b.timestamp).map(item => item.BPM))
+      setLowBloodPressure(Week.filter(item => { return (item.TYPE === 'ความดันโลหิตต่ำ') }).length)
+      setNormalBloodPressure(Week.filter(item => { return (item.TYPE === 'ปกติ') }).length)
+      setElevatedBloodPressure(Week.filter(item => { return (item.TYPE === 'ความดันโลหิตสูงขั้นต้น') }).length)
+      setHighBloodPressure1(Week.filter(item => { return (item.TYPE === 'ความดันโลหิตสูง ระยะที่ 1') }).length)
+      setHighBloodPressure2(Week.filter(item => { return (item.TYPE === 'ความดันโลหิตสูง ระยะที่ 2') }).length)
       setLineChartCount(Week.length)
       setColorSelectWeek('#5DB075')
       setColorSelectMonth('#838383')
@@ -175,6 +198,11 @@ const Statistics = () => {
       setLineChartSYS(Month.sort((a, b) => a.timestamp - b.timestamp).map(item => item.SYS))
       setLineChartDIA(Month.sort((a, b) => a.timestamp - b.timestamp).map(item => item.DIA))
       setLineChartBPM(Month.sort((a, b) => a.timestamp - b.timestamp).map(item => item.BPM))
+      setLowBloodPressure(Month.filter(item => { return (item.TYPE === 'ความดันโลหิตต่ำ') }).length)
+      setNormalBloodPressure(Month.filter(item => { return (item.TYPE === 'ปกติ') }).length)
+      setElevatedBloodPressure(Month.filter(item => { return (item.TYPE === 'ความดันโลหิตสูงขั้นต้น') }).length)
+      setHighBloodPressure1(Month.filter(item => { return (item.TYPE === 'ความดันโลหิตสูง ระยะที่ 1') }).length)
+      setHighBloodPressure2(Month.filter(item => { return (item.TYPE === 'ความดันโลหิตสูง ระยะที่ 2') }).length)
       setLineChartCount(Month.length)
       setColorSelectWeek('#838383')
       setColorSelectMonth('#5DB075')
@@ -211,6 +239,11 @@ const Statistics = () => {
       setLineChartSYS(bloodPressure.sort((a, b) => a.timestamp - b.timestamp).map(item => item.SYS))
       setLineChartDIA(bloodPressure.sort((a, b) => a.timestamp - b.timestamp).map(item => item.DIA))
       setLineChartBPM(bloodPressure.sort((a, b) => a.timestamp - b.timestamp).map(item => item.BPM))
+      setLowBloodPressure(bloodPressure.filter(item => { return (item.TYPE === 'ความดันโลหิตต่ำ') }).length)
+      setNormalBloodPressure(bloodPressure.filter(item => { return (item.TYPE === 'ปกติ') }).length)
+      setElevatedBloodPressure(bloodPressure.filter(item => { return (item.TYPE === 'ความดันโลหิตสูงขั้นต้น') }).length)
+      setHighBloodPressure1(bloodPressure.filter(item => { return (item.TYPE === 'ความดันโลหิตสูง ระยะที่ 1') }).length)
+      setHighBloodPressure2(bloodPressure.filter(item => { return (item.TYPE === 'ความดันโลหิตสูง ระยะที่ 2') }).length)
       setLineChartCount(bloodPressure.length)
       setColorSelectWeek('#838383')
       setColorSelectMonth('#838383')
@@ -280,14 +313,63 @@ const Statistics = () => {
     ],
   };
 
+  const dataPie = [
+    {
+      name: "ความดันโลหิตต่ำ",
+      count: lowBloodPressure,
+      color: "#23AFD6",
+      legendFontColor: "#7F7F7F",
+      legendFontSize: 12
+    },
+    {
+      name: "ปกติ",
+      count: elevatedBloodPressure,
+      color: "#A4BF43",
+      legendFontColor: "#7F7F7F",
+      legendFontSize: 12
+    },
+    {
+      name: "ความดันโลหิตสูงขั้นต้น",
+      count: normalBloodPressure,
+      color: "#EEC151",
+      legendFontColor: "#7F7F7F",
+      legendFontSize: 12
+    },
+    {
+      name: "ความดันโลหิตสูง ระยะที่ 1",
+      count: highBloodPressure1,
+      color: "#F1815C",
+      legendFontColor: "#7F7F7F",
+      legendFontSize: 12
+    },
+    {
+      name: "ความดันโลหิตสูง ระยะที่ 2",
+      count: highBloodPressure2,
+      color: "#FF0000",
+      legendFontColor: "#7F7F7F",
+      legendFontSize: 12
+    }
+  ];
+
+  const chartConfigPie = {
+    backgroundGradientFrom: "#1E2923",
+    backgroundGradientFromOpacity: 0,
+    backgroundGradientTo: "#08130D",
+    backgroundGradientToOpacity: 0.5,
+    color: (opacity = 1) => `rgba(26, 255, 146, ${opacity})`,
+    strokeWidth: 2, // optional, default 3
+    barPercentage: 0.5,
+    useShadowColorFromDataset: false // optional
+  };
+
   return (
     <View style={styles.container}>
       <View style={styles.titleBar}>
         <Text style={styles.textHeader}>สถิติ</Text>
       </View>
-      <View style={styles.borderStatistics}>
-        <NativeBaseProvider>
-          <View>
+      <NativeBaseProvider>
+        <VStack style={styles.borderStatistics}>
+          <ScrollView>
             <HStack justifyContent="space-around" width="100%" paddingLeft="1.5" paddingRight="1.5">
               <ProgressChart
                 data={dataSYSProgressChart}
@@ -341,56 +423,69 @@ const Statistics = () => {
               <View style={{ flex: 1, alignItems: "center" }}>
                 <Text style={styles.avgTitle}>ค่าเฉลี่ย</Text></View>
             </HStack>
-          </View>
-          <HStack space="25%" justifyContent="center" marginTop="2%" marginBottom="3%" >
-            <TouchableOpacity
-              onPress={() => { getDataWeekAvg() }}>
-              <Text style={[styles.selectContainer, { color: colorSelectWeek, }]}>
-                สัปดาห์
-              </Text>
-            </TouchableOpacity>
-            <TouchableOpacity
-              onPress={() => { getDataMonthAvg() }}>
-              <Text style={[styles.selectContainer, { color: colorSelectMonth, }]}>
-                เดือน
-              </Text>
-            </TouchableOpacity>
-            <TouchableOpacity
-              onPress={() => { getDataAllAvg() }}>
-              <Text style={[styles.selectContainer, { color: colorSelectAll, }]}>
-                ทั้งหมด
-              </Text>
-            </TouchableOpacity>
-          </HStack>
-          <View style={{ alignItems: "center"}}>
-            <Text style={{ fontFamily: "NotoSansThai-Regular", color: "black", fontSize:12 }}>
-              {"ทั้งหมด " + LineChartCount + " ครั้ง"}
-            </Text>
-            <LineChart
-              data={dataChartLine}
-              width={370}
-              height={220}
-              chartConfig={chartConfigLine}
-              withDots={false}
-              // fromNumber={220}
-              withShadow={true}
-              withVerticalLines={false}
-            />
-            <HStack position="absolute" alignItems="center" marginTop={210} >
-              <FontAwesome name='circle' color="#FF0000" />
-              <Text style={styles.lineChartTitles}> SYS    </Text>
-              <FontAwesome name='circle' color="#A4BF43" />
-              <Text style={styles.lineChartTitles}> DIA    </Text>
-              <FontAwesome name='circle' color="#23AFD6" />
-              <Text style={styles.lineChartTitles}> BPM  </Text>
+            <HStack space="22%" justifyContent="center" marginTop="2%" marginBottom="3%" >
+              <TouchableOpacity
+                onPress={() => { getDataWeekAvg() }}>
+                <Text style={[styles.selectContainer, { color: colorSelectWeek, }]}>
+                  สัปดาห์
+                </Text>
+              </TouchableOpacity>
+              <TouchableOpacity
+                onPress={() => { getDataMonthAvg() }}>
+                <Text style={[styles.selectContainer, { color: colorSelectMonth, }]}>
+                  เดือน
+                </Text>
+              </TouchableOpacity>
+              <TouchableOpacity
+                onPress={() => { getDataAllAvg() }}>
+                <Text style={[styles.selectContainer, { color: colorSelectAll, }]}>
+                  ทั้งหมด
+                </Text>
+              </TouchableOpacity>
             </HStack>
-          </View>
-          <Button
-            title='test'
-            onPress={() => console.log(LineChartCount)} />
-        </NativeBaseProvider>
-      </View>
+            <View style={{ alignItems: "center", marginTop:10 }}>
+              <Text style={{ fontFamily: "NotoSansThai-Regular", color: "black", fontSize: 12 }}>
+                {"ทั้งหมด " + LineChartCount + " ครั้ง"}
+              </Text>
+              <LineChart
+                data={dataChartLine}
+                width={370}
+                height={220}
+                chartConfig={chartConfigLine}
+                withDots={false}
+                // fromNumber={220}
+                withShadow={true}
+                withVerticalLines={false}
+              />
+              <HStack position="absolute" alignItems="center" marginTop={205} >
+                <FontAwesome name='circle' color="#FF0000" />
+                <Text style={styles.lineChartTitles}> SYS    </Text>
+                <FontAwesome name='circle' color="#A4BF43" />
+                <Text style={styles.lineChartTitles}> DIA    </Text>
+                <FontAwesome name='circle' color="#23AFD6" />
+                <Text style={styles.lineChartTitles}> BPM  </Text>
+              </HStack>
+            </View>
+            <VStack alignItems="center" marginTop={4}>
+              <PieChart
+                data={dataPie}
+                width={360}
+                height={180}
+                chartConfig={chartConfigPie}
+                accessor={"count"}
+                backgroundColor={"transparent"}
+                paddingLeft={"-47"}
+                center={[30, 7]}
+              />
+            </VStack>
+          </ScrollView>
+        </VStack>
+      </NativeBaseProvider>
     </View>
+
+
+
+
   )
 };
 
@@ -431,12 +526,12 @@ const styles = StyleSheet.create({
     fontFamily: 'NotoSansThai-Regular'
   },
   selectContainer: {
-    fontSize: 15,
+    fontSize: 17,
     fontFamily: "NotoSansThai-SemiBold",
 
   },
-  lineChartTitles : {
-    fontFamily: "NotoSansThai-Regular", 
+  lineChartTitles: {
+    fontFamily: "NotoSansThai-Regular",
     color: "black",
   },
 });

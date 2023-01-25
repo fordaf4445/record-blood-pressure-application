@@ -1,16 +1,15 @@
-import { View, Text, StyleSheet, TextInput, Alert, ScrollView, KeyboardAvoidingView, TouchableWithoutFeedback, Keyboard } from 'react-native'
+import { View, Text, StyleSheet, TextInput, Alert, TouchableWithoutFeedback, Keyboard } from 'react-native'
 import React, { useState, useEffect } from 'react'
-import { Button,} from '@rneui/base';
+import { Button, } from '@rneui/base';
 import { firebase } from '@react-native-firebase/auth';
 import moment from 'moment';
 
 
 const InputDataTest = () => {
     const db = firebase.firestore();
-    const [sys, setSys] = useState(null);
-    const [dia, setDia] = useState(null);
-    const [bpm, setBpm] = useState(null);
-    const [currentDate, setCurrentDate] = useState(null);
+    const [sys, setSys] = useState('');
+    const [dia, setDia] = useState('');
+    const [bpm, setBpm] = useState('');
 
     const dateToTime = current => {
         return moment(current).format('L LT');
@@ -52,26 +51,21 @@ const InputDataTest = () => {
             .then(function (docRef) {
                 console.log("Document written with ID: ", docRef.id);
                 // Alert.alert("เพิ่มข้อมูลสำเร็จ")
-                createAlert();
-                
+                Alert.alert(
+                    "เพิ่มข้อมูลสำเร็จ",
+                    "",
+                    [
+                        { text: "OK", onPress: () => { setSys(''), setDia(''), setBpm('') } }
+                    ]
+                );
 
             })
             .catch(function (err) {
                 console.log("Error adding information: ", err);
-                Alert.alert("เพิ่มข้อมูลไม่สำเร็จ !!"+ err.message)
+                Alert.alert("เพิ่มข้อมูลไม่สำเร็จ !!" + err.message)
             })
         { type }
-    }
-
-    function createAlert() {
-        Alert.alert(
-            "เพิ่มข้อมูลสำเร็จ",
-            "",
-            [
-                { text: "OK", onPress: () => {setSys(null),setDia(null),setBpm(null)} }
-            ]
-        );
-    }
+    };
 
     return (
 
@@ -114,9 +108,9 @@ const InputDataTest = () => {
                         <TextInput style={styles.inputBPM}
                             keyboardType='numeric'
                             onChangeText={(bpm) => setBpm(bpm)}
-                            value={bpm} 
+                            value={bpm}
                             maxLength={3}
-                            />
+                        />
                         <View style={{ top: 20, left: 25 }}>
                             <Text style={{ fontSize: 20, fontWeight: "bold", color: "#71C7E2" }}>
                                 PLUSE
@@ -136,7 +130,11 @@ const InputDataTest = () => {
                                 height: 50,
                                 width: 200,
                             }}
-                            onPress={addInformationFireStore} />
+                            onPress={() => {
+                                if (sys == '' || dia == '' || bpm == '') {
+                                    Alert.alert('ไม่สารมารถเพิ่มข้อมูลได้', 'ไม่มีข้อมูลใน SYS,DIA หรือ BPM')
+                                } else { addInformationFireStore() }
+                            }} />
                     </View>
                 </View>
             </View>
