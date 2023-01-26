@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View, FlatList, ActivityIndicator, TouchableOpacity } from 'react-native'
+import { StyleSheet, Text, View, FlatList, ActivityIndicator, TouchableOpacity, Animated } from 'react-native'
 import React, { useState, useEffect } from 'react'
 import { firebase } from '@react-native-firebase/auth';
 import { GestureHandlerRootView, Swipeable } from 'react-native-gesture-handler';
@@ -25,7 +25,7 @@ const History = () => {
 
                     });
                 });
-                
+
                 setloodPressure(bloodPressure);
                 setLoading(false);
             });
@@ -34,11 +34,19 @@ const History = () => {
     }, []);
 
     if (loading) {
-        return <ActivityIndicator />
+        return (
+            <View style={{ alignItems: "center", justifyContent: "center", flex: 1, }}>
+                <Animated.Image
+                    source={require("../../../assets/gif/heartLoading.gif")}
+                    style={{ width: 70, height: 70 }}
+                    resizeMode='cover'/>
+                {/* <ActivityIndicator size='large' /> */}
+                <Text style={{fontFamily:"NotoSansThai-Bold",fontSize:18, color:"#000"}}>กำลังโหลด..</Text>
+            </View>)
     };
 
     const DatetoTime = currDate => {
-        return moment(currDate).format ('DD/MM/YY hh:mm A');
+        return moment(currDate).format('DD/MM/YY hh:mm A');
     }
 
     function renderItem(item) {
@@ -50,10 +58,10 @@ const History = () => {
                 .doc(item.key).delete()
                 .then(() => {
                     console.log('Item deleted successfully');
-                  })
-                  .catch((error) => {
+                })
+                .catch((error) => {
                     console.error('Error deleting item:', error);
-                  });
+                });
         }
 
         function deleteItem() {
@@ -202,6 +210,6 @@ const styles = StyleSheet.create({
         backgroundColor: "red",
         width: "15%",
         height: "100%",
-        
+
     }
 });

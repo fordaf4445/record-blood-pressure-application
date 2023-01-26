@@ -90,4 +90,13 @@ cath( no error) 6:29 PM
     finish : add react-native chart-kit completely 
              components statistics complete v.1.0.2
     test : run emulator pass 
-           run realdevice pass 
+           run realdevice pass
+
+25/01/2023 11:00 PM v.1.0.2
+    add gif to folder assets/gif 
+    add animation to android/app/build.gradle
+        implementation 'com.facebook.fresco:animated-gif:2.6.0'
+        implementation 'com.facebook.fresco:animated-webp:2.0.0'
+        implementation 'com.facebook.fresco:webpsupport:2.0.0'
+    test : run emulator pass 
+           run realdevice pass

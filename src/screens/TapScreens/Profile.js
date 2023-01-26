@@ -1,12 +1,13 @@
 import React, { useState, useEffect, useContext } from 'react';
-import { View, StyleSheet, TextInput, ScrollView, CheckBox, Image, TouchableOpacity, ActivityIndicator } from 'react-native';
-import { Button, Input, makeStyles, Text, Icon } from '@rneui/base';
-import Inicon from 'react-native-vector-icons/dist/Ionicons'
+import { View, StyleSheet, TextInput, ScrollView, CheckBox, Image, TouchableOpacity, ActivityIndicator, Animated } from 'react-native';
+import { Button, Text, } from '@rneui/base';
+import Inicon from 'react-native-vector-icons/dist/Ionicons';
+import MaterialIcons from 'react-native-vector-icons/dist/MaterialIcons'
 import AlarmTitle from '../../components/ProfileComponents/AlarmTitle';
 import Savefile from '../../components/ProfileComponents/Savefile';
 import Title from '../../components/ProfileComponents/Title';
 import { AuthContext } from '../../auth/AuthProvider';
-import auth, { firebase } from '@react-native-firebase/auth';
+import { firebase } from '@react-native-firebase/auth';
 import { useNavigation } from '@react-navigation/native';
 
 const Profile = () => {
@@ -15,7 +16,7 @@ const Profile = () => {
     const navigation = useNavigation();
     const { signout } = useContext(AuthContext);
     const [name, setName] = useState('');
-    const [image, setImage] = useState('https://sv1.picz.in.th/images/2022/12/15/GIGhwg.png');
+    const [image, setImage] = useState("../../../assets/image/blank-profile-picture-973460.png");
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
@@ -30,8 +31,16 @@ const Profile = () => {
     }, []);
 
     if (loading) {
-        return <View style={styles.ActivityIndicatorContainer} ><ActivityIndicator /></View>
-    }
+        return (
+            <View style={{ alignItems: "center", justifyContent: "center", flex: 1, }}>
+                <Animated.Image
+                    source={require("../../../assets/gif/heartLoading.gif")}
+                    style={{ width: 70, height: 70 }}
+                    resizeMode='cover' />
+                {/* <ActivityIndicator size='large' /> */}
+                <Text style={{ fontFamily: "NotoSansThai-Bold", fontSize: 18, color: "#000" }}>กำลังโหลด..</Text>
+            </View>)
+    };
 
     return (
         <View style={styles.container}>
@@ -47,11 +56,13 @@ const Profile = () => {
                 </View>
                 <View style={{ alignSelf: "center", top: 20 }}>
                     <View style={styles.profileImage}>
-                        <Image source={{ uri: image }}
+                        <Image source={require("../../../assets/image/user.png")}
                             style={styles.image} />
                     </View>
                     <View style={styles.add}>
-                        <Inicon name='ios-add-circle' size={40} color='#838383' />
+                        <TouchableOpacity>
+                            <MaterialIcons name='add-photo-alternate' size={30} color='#fff' />
+                        </TouchableOpacity>
                     </View>
                 </View>
             </View>
@@ -64,7 +75,7 @@ const Profile = () => {
                     <Button
                         title={<AlarmTitle />}
                         icon={
-                           <Inicon name='alarm-outline' style={{fontSize:45,color:"black",marginRight:65}}/>
+                            <Inicon name='alarm-outline' style={{ fontSize: 45, color: "black", marginRight: 65 }} />
                         }
                         buttonStyle={{
                             borderBottomWidth: 1,
@@ -130,15 +141,16 @@ const styles = StyleSheet.create({
         borderColor: 'white',
     },
     add: {
-        backgroundColor: "#4144B",
+        backgroundColor: "#838383",
         position: "absolute",
-        bottom: -9,
-        right: 0,
-        width: 60,
-        height: 60,
+        bottom: 10,
+        right: 10,
+        width: 40,
+        height: 40,
         borderRadius: 30,
         justifyContent: "center",
         alignItems: "center",
+        // borderWidth:1,
     },
     textHeader: {
         fontSize: 35,
@@ -156,9 +168,4 @@ const styles = StyleSheet.create({
         fontFamily: 'NotoSansThai-Bold',
         color: 'black',
     },
-    ActivityIndicatorContainer: {
-        alignItems: 'center',
-        justifyContent: 'center',
-        fontSize: "large",
-    }
-})
+});

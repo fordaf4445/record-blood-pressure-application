@@ -33,7 +33,6 @@ export default function AuthStack() {
     //     routesName = 'Welcome';
     // }
 
-
     return (
         <Stack.Navigator
             initialRouteName='Welcome'

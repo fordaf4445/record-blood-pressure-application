@@ -4,7 +4,7 @@ import { firebase } from '@react-native-firebase/auth'
 
 const Title = () => {
 
-    const [loading, setLoading] = useState(true);
+    // const [loading, setLoading] = useState(true);
     const [data, setData] = useState('');
 
     useEffect(() => {
@@ -13,14 +13,14 @@ const Title = () => {
                 .doc(firebase.auth().currentUser.uid)
                 .onSnapshot((docsnapshot) => {
                     setData(docsnapshot.data());
-                    setLoading(false);
+                    // setLoading(false);
                 });
         return () => unsubscribe();
     }, []);
 
-    if (loading) {
-        return <View style={styles.ActivityIndicatorContainer} ><ActivityIndicator /></View>
-    }
+    // if (loading) {
+    //     return <View style={styles.ActivityIndicatorContainer} ><ActivityIndicator /></View>
+    // }
 
     return (
         <View style={{ top: 5 }}>

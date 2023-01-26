@@ -20,22 +20,22 @@ const Welcome = () => {
     }
     const forgetPasswords = () => {
         firebase.auth().sendPasswordResetEmail(email)
-        .then(() => {
-            Alert.alert(
-                "เราได้ส่งอีเมลไปให้คุณแล้ว",
-                "โปรดตรวจสอบอีเมลทั้งหมดของคุณหรือจดหมายขยะเพื่อรีเซ็ตรหัสผ่าน",
-                [
-                  { text: "OK", onPress: () => console.log("OK Pressed") }
-                ]
-              );
-        })
-        .catch((error) =>{
-            alert('Error: ' + error)
-        })
+            .then(() => {
+                Alert.alert(
+                    "เราได้ส่งอีเมลไปให้คุณแล้ว",
+                    "โปรดตรวจสอบอีเมลทั้งหมดของคุณหรือจดหมายขยะเพื่อรีเซ็ตรหัสผ่าน",
+                    [
+                        { text: "OK", onPress: () => console.log("OK Pressed") }
+                    ]
+                );
+            })
+            .catch((error) => {
+                alert('Error: ' + error)
+            })
     }
 
     return (
-        <ScrollView style={{flex:1}}>
+        <ScrollView style={{ flex: 1 }}>
             <View style={styles.container}>
                 <View style={styles.iconView}>
                     <Icon name='heartbeat' style={styles.icon} />
@@ -68,17 +68,19 @@ const Welcome = () => {
                     />
                     <TouchableOpacity style={styles.secureIcon}
                         onPress={() => { setSecureTextEntry((prev) => !prev) }}>
-                        <Lonicons name={ secureTextEntry? 'eye' : 'eye-off' } style={styles.eye}/>
+                        <Lonicons name={secureTextEntry ? 'eye' : 'eye-off'} style={styles.eye} />
                     </TouchableOpacity>
-                    <TouchableOpacity onPress={() => { if (email == '') {
-                        Alert.alert("แจ้งเตือน","โปรดกรอกอีเมล")
-                    } else {forgetPasswords()}}}>
+                    <TouchableOpacity onPress={() => {
+                        if (email == '') {
+                            Alert.alert("แจ้งเตือน", "โปรดกรอกอีเมล")
+                        } else { forgetPasswords() }
+                    }}>
                         <Text style={styles.textForgetPass}>
                             ลืมรหัสผ่าน
                         </Text>
                     </TouchableOpacity>
                     <Button
-                        onPress={() => { if (email == ''|| password == ''){ Alert.alert("แจ้งเตือน","โปรดกรอกอีเมลและรหัสผ่าน") }else{touchSignIn()}}}
+                        onPress={() => { if (email == '' || password == '') { Alert.alert("แจ้งเตือน", "โปรดกรอกอีเมลและรหัสผ่าน") } else { touchSignIn() } }}
                         title="เข้าสู่ระบบ"
                         titleStyle={{ fontFamily: 'NotoSansThai-Bold' }}
                         buttonStyle={{
@@ -155,13 +157,13 @@ const styles = StyleSheet.create({
         marginTop: 136,
         left: 308,
     },
-    eye:{
+    eye: {
         fontSize: 25,
     },
-    textForgetPass:{
+    textForgetPass: {
         color: '#5DB075',
         top: 10,
         fontFamily: 'NotoSansThai-SemiBold',
-        left:130,
+        left: 130,
     },
 })

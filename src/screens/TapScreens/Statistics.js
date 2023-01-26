@@ -1,4 +1,4 @@
-import { View, Text, StyleSheet, Button, TouchableOpacity, Alert } from 'react-native';
+import { View, Text, StyleSheet, Button, TouchableOpacity, Alert, Animated } from 'react-native';
 import React, { useState, useEffect } from 'react';
 import {
   NativeBaseProvider,
@@ -29,12 +29,13 @@ const Statistics = () => {
   const [lineChartBPM, setLineChartBPM] = useState([0]);
   const [LineChartCount, setLineChartCount] = useState(0);
 
-  const [count, setCount] = useState(0);
   const [lowBloodPressure, setLowBloodPressure] = useState(0);
   const [normalBloodPressure, setNormalBloodPressure] = useState(0);
   const [elevatedBloodPressure, setElevatedBloodPressure] = useState(0);
   const [highBloodPressure1, setHighBloodPressure1] = useState(0);
   const [highBloodPressure2, setHighBloodPressure2] = useState(0);
+
+  const [loading, setLoading] = useState(true);
 
   const db = firebase.firestore();
 
@@ -117,20 +118,27 @@ const Statistics = () => {
           setLineChartCount(bloodPressure.length)
         };
         bloodPressure.length != 0 ? (avg()) : (setAvgSYS(0), setAvgDIA(0), setAvgBPM(0))
-
+        setLoading(false);
       });
     return () => subscriber();
   }, []);
+
+  if (loading) {
+    return (
+      <View style={{ alignItems: "center", justifyContent: "center", flex: 1, }}>
+        <Animated.Image
+          source={require("../../../assets/gif/heartLoading.gif")}
+          style={{ width: 70, height: 70 }}
+          resizeMode='cover' />
+        {/* <ActivityIndicator size='large' /> */}
+        <Text style={{ fontFamily: "NotoSansThai-Bold", fontSize: 18, color: "#000" }}>กำลังโหลด..</Text>
+      </View>)
+  };
 
   const getDataWeekAvg = () => {
     const Week = bloodPressure.filter(item => {
       return item.timestamp >= startofWeek && item.timestamp <= endofWeek;
     });
-    //'ความดันโลหิตสูง ระยะที่ 2'
-    const count = Week.filter(item => {
-      return (item.TYPE === 'ความดันโลหิตสูง ระยะที่ 2')
-    }).length;
-    setCount(count);
 
     const avg = () => {
       const initialValue = { SYS: 0, DIA: 0, BPM: 0 }
@@ -443,7 +451,7 @@ const Statistics = () => {
                 </Text>
               </TouchableOpacity>
             </HStack>
-            <View style={{ alignItems: "center", marginTop:10 }}>
+            <View style={{ alignItems: "center", marginTop: 10 }}>
               <Text style={{ fontFamily: "NotoSansThai-Regular", color: "black", fontSize: 12 }}>
                 {"ทั้งหมด " + LineChartCount + " ครั้ง"}
               </Text>
