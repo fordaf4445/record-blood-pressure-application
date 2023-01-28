@@ -44,6 +44,7 @@ export const AuthProvider = ({ children }) => {
                                         hight: hight,
                                         age: age,
                                         sex: sex,
+                                        image:"https://firebasestorage.googleapis.com/v0/b/react-native-project-3ec06.appspot.com/o/blank-profile-picture-973460.png?alt=media&token=d841e70e-9c59-4d22-baea-f59ba0578cd2",
                                     })
                             })
                     } catch (err) {

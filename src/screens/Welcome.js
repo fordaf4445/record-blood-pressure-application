@@ -35,7 +35,7 @@ const Welcome = () => {
     }
 
     return (
-        <ScrollView style={{ flex: 1 }}>
+        <ScrollView style={{ flex: 1 }} showsVerticalScrollIndicator={false}>
             <View style={styles.container}>
                 <View style={styles.iconView}>
                     <Icon name='heartbeat' style={styles.icon} />

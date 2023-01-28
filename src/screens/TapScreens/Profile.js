@@ -16,18 +16,17 @@ const Profile = () => {
     const navigation = useNavigation();
     const { signout } = useContext(AuthContext);
     const [name, setName] = useState('');
-    const [image, setImage] = useState("../../../assets/image/blank-profile-picture-973460.png");
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
-        const unsubscribe =
+        const subscribe =
             firebase.firestore().collection('dataUser')
                 .doc(firebase.auth().currentUser.uid)
                 .onSnapshot((docsnapshot) => {
                     setName(docsnapshot.data());
                     setLoading(false);
                 });
-        return () => unsubscribe();
+        return () => subscribe();
     }, []);
 
     if (loading) {
@@ -42,27 +41,24 @@ const Profile = () => {
             </View>)
     };
 
+
+
     return (
         <View style={styles.container}>
             <View style={{ backgroundColor: '#5DB075', flex: 1 }}>
                 <View style={[styles.titleBar]}>
                     <TouchableOpacity onPress={() => { navigation.navigate('SettingComponent') }}>
-                        <Text style={styles.text}>setting</Text>
+                        <Text style={styles.text}>ตั้งค่าผู้ใช้</Text>
                     </TouchableOpacity>
                     <Text style={styles.textHeader}>Profile</Text>
                     <TouchableOpacity onPress={touchSignout}>
-                        <Text style={styles.text}>Logout</Text>
+                        <Text style={styles.text}>ออกระบบ</Text>
                     </TouchableOpacity>
                 </View>
                 <View style={{ alignSelf: "center", top: 20 }}>
                     <View style={styles.profileImage}>
-                        <Image source={require("../../../assets/image/user.png")}
+                        <Image source={{uri : name.image}}
                             style={styles.image} />
-                    </View>
-                    <View style={styles.add}>
-                        <TouchableOpacity>
-                            <MaterialIcons name='add-photo-alternate' size={30} color='#fff' />
-                        </TouchableOpacity>
                     </View>
                 </View>
             </View>
@@ -139,6 +135,7 @@ const styles = StyleSheet.create({
         borderRadius: 100,
         borderWidth: 5,
         borderColor: 'white',
+        backgroundColor:"#fff"
     },
     add: {
         backgroundColor: "#838383",
@@ -159,7 +156,7 @@ const styles = StyleSheet.create({
     },
     text: {
         fontSize: 16,
-        fontFamily: 'NotoSansThai-Regular',
+        fontFamily: 'NotoSansThai-Bold',
         color: 'white',
         top: 20,
     },
