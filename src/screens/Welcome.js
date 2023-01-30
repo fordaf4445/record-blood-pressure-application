@@ -1,11 +1,12 @@
-import { Alert, StyleSheet, View, Dimensions, TouchableOpacity, TextInput, ScrollView, SafeAreaView } from 'react-native';
+import { Alert, StyleSheet, View, TouchableOpacity, TextInput, ScrollView, ActivityIndicator, Animated } from 'react-native';
 import React, { useState, useContext } from 'react';
 import { useNavigation } from '@react-navigation/native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import Lonicons from 'react-native-vector-icons/Ionicons';
-import { Button, Text } from '@rneui/base';
+import { Button, Text, Overlay, color } from '@rneui/base';
 import { AuthContext } from '../auth/AuthProvider';
 import { firebase } from '@react-native-firebase/auth';
+
 
 const Welcome = () => {
     const navigation = useNavigation();
@@ -14,9 +15,13 @@ const Welcome = () => {
     const { signin } = useContext(AuthContext);
     const [secureTextEntry, setSecureTextEntry] = useState(true);
 
+    const { visible, setVisible } = useContext(AuthContext);
+
     const touchSignIn = () => {
+        setVisible(true);
         signin(email, password);
         // navigation.navigate('TapStack');
+
     }
     const forgetPasswords = () => {
         firebase.auth().sendPasswordResetEmail(email)
@@ -37,6 +42,16 @@ const Welcome = () => {
     return (
         <ScrollView style={{ flex: 1 }} showsVerticalScrollIndicator={false}>
             <View style={styles.container}>
+                <Overlay isVisible={visible}  overlayStyle={{ borderColor: "red", borderRadius:25, backgroundColor: "#fff" }}>
+                    <View style={{alignItems:"center", width:150}}>
+                        <Animated.Image
+                            source={require("../../assets/gif/heartLoading.gif")}
+                            style={{ width: 70, height: 70 }}
+                            resizeMode='cover' />
+                        {/* <ActivityIndicator size='large' /> */}
+                        <Text style={{ fontFamily: "NotoSansThai-Bold", fontSize: 18, color: "#000" }}>กรุณารอสักครู่..</Text>
+                    </View>
+                </Overlay>
                 <View style={styles.iconView}>
                     <Icon name='heartbeat' style={styles.icon} />
                 </View>
@@ -71,16 +86,14 @@ const Welcome = () => {
                         <Lonicons name={secureTextEntry ? 'eye' : 'eye-off'} style={styles.eye} />
                     </TouchableOpacity>
                     <TouchableOpacity onPress={() => {
-                        if (email == '') {
-                            Alert.alert("แจ้งเตือน", "โปรดกรอกอีเมล")
-                        } else { forgetPasswords() }
+                        email != '' ? (forgetPasswords()) : (Alert.alert("แจ้งเตือน", "โปรดกรอกอีเมล"));
                     }}>
                         <Text style={styles.textForgetPass}>
                             ลืมรหัสผ่าน
                         </Text>
                     </TouchableOpacity>
                     <Button
-                        onPress={() => { if (email == '' || password == '') { Alert.alert("แจ้งเตือน", "โปรดกรอกอีเมลและรหัสผ่าน") } else { touchSignIn() } }}
+                        onPress={() => { if (email == '' || password == '') { Alert.alert("แจ้งเตือน", "โปรดกรอกอีเมลและรหัสผ่าน"), console.log(visible); } else { touchSignIn() } }}
                         title="เข้าสู่ระบบ"
                         titleStyle={{ fontFamily: 'NotoSansThai-Bold' }}
                         buttonStyle={{
@@ -98,10 +111,13 @@ const Welcome = () => {
                         }}
                     />
                     <TouchableOpacity onPress={() => { navigation.navigate('Signup') }}>
-                        <Text style={styles.textThree}>
-                            ไม่มีบัญชีใช่ไหม ? กดลงชื่อเพื่อเข้าใช้
-                            {/* Don’t have account? Sign Up */}
-                        </Text>
+                        <View style={{ flexDirection: "row" }}>
+                            <Text style={styles.textThree}>
+                                ไม่มีบัญชีใช่ไหม ?
+                                {/* Don’t have account? Sign Up */}
+                            </Text>
+                            <Text style={[styles.textThree, { color: "#5DB075" }]}> ลงชื่อเพื่อเข้าใช้</Text>
+                        </View>
                     </TouchableOpacity>
                 </View>
             </View>
@@ -136,7 +152,7 @@ const styles = StyleSheet.create({
 
     },
     textThree: {
-        color: '#5DB075',
+        color: '#838383',
         top: 10,
         fontFamily: 'NotoSansThai-SemiBold',
     },
@@ -165,5 +181,16 @@ const styles = StyleSheet.create({
         top: 10,
         fontFamily: 'NotoSansThai-SemiBold',
         left: 130,
+    },
+
+    textPrimary: {
+        marginVertical: 20,
+        textAlign: 'center',
+        fontSize: 20,
+    },
+    textSecondary: {
+        marginBottom: 10,
+        textAlign: 'center',
+        fontSize: 17,
     },
 })

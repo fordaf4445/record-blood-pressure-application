@@ -35,9 +35,9 @@ const AlarmComponent = () => {
   const [editCreateDate, setEditCreateDate] = useState(new Date());
   const [editTitle, setEditTitle] = useState(null);
   const [editText, setEditText] = useState(null);
-  const [editRepeat , setEditRepeat] = useState(null);
+  const [editRepeat, setEditRepeat] = useState(null);
 
-  
+
 
   useEffect(() => {
     createChannel()
@@ -94,22 +94,22 @@ const AlarmComponent = () => {
 
           style: 'cancel',
         },
-        { text: 'OK', onPress: () => { del(),getNotification()} },
+        { text: 'OK', onPress: () => { del(), getNotification() } },
       ])
   };
 
   const openEditAlarm = alarm => {
-    
+
     setEditId(alarm.id)
     setEditCreateDate(alarm.date)
     setEditTitle(alarm.title)
     setEditText(alarm.message)
     setEditRepeat(alarm.repeatInterval)
-    
+
     setEditAlarm(true)
   };
 
-  
+
 
   return (
     <NativeBaseProvider>
@@ -150,29 +150,34 @@ const AlarmComponent = () => {
 
                 alarmList.sort((a, b) => a.id - b.id).map((alarm) => {
 
-      
+
                   return (
-                      <HStack style={styles.cradList} justifyContent="space-between" key={alarm.id} >
-                        <TouchableOpacity style={{flexDirection:"row"}}
-                        onPress={() => {openEditAlarm(alarm)}}>
+                    <HStack style={styles.cradList} justifyContent="space-between" key={alarm.id}>
+                      <TouchableOpacity style={{ flexDirection: "row" }}
+                        onPress={() => { openEditAlarm(alarm) }}>
                         <HStack alignItems="center">
                           <Text fontSize={25} style={styles.cradTime}>{dateToTime(alarm.date)}</Text>
                         </HStack>
+                        <View style={{ position: "absolute", marginTop: 43, marginLeft: 5 }}>
+                          <Text style={{ color: "#838383", fontFamily: "NotoSansThai-Regular" }}>
+                            {alarm.repeatInterval == 'day' ? ('ทุกวัน') : ('วันเดียว')}
+                          </Text>
+                        </View>
                         <HStack alignItems="center" w="55%" marginLeft="3%">
                           <Text fontSize={15} style={styles.cradTitles} isTruncated
-                          marginTop={1.5}>{alarm.title}</Text>
+                            marginTop={1.5}>{alarm.title}</Text>
                         </HStack>
-                        </TouchableOpacity>
-                        <HStack alignItems="center">
-                          <TouchableOpacity
-                          onPress={() => {deleteAlarm(alarm)}}>
+                      </TouchableOpacity>
+                      <HStack alignItems="center">
+                        <TouchableOpacity
+                          onPress={() => { deleteAlarm(alarm) }}>
                           <Feather
-                          name='x-circle'
-                          size={27}
+                            name='x-circle'
+                            size={27}
                           />
-                          </TouchableOpacity>
-                        </HStack>
+                        </TouchableOpacity>
                       </HStack>
+                    </HStack>
                   )
                 })
 

@@ -31,7 +31,6 @@ const AlarmModal = (
   const [createDate, setCreateDate] = useState(new Date());
   const [createTitle, setCreateTitle] = useState('');
   const [createText, setCreateText] = useState('');
-  const [createVibration, setCreateVibration] = useState(true);
   const [createRepeat, setCreateRepeat] = useState("day");
 
 
@@ -67,7 +66,7 @@ const AlarmModal = (
         color: "#5DB075",
         // when: Date.now(),
         repeatType: createRepeat,
-        vibrate: createVibration,
+        vibrate: true,
         vibration: 1000,
       });
       Alert.alert('ตั้งการแจ้งเตือนสำเร็จ', createTitle + '   เวลา : ' + dateToTime(createDate), [
@@ -134,7 +133,7 @@ const AlarmModal = (
                     ทุกวัน
                   </Radio>
                   <Radio colorScheme="emerald" value='undefined' my={1} marginLeft={10}>
-                    ครั้งเดียว
+                    วันเดียว
                   </Radio>
                 </Radio.Group>
                 {/* <HStack justifyContent="space-between" >
@@ -312,7 +311,7 @@ const EditAlarm = (
                     ทุกวัน
                   </Radio>
                   <Radio colorScheme="emerald" value='undefined' my={1} marginLeft={10}>
-                    ครั้งเดียว
+                    วันเดียว
                   </Radio>
                 </Radio.Group>
                 <HStack marginTop={200} ></HStack>

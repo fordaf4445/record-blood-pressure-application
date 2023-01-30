@@ -1,11 +1,10 @@
 import React, { useState, useContext } from 'react';
-import { View, StyleSheet, TextInput, ScrollView, CheckBox, TouchableOpacity } from 'react-native';
-import { Button, Input, makeStyles, Text } from '@rneui/base';
-import { useNavigation } from '@react-navigation/native';
+import { View, StyleSheet, TextInput, ScrollView, TouchableOpacity, Animated, Alert } from 'react-native';
+import { Button, Text, Overlay } from '@rneui/base';
 import BouncyCheckbox from "react-native-bouncy-checkbox";
-import firestore from '@react-native-firebase/firestore';
 import { AuthContext } from '../auth/AuthProvider';
 import Lonicons from 'react-native-vector-icons/Ionicons';
+import firestore from '@react-native-firebase/firestore';
 
 const Signup = () => {
     // const navigation = useNavigation();
@@ -19,6 +18,7 @@ const Signup = () => {
     const { weight, setWeight } = useContext(AuthContext);
     const { signup } = useContext(AuthContext);
     const [secureTextEntry, setSecureTextEntry] = useState(true);
+    const { visible, setVisible } = useContext(AuthContext);
 
     // function addDataUser() {
     //     firestore()
@@ -38,6 +38,7 @@ const Signup = () => {
     // };
 
     const touchSignUp = () => {
+        setVisible(true);
         signup(email, password);
         // addDataUser();
     }
@@ -45,8 +46,16 @@ const Signup = () => {
     return (
         <ScrollView>
             <View style={{ flex: 1 }}>
-
-
+                <Overlay isVisible={visible} overlayStyle={{ borderColor: "red", borderRadius: 25, backgroundColor: "#fff" }}>
+                    <View style={{ alignItems: "center", width: 150 }}>
+                        <Animated.Image
+                            source={require("../../assets/gif/heartLoading.gif")}
+                            style={{ width: 70, height: 70 }}
+                            resizeMode='cover' />
+                        {/* <ActivityIndicator size='large' /> */}
+                        <Text style={{ fontFamily: "NotoSansThai-Bold", fontSize: 18, color: "#000" }}>กรุณารอสักครู่..</Text>
+                    </View>
+                </Overlay>
                 <View style={styles.container}>
                     {/* <Text style={styles.textMain}> ลงทะเบียน </Text> */}
                     <Text style={[styles.textcolor, { top: 15, right: 132 }]}>ยูสเซอร์เนม</Text>
@@ -164,7 +173,11 @@ const Signup = () => {
                                 alignItems: 'center',
                             }}
                             titleStyle={{ fontFamily: 'NotoSansThai-SemiBold' }}
-                            onPress={touchSignUp} />
+                            onPress={() => {
+                                username, email, password, age, hight, sex, weight == '' ?
+                                    (Alert.alert("ลงทะเบียนไม่สำเร็จ", "ไม่สามารถเว้นช่องว่างได้"))
+                                    : (touchSignUp())
+                            }} />
                     </View>
                 </View>
 
@@ -233,7 +246,7 @@ const styles = StyleSheet.create({
         marginTop: 276,
         left: 340,
     },
-    eye:{
+    eye: {
         fontSize: 25,
     },
 

@@ -14,16 +14,21 @@ export const AuthProvider = ({ children }) => {
     const [sex, setSex] = useState('');
     const [weight, setWeight] = useState('');
     const [data, setData] = useState('');
+    const [visible, setVisible] = useState(false);
 
     return (
         <AuthContext.Provider
             value={{
                 user, setUser, username, setUsername, email, setEmail, password, setPassword,
                 age, setAge, hight, setHight, sex, setSex, weight, setWeight, data, setData,
+                visible, setVisible,
+
                 signin: async (email, password) => {
                     try {
                         await auth().signInWithEmailAndPassword(email, password);
+                        await setVisible(false);
                     } catch (err) {
+                        setVisible(false);
                         console.log('signInWithEmailAndPassword fail'),
                             Alert.alert("เข้าสู่ระบบไม่สำเร็จ", "อีเมลหรือรหัสผ่านของคุณไม่ถูกต้อง             โปรดลองอีกครั้ง",
                             );
@@ -44,10 +49,12 @@ export const AuthProvider = ({ children }) => {
                                         hight: hight,
                                         age: age,
                                         sex: sex,
-                                        image:"https://firebasestorage.googleapis.com/v0/b/react-native-project-3ec06.appspot.com/o/blank-profile-picture-973460.png?alt=media&token=d841e70e-9c59-4d22-baea-f59ba0578cd2",
+                                        image: "https://firebasestorage.googleapis.com/v0/b/react-native-project-3ec06.appspot.com/o/blank-profile-picture-973460.png?alt=media&token=d841e70e-9c59-4d22-baea-f59ba0578cd2",
                                     })
                             })
+                        await setVisible(false);
                     } catch (err) {
+                        setVisible(false);
                         console.log(err.messege);
                         Alert.alert("ลงทะเบียนไม่สำเร็จ");
                     }
