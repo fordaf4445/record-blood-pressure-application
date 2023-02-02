@@ -131,9 +131,9 @@ const InputDataTest = () => {
                                 width: 200,
                             }}
                             onPress={() => {
-                                sys == '' || dia == '' || bpm == '' ? (
+                                if (sys == '' || dia == '' || bpm == '') {
                                     Alert.alert('ไม่สารมารถเพิ่มข้อมูลได้', 'ไม่มีข้อมูลใน SYS,DIA หรือ BPM')
-                                ) : (addInformationFireStore())
+                                } else { addInformationFireStore() }
                             }} />
                     </View>
                 </View>

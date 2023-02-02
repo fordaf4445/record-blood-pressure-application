@@ -174,7 +174,7 @@ const Signup = () => {
                             }}
                             titleStyle={{ fontFamily: 'NotoSansThai-SemiBold' }}
                             onPress={() => {
-                                username, email, password, age, hight, sex, weight == '' ?
+                                username == '' || email == '' || password == '' || age == '' || hight == '' || sex == '' || weight == '' ?
                                     (Alert.alert("ลงทะเบียนไม่สำเร็จ", "ไม่สามารถเว้นช่องว่างได้"))
                                     : (touchSignUp())
                             }} />
