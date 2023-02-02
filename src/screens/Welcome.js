@@ -1,9 +1,10 @@
-import { Alert, StyleSheet, View, TouchableOpacity, TextInput, ScrollView, ActivityIndicator, Animated } from 'react-native';
+import { Alert, StyleSheet, View, TouchableOpacity, TextInput, ScrollView, ActivityIndicator, Animated, Text } from 'react-native';
 import React, { useState, useContext } from 'react';
+import { NativeBaseProvider, VStack, HStack } from 'native-base';
 import { useNavigation } from '@react-navigation/native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import Lonicons from 'react-native-vector-icons/Ionicons';
-import { Button, Text, Overlay, color } from '@rneui/base';
+import { Overlay } from '@rneui/base';
 import { AuthContext } from '../auth/AuthProvider';
 import { firebase } from '@react-native-firebase/auth';
 
@@ -40,88 +41,90 @@ const Welcome = () => {
     }
 
     return (
-        <ScrollView style={{ flex: 1 }} showsVerticalScrollIndicator={false}>
-            <View style={styles.container}>
-                <Overlay isVisible={visible}  overlayStyle={{ borderColor: "red", borderRadius:25, backgroundColor: "#fff" }}>
-                    <View style={{alignItems:"center", width:150}}>
-                        <Animated.Image
-                            source={require("../../assets/gif/heartLoading.gif")}
-                            style={{ width: 70, height: 70 }}
-                            resizeMode='cover' />
-                        {/* <ActivityIndicator size='large' /> */}
-                        <Text style={{ fontFamily: "NotoSansThai-Bold", fontSize: 18, color: "#000" }}>กรุณารอสักครู่..</Text>
-                    </View>
-                </Overlay>
-                <View style={styles.iconView}>
-                    <Icon name='heartbeat' style={styles.icon} />
-                </View>
-                <View style={styles.container}>
-                    <Text style={styles.textMain}>แอปพลิเคชัน</Text>
-                    <Text style={styles.textMain}>บันทึกความดันโลหิต</Text>
-                </View>
-                <View style={{ flex: 3, alignItems: 'center' }}>
-                    <Text style={styles.textSecond}>เข้าสู่ระบบ</Text>
-                    <TextInput
-                        style={styles.inputView}
-                        placeholder="Email"
-                        placeholderTextColor="gray"
-                        value={email}
-                        onChangeText={(email) => { setEmail(email) }}
-                    />
-                    <TextInput
-                        style={styles.inputView}
-                        placeholder="Password"
-                        placeholderTextColor="gray"
-                        name="password"
-                        autoCapitalize="none"
-                        autoCorrect={false}
-                        textContentType="newPassword"
-                        secureTextEntry={secureTextEntry}
-                        value={password}
-                        enablesReturnKeyAutomatically
-                        onChangeText={(password) => setPassword(password)}
-                    />
-                    <TouchableOpacity style={styles.secureIcon}
-                        onPress={() => { setSecureTextEntry((prev) => !prev) }}>
-                        <Lonicons name={secureTextEntry ? 'eye' : 'eye-off'} style={styles.eye} />
-                    </TouchableOpacity>
-                    <TouchableOpacity onPress={() => {
-                        email != '' ? (forgetPasswords()) : (Alert.alert("แจ้งเตือน", "โปรดกรอกอีเมล"));
-                    }}>
-                        <Text style={styles.textForgetPass}>
-                            ลืมรหัสผ่าน
-                        </Text>
-                    </TouchableOpacity>
-                    <Button
-                        onPress={() => { if (email == '' || password == '') { Alert.alert("แจ้งเตือน", "โปรดกรอกอีเมลและรหัสผ่าน"), console.log(visible); } else { touchSignIn() } }}
-                        title="เข้าสู่ระบบ"
-                        titleStyle={{ fontFamily: 'NotoSansThai-Bold' }}
-                        buttonStyle={{
-                            backgroundColor: '#5DB075',
-                            borderRadius: 30,
-                            height: 50,
-                            width: 343,
-                        }}
-                        containerStyle={{
-                            // marginHorizontal: 50,
-                            marginVertical: 10,
-                            marginTop: 20,
-                            alignItems: 'center',
-
-                        }}
-                    />
-                    <TouchableOpacity onPress={() => { navigation.navigate('Signup') }}>
-                        <View style={{ flexDirection: "row" }}>
-                            <Text style={styles.textThree}>
-                                ไม่มีบัญชีใช่ไหม ?
-                                {/* Don’t have account? Sign Up */}
-                            </Text>
-                            <Text style={[styles.textThree, { color: "#5DB075" }]}> ลงชื่อเพื่อเข้าใช้</Text>
+        <NativeBaseProvider>
+            <ScrollView style={{ flex: 1 }} showsVerticalScrollIndicator={false}>
+                <VStack style={styles.container}>
+                    <Overlay isVisible={visible} overlayStyle={{ borderColor: "red", borderRadius: 25, backgroundColor: "#fff" }}>
+                        <View style={{ alignItems: "center", width: 150 }}>
+                            <Animated.Image
+                                source={require("../../assets/gif/heartLoading.gif")}
+                                style={{ width: 70, height: 70 }}
+                                resizeMode='cover' />
+                            {/* <ActivityIndicator size='large' /> */}
+                            <Text style={{ fontFamily: "NotoSansThai-Bold", fontSize: 18, color: "#000" }}>กรุณารอสักครู่..</Text>
                         </View>
-                    </TouchableOpacity>
-                </View>
-            </View>
-        </ScrollView>
+                    </Overlay>
+                    <VStack alignItems="center" width="100%">
+                        <Icon name='heartbeat' style={styles.icon} />
+                        <Text style={styles.textMain}>แอปพลิเคชัน</Text>
+                        <Text style={styles.textMain}>บันทึกความดันโลหิต</Text>
+                    </VStack>
+                    <VStack marginTop={5} width="95%" space={2.5} >
+                        <VStack width="100%" alignItems="center" >
+                            <Text style={styles.textSecond}>เข้าสู่ระบบ</Text>
+                        </VStack>
+                        <VStack width="100%" alignItems="center">
+                            <VStack width="100%">
+                                <TextInput
+                                    style={styles.inputView}
+                                    placeholder="Email"
+                                    placeholderTextColor="gray"
+                                    value={email}
+                                    onChangeText={(email) => { setEmail(email) }}
+                                />
+                            </VStack>
+                            <VStack width="100%">
+                                <TextInput
+                                    style={[styles.inputView, { marginTop: 15 }]}
+                                    placeholder="Password"
+                                    placeholderTextColor="gray"
+                                    name="password"
+                                    autoCapitalize="none"
+                                    autoCorrect={false}
+                                    textContentType="newPassword"
+                                    secureTextEntry={secureTextEntry}
+                                    value={password}
+                                    enablesReturnKeyAutomatically
+                                    onChangeText={(password) => setPassword(password)}
+                                />
+                            </VStack>
+                        </VStack>
+                        <VStack style={styles.secureIcon}>
+                            <TouchableOpacity
+                                onPress={() => { setSecureTextEntry((prev) => !prev) }}>
+                                <Lonicons name={secureTextEntry ? 'eye' : 'eye-off'} style={styles.eye} />
+                            </TouchableOpacity>
+                        </VStack>
+                        <TouchableOpacity onPress={() => {
+                            email != '' ? (forgetPasswords()) : (Alert.alert("แจ้งเตือน", "โปรดกรอกอีเมล"));
+                        }}>
+                            <VStack width="100%" alignItems="flex-end"  >
+                                <Text style={styles.textForgetPass}>
+                                    ลืมรหัสผ่าน
+                                </Text>
+                            </VStack>
+                        </TouchableOpacity>
+                        <TouchableOpacity style={styles.buttonContrainer}
+                            onPress={() => { if (email == '' || password == '') { Alert.alert("แจ้งเตือน", "โปรดกรอกอีเมลและรหัสผ่าน"), console.log(visible); } else { touchSignIn() } }}>
+                            <VStack height="100%" alignItems="center" justifyContent="center">
+                                <Text style={{ fontFamily: 'NotoSansThai-Bold', fontSize: 18, color: "#fff" }}>เข้าสู่ระบบ</Text>
+                            </VStack>
+                        </TouchableOpacity>
+                        <VStack marginTop={5} alignItems="center">
+                            <TouchableOpacity onPress={() => { navigation.navigate('Signup') }}>
+                                <View style={{ flexDirection: "row" }}>
+                                    <Text style={styles.textThree}>
+                                        ไม่มีบัญชีใช่ไหม ?
+                                        {/* Don’t have account? Sign Up */}
+                                    </Text>
+                                    <Text style={[styles.textThree, { color: "#5DB075" }]}> ลงชื่อเพื่อเข้าใช้</Text>
+                                </View>
+                            </TouchableOpacity>
+                        </VStack>
+                    </VStack>
+                </VStack>
+            </ScrollView>
+        </NativeBaseProvider>
     )
 }
 
@@ -130,7 +133,7 @@ export default Welcome
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        padding: 35,
+        padding: 15,
         alignItems: 'center',
     },
     iconView: {
@@ -144,6 +147,7 @@ const styles = StyleSheet.create({
     textMain: {
         fontSize: 30,
         fontFamily: 'NotoSansThai-Bold',
+        color: "#000"
     },
     textSecond: {
         fontSize: 24,
@@ -153,7 +157,6 @@ const styles = StyleSheet.create({
     },
     textThree: {
         color: '#838383',
-        top: 10,
         fontFamily: 'NotoSansThai-SemiBold',
     },
     inputView: {
@@ -162,25 +165,28 @@ const styles = StyleSheet.create({
         height: 50,
         borderWidth: 1,
         borderColor: '#E8E8E8',
-        padding: 15,
-        marginTop: 20,
-        width: 343,
+        padding: 10,
+        paddingLeft: 15,
+        width: "100%",
         fontSize: 16,
         fontFamily: 'NotoSansThai-SemiBold',
+        shadowColor: "#5DB075",
+        elevation: 10,
     },
     secureIcon: {
         position: 'absolute',
-        marginTop: 136,
-        left: 308,
+        marginTop: 122,
+        width: "96%",
+        alignItems: "flex-end",
     },
     eye: {
         fontSize: 25,
     },
     textForgetPass: {
         color: '#5DB075',
-        top: 10,
+        // top: 10,
         fontFamily: 'NotoSansThai-SemiBold',
-        left: 130,
+        // left: 130,
     },
 
     textPrimary: {
@@ -192,5 +198,13 @@ const styles = StyleSheet.create({
         marginBottom: 10,
         textAlign: 'center',
         fontSize: 17,
+    },
+    buttonContrainer: {
+        width: "100%",
+        height: 50,
+        borderRadius: 30,
+        backgroundColor: "#5DB075",
+        shadowColor: "#000",
+        elevation: 10,
     },
 })
