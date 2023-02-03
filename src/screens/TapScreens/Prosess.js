@@ -7,11 +7,10 @@ import FontAwesome5 from 'react-native-vector-icons/dist/FontAwesome5';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import Entypo from 'react-native-vector-icons/Entypo';
 import { VStack, HStack, NativeBaseProvider } from 'native-base';
-import { ModalJNC7 } from '../../components/ProcessComponents/ModalJNC7';
+
 
 const Prosess = () => {
     const [changeMode, setChangeMode] = useState(true);
-    const [openModalJNC7, setOpenModalJNC7] = useState(false);
 
     const navigation = useNavigation();
 
@@ -28,7 +27,7 @@ const Prosess = () => {
                         <Text style={{ fontFamily: "NotoSansThai-Regular", color: changeMode == true ? ("#000") : ("#fff") }}>
                             การแบ่งระดับความดันโลหิตสูงตามวิธี JNC 7
                         </Text>
-                        <TouchableOpacity onPress={() => {setOpenModalJNC7(!openModalJNC7)}}>
+                        <TouchableOpacity onPress={() => {}}>
                             <Entypo name='help-with-circle' size={18} color={changeMode == true ? ("#5DB075") : ("#fff")} />
                         </TouchableOpacity>
                     </HStack>
@@ -67,10 +66,6 @@ const Prosess = () => {
                         />
                     </HStack>
                 </VStack>
-                {ModalJNC7(
-                    openModalJNC7,
-                    setOpenModalJNC7
-                )}
             </VStack>
         </NativeBaseProvider>
     )
