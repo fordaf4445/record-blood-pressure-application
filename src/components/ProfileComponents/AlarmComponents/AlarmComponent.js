@@ -150,7 +150,6 @@ const AlarmComponent = () => {
 
                 alarmList.sort((a, b) => a.id - b.id).map((alarm) => {
 
-
                   return (
                     <HStack style={styles.cradList} justifyContent="space-between" key={alarm.id}>
                       <TouchableOpacity style={{ flexDirection: "row" }}

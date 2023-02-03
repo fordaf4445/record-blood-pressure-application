@@ -88,7 +88,7 @@ const AlarmModal = (
 
   return addAlarm ? (
     <ScrollView>
-      <Modal isOpen={addAlarm} closeOnOverlayClick={false}>
+      <Modal isOpen={addAlarm} closeOnOverlayClick={true} avoidKeyboard={true}>
 
         <Modal.Content width="90%" height="100%">
           <Modal.Header style={{ backgroundColor: "#5DB075" }}>
@@ -266,7 +266,7 @@ const EditAlarm = (
 
   return editAlarm ? (
     <ScrollView>
-      <Modal isOpen={editAlarm} closeOnOverlayClick={false} >
+      <Modal isOpen={editAlarm} closeOnOverlayClick={true} avoidKeyboard={true} >
 
         <Modal.Content width="90%" height="100%">
           <Modal.Header style={{ backgroundColor: "#71C7E2" }}>

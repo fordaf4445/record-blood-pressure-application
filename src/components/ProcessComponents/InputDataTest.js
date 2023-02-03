@@ -11,6 +11,8 @@ const InputDataTest = () => {
     const [dia, setDia] = useState('');
     const [bpm, setBpm] = useState('');
 
+    const [changeMode , setChangeMode] = useState(false);
+
     const dateToTime = current => {
         return moment(current).format('L LT');
     }
@@ -70,75 +72,75 @@ const InputDataTest = () => {
     return (
 
         <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
-            <View style={styles.container}>
-                <View style={{ flex: 1, left: 50, top: 20 }}>
-                    <View style={{ flexDirection: "row" }}>
-                        <TextInput style={styles.inputSYS}
-                            keyboardType='numeric'
-                            onChangeText={(sys) => setSys(sys)}
-                            value={sys}
-                            maxLength={3}
-                        />
-                        <View style={{ top: 20, left: 25 }}>
-                            <Text style={{ fontSize: 20, fontWeight: "bold", color: "red" }}>
-                                SYS
-                            </Text>
-                            <Text>
-                                mmgh
-                            </Text>
-                        </View>
-                    </View>
-                    <View style={{ flexDirection: "row" }}>
-                        <TextInput style={styles.inputDIA}
-                            keyboardType='numeric'
-                            onChangeText={(dia) => setDia(dia)}
-                            value={dia}
-                            maxLength={3}
-                        />
-                        <View style={{ top: 20, left: 25 }}>
-                            <Text style={{ fontSize: 20, fontWeight: "bold", color: "#B8DE9A" }}>
-                                DIA
-                            </Text>
-                            <Text>
-                                mmgh
-                            </Text>
-                        </View>
-                    </View>
-                    <View style={{ flexDirection: "row" }}>
-                        <TextInput style={styles.inputBPM}
-                            keyboardType='numeric'
-                            onChangeText={(bpm) => setBpm(bpm)}
-                            value={bpm}
-                            maxLength={3}
-                        />
-                        <View style={{ top: 20, left: 25 }}>
-                            <Text style={{ fontSize: 20, fontWeight: "bold", color: "#71C7E2" }}>
-                                PLUSE
-                            </Text>
-                            <Text>
-                                bpm
-                            </Text>
-                        </View>
-                    </View>
-                    <View style={{ alignItems: "center", left: -50, top: 350 }}>
-                        <Button
-                            title={"เพิ่ม"}
-                            titleStyle={{ fontFamily: 'NotoSansThai-Bold' }}
-                            buttonStyle={{
-                                backgroundColor: '#5DB075',
-                                borderRadius: 30,
-                                height: 50,
-                                width: 200,
-                            }}
-                            onPress={() => {
-                                sys == '' || dia == '' || bpm == '' ? (
-                                    Alert.alert('ไม่สารมารถเพิ่มข้อมูลได้', 'ไม่มีข้อมูลใน SYS,DIA หรือ BPM')
-                                ) : (addInformationFireStore())
-                            }} />
+        <View style={styles.container}>
+            <View style={{ flex: 1, left: 50, top: 20 }}>
+                <View style={{ flexDirection: "row" }}>
+                    <TextInput style={styles.inputSYS}
+                        keyboardType='numeric'
+                        onChangeText={(sys) => setSys(sys)}
+                        value={sys}
+                        maxLength={3}
+                    />
+                    <View style={{ top: 20, left: 25 }}>
+                        <Text style={{ fontSize: 20, fontWeight: "bold", color: "red" }}>
+                            SYS
+                        </Text>
+                        <Text>
+                            mmgh
+                        </Text>
                     </View>
                 </View>
+                <View style={{ flexDirection: "row" }}>
+                    <TextInput style={styles.inputDIA}
+                        keyboardType='numeric'
+                        onChangeText={(dia) => setDia(dia)}
+                        value={dia}
+                        maxLength={3}
+                    />
+                    <View style={{ top: 20, left: 25 }}>
+                        <Text style={{ fontSize: 20, fontWeight: "bold", color: "#B8DE9A" }}>
+                            DIA
+                        </Text>
+                        <Text>
+                            mmgh
+                        </Text>
+                    </View>
+                </View>
+                <View style={{ flexDirection: "row" }}>
+                    <TextInput style={styles.inputBPM}
+                        keyboardType='numeric'
+                        onChangeText={(bpm) => setBpm(bpm)}
+                        value={bpm}
+                        maxLength={3}
+                    />
+                    <View style={{ top: 20, left: 25 }}>
+                        <Text style={{ fontSize: 20, fontWeight: "bold", color: "#71C7E2" }}>
+                            PLUSE
+                        </Text>
+                        <Text>
+                            bpm
+                        </Text>
+                    </View>
+                </View>
+                <View style={{ alignItems: "center", left: -50, top: 350 }}>
+                    <Button
+                        title={"เพิ่ม"}
+                        titleStyle={{ fontFamily: 'NotoSansThai-Bold' }}
+                        buttonStyle={{
+                            backgroundColor: '#5DB075',
+                            borderRadius: 30,
+                            height: 50,
+                            width: 200,
+                        }}
+                        onPress={() => {
+                            if (sys == '' || dia == '' || bpm == '') {
+                                Alert.alert('ไม่สารมารถเพิ่มข้อมูลได้', 'ไม่มีข้อมูลใน SYS,DIA หรือ BPM')
+                            } else { addInformationFireStore() }
+                        }} />
+                </View>
             </View>
-        </TouchableWithoutFeedback>
+        </View>
+    </TouchableWithoutFeedback>
     )
 
 }

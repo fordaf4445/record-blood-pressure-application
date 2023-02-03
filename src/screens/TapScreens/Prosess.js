@@ -1,81 +1,78 @@
-import React, { useState } from 'react';
-import { View, StyleSheet, Image, Animated } from 'react-native';
-import { Button, Input, makeStyles, Text } from '@rneui/base';
+import React, { useState, useEffect } from 'react';
+import { View, StyleSheet, Image, Animated, Text, TouchableOpacity } from 'react-native';
+import { Button, Input, makeStyles, FAB, color } from '@rneui/base';
 import { useNavigation } from '@react-navigation/native';
 import { GestureHandlerRootView, Swipeable } from 'react-native-gesture-handler';
 import FontAwesome5 from 'react-native-vector-icons/dist/FontAwesome5';
-
+import FontAwesome from 'react-native-vector-icons/FontAwesome';
+import Entypo from 'react-native-vector-icons/Entypo';
+import { VStack, HStack, NativeBaseProvider } from 'native-base';
+import { ModalJNC7 } from '../../components/ProcessComponents/ModalJNC7';
 
 const Prosess = () => {
+    const [changeMode, setChangeMode] = useState(true);
+    const [openModalJNC7, setOpenModalJNC7] = useState(false);
 
     const navigation = useNavigation();
 
-    function clickInput() {
 
-        return (
-            <View style={{ height: 150, alignItems: "center", flex: 1 }}>
-                <Button
-                    onPress={() => { navigation.navigate('InputDataTest') }}
-                    title={"เพิ่มข้อมูลด้วยตัวเอง"}
-                    titleStyle={{ fontFamily: 'NotoSansThai-Bold' }}
-                    buttonStyle={{
-                        backgroundColor: 'red',
-                        borderRadius: 30,
-                        height: 50,
-                        width: 212,
-                    }}
-                    containerStyle={{
-                        // marginHorizontal: 50,
-                        marginVertical: 10,
-                        marginTop: 25,
-                        alignItems: 'center',
-                    }}
-                />
-                <Text style={[styles.text, { color: "red", }]}>กดเพื่อเพิ่มข้อมูลด้วยตัวเอง</Text>
-            </View>
-        )
-    }
 
     return (
-        <View style={styles.container}>
-            <View style={{ flex: 1, alignItems: 'center', justifyContent: 'space-around' }}>
-                <View style={{ flex: 3, justifyContent: 'center' }}>
-                    <Image source={require("../../../assets/image/wifi-connection.png")}
-                        style={{ width: 200, height: 200 }} />
-                    <Text></Text>
-                    <View style={styles.slideLeft}>
-                        <FontAwesome5 name='chevron-circle-left' style={{fontSize:20, color:"#5DB075"}}  />
-                        <Text style={{fontFamily:'NotoSansThai-SemiBold',color:'#5DB075'}}>  เลื่อนไปทางซ้ายเพื่อเพิ่มข้อมูลด้วยตัวเอง</Text>
-                    </View>
-                </View>
-                <GestureHandlerRootView style={{ top: 30 }}>
-                    <Swipeable
-                        renderRightActions={clickInput}>
-                        <View style={{ height: 150, }}>
-                            <Button
-                                title={"เชื่อมต่อบลูทูธ"}
-                                titleStyle={{ fontFamily: 'NotoSansThai-Bold' }}
-                                buttonStyle={{
-                                    backgroundColor: '#5DB075',
-                                    borderRadius: 30,
-                                    height: 50,
-                                    width: 212,
-                                }}
-                                containerStyle={{
-                                    // marginHorizontal: 50,
-                                    marginVertical: 10,
-                                    marginTop: 25,
-                                    alignItems: 'center',
-                                }}
-                            />
-                            <Text style={styles.text}>เชื่อมต่อบลูทูธเพื่อเพิ่มข้อมูลความดันโลหิต</Text>
-                        </View>
-                    </Swipeable>
-                </GestureHandlerRootView>
+        <NativeBaseProvider>
+            <VStack style={styles.container} space={5} backgroundColor={changeMode == true ? ("#fff") : ("#5DB075")}>
+                <VStack style={styles.inputDataBluetooth}>
 
-            </View>
-
-        </View>
+                </VStack>
+                <VStack height="37%" width="100%" borderWidth={1} space={1.5} alignItems="center">
+                    <HStack alignItems="center" space={2} >
+                        <Text style={{ fontFamily: "NotoSansThai-Regular", color: changeMode == true ? ("#000") : ("#fff") }}>
+                            การแบ่งระดับความดันโลหิตสูงตามวิธี JNC 7
+                        </Text>
+                        <TouchableOpacity onPress={() => {setOpenModalJNC7(!openModalJNC7)}}>
+                            <Entypo name='help-with-circle' size={18} color={changeMode == true ? ("#5DB075") : ("#fff")} />
+                        </TouchableOpacity>
+                    </HStack>
+                    <VStack style={styles.inforMation} space={2}>
+                        <HStack style={styles.inforMationLayer}>
+                            <Text>ประเภท  SYS  DIA</Text>
+                        </HStack>
+                        <HStack style={styles.inforMationLayer}>
+                            <Text>ความดันโลหิตสูง ระยะที่ 2</Text>
+                        </HStack>
+                        <HStack style={styles.inforMationLayer}>
+                            <Text>ความดันโลหิตสูง ระยะที่ 1</Text>
+                        </HStack>
+                        <HStack style={styles.inforMationLayer}>
+                            <Text>ความดันโลหิตสูงขั้นต้น</Text>
+                        </HStack>
+                        <HStack style={styles.inforMationLayer}>
+                            <Text>ปกติ</Text>
+                        </HStack>
+                        <HStack style={styles.inforMationLayer}>
+                            <Text>ความดันโลหิตต่ำ</Text>
+                        </HStack>
+                    </VStack>
+                </VStack >
+                <VStack style={styles.fabContainer} alignItems="flex-end" justifyContent="flex-end">
+                    <HStack style={styles.inFabContainer} space={2}>
+                        <Text>change mode Input</Text>
+                        <FAB
+                            onPress={() => { setChangeMode(!changeMode) }}
+                            icon={
+                                <FontAwesome
+                                    name='refresh' size={25} color={changeMode == true ? ("#fff") : ("#5DB075")}
+                                />}
+                            color={changeMode == true ? ("#5DB075") : ("#fff")}
+                            style={{}}
+                        />
+                    </HStack>
+                </VStack>
+                {ModalJNC7(
+                    openModalJNC7,
+                    setOpenModalJNC7
+                )}
+            </VStack>
+        </NativeBaseProvider>
     )
 }
 
@@ -83,8 +80,39 @@ export default Prosess;
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        padding: 35,
+        padding: 20,
         alignItems: 'center',
+        borderWidth: 1,
+        height: "100%",
+    },
+    inputDataBluetooth: {
+        borderWidth: 1,
+        width: "100%",
+        height: "30%",
+        borderRadius: 35,
+    },
+    inforMation: {
+        borderWidth: 1,
+        width: "100%",
+        // height: "100%",
+        borderRadius: 35,
+        padding: 10,
+        alignItems: "center",
+        justifyContent: "center",
+    },
+    inforMationLayer: {
+        borderWidth: 1,
+        width: "100%",
+        height: "11%",
+    },
+    fabContainer: {
+        width: "100%",
+        height: "25%",
+        borderBottomColor: "red",
+        borderWidth: 1,
+    },
+    inFabContainer: {
+        alignItems: "center",
     },
     text: {
         color: '#5DB075',
@@ -92,11 +120,5 @@ const styles = StyleSheet.create({
         fontFamily: 'NotoSansThai-SemiBold',
         backgroundColor: "#f2f2f2",
     },
-    slideLeft: {
-        position: 'absolute',
-        top: 500,
-        left:-35,
-        flexDirection:"row",
 
-    },
 });
