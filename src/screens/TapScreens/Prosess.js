@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { View, StyleSheet, Image, Animated, Text, TouchableOpacity } from 'react-native';
-import { Button, Input, makeStyles, FAB, color } from '@rneui/base';
+import { View, StyleSheet, Image, Animated, Text, TouchableOpacity, Button } from 'react-native';
+import {  FAB, Overlay  } from '@rneui/base';
 import { useNavigation } from '@react-navigation/native';
 import { GestureHandlerRootView, Swipeable } from 'react-native-gesture-handler';
 import FontAwesome5 from 'react-native-vector-icons/dist/FontAwesome5';
@@ -11,23 +11,31 @@ import { VStack, HStack, NativeBaseProvider } from 'native-base';
 
 const Prosess = () => {
     const [changeMode, setChangeMode] = useState(true);
+    const [openOverlayJNC7 , setOpenOverlayJNC7] = useState(false);
 
     const navigation = useNavigation();
-
-
 
     return (
         <NativeBaseProvider>
             <VStack style={styles.container} space={5} backgroundColor={changeMode == true ? ("#fff") : ("#5DB075")}>
+                <Overlay isVisible={openOverlayJNC7} overlayStyle={{backgroundColor:"#fff",height:"90%" ,width:"98%"}}>
+                    <View style={{}}>
+                        <Image
+                        source={require("../../../assets/image/ClassificationBloodpressure.png")}
+                        style={{height:330 ,width:"100%"}}/>
+                        <Button
+                        title='Close'
+                        onPress={() =>{setOpenOverlayJNC7(!openOverlayJNC7)}}/>
+                    </View>
+                </Overlay>
                 <VStack style={styles.inputDataBluetooth}>
-
                 </VStack>
                 <VStack height="37%" width="100%" borderWidth={1} space={1.5} alignItems="center">
                     <HStack alignItems="center" space={2} >
                         <Text style={{ fontFamily: "NotoSansThai-Regular", color: changeMode == true ? ("#000") : ("#fff") }}>
                             การแบ่งระดับความดันโลหิตสูงตามวิธี JNC 7
                         </Text>
-                        <TouchableOpacity onPress={() => {}}>
+                        <TouchableOpacity onPress={() => {setOpenOverlayJNC7(!openOverlayJNC7)}}>
                             <Entypo name='help-with-circle' size={18} color={changeMode == true ? ("#5DB075") : ("#fff")} />
                         </TouchableOpacity>
                     </HStack>
