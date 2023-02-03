@@ -113,8 +113,14 @@ cath( no error) 6:29 PM
            run realdevice pass
         I think there's a better way to upload the image by pressing Verify again. But I'm too lazy to do it. Come back and do it again if you have time.
 
-31/01/2023 10:35 v.1.0.2
+31/01/2023 10:35 PM v.1.0.2
     edit : ProfileComponent All new
     test : run emulator pass 
            run realdevice pass
 
+03/02/2023 10:08 PM v.1.0.2
+    add : "react-native-image-zoom-viewer": "^3.0.1" use Zoom picture,
+            add overlay in ProfileComponent.
+    test : run emulator pass 
+           run realdevice pass
+           
