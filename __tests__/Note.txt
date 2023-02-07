@@ -123,4 +123,10 @@ cath( no error) 6:29 PM
             add overlay in ProfileComponent.
     test : run emulator pass 
            run realdevice pass
-           
+
+07/02/2023
+    add : dot indication and InPutDataManual
+            Overlay of InputData
+    delete component : InputDataTest.js
+    test : run emulator pass 
+           run realdevice pass
