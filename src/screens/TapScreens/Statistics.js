@@ -175,7 +175,8 @@ const Statistics = () => {
       setColorSelectAll('#838383')
     };
 
-    Week.length != 0 ? (avg()) : (Alert.alert("ยังไม่มีข้อมูลของสัปดาห์นี้", "ข้อมูลของสัปดาห์จะเริ่มนับทุกวันอาทิตย์ของทุกสัปดาห์"));
+    Week.length != 0 ? (avg())
+      : (Alert.alert("ยังไม่มีข้อมูลของสัปดาห์นี้", "ข้อมูลของสัปดาห์จะเริ่มนับทุกวันอาทิตย์ของทุกสัปดาห์"), console.log("No data for this week"));
   };
 
   const getDataMonthAvg = () => {
@@ -217,7 +218,8 @@ const Statistics = () => {
       setColorSelectAll('#838383')
     };
 
-    Month.length != 0 ? (avg()) : (Alert.alert("ยังไม่มีข้อมูลของเดือนนี้", "ข้อมูลของเดือนจะเริ่มนับทุกวันที่หนึ่งของทุกเดือน"));
+    Month.length != 0 ? (avg())
+      : (Alert.alert("ยังไม่มีข้อมูลของเดือนนี้", "ข้อมูลของเดือนจะเริ่มนับทุกวันที่หนึ่งของทุกเดือน"), console.log("No data for this Month"));
   };
 
   const getDataAllAvg = () => {
@@ -331,14 +333,14 @@ const Statistics = () => {
     },
     {
       name: "ปกติ",
-      count: elevatedBloodPressure,
+      count: normalBloodPressure,
       color: "#A4BF43",
       legendFontColor: "#7F7F7F",
       legendFontSize: 12
     },
     {
       name: "ความดันโลหิตสูงขั้นต้น",
-      count: normalBloodPressure,
+      count: elevatedBloodPressure,
       color: "#EEC151",
       legendFontColor: "#7F7F7F",
       legendFontSize: 12

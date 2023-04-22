@@ -11,8 +11,8 @@ import Statistics from '../screens/TapScreens/Statistics';
 import Profile from '../screens/TapScreens/Profile';
 
 import SettingComponent from '../components/ProfileComponents/SettingComponent';
-import InputDataTest from '../components/ProcessComponents/InputDataTest';
 import AlarmComponent from '../components/ProfileComponents/AlarmComponents/AlarmComponent';
+import BleTest from '../components/ProcessComponents/BleTest';
 
 const Tab = createBottomTabNavigator();
 
@@ -26,23 +26,10 @@ function ProsessInputData() {
                 name="Prosess"
                 component={Prosess}
                 options={{ headerShown: false }} />
-            <ProsessInputDataStack.Screen
-                name="InputDataTest"
-                component={InputDataTest}
-                options={{
-                    title: "เพิ่มข้อมูลความดันโลหิต",
-                    headerTitleStyle:{
-                        fontFamily:"NotoSansThai-Bold",
-                        color:"white"
-                    },
-                    headerStyle:{
-                        height: 60,
-                        backgroundColor: "#5DB075"
-                    },
-                    // headerTintColor: "#fff",
-                    headerBackImage: () => (<FontAwesome name="chevron-left"  color={"white"} size={25} />),
-                }}
-                />
+                <ProsessInputDataStack.Screen
+                name="BleTest"
+                component={BleTest}
+                 />
         </ProsessInputDataStack.Navigator>
     )
 };

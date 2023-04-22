@@ -6,6 +6,7 @@ import React, { useState, useEffect } from 'react';
 import { firebase } from '@react-native-firebase/auth';
 import moment from 'moment';
 import { VStack, HStack, NativeBaseProvider, Link } from 'native-base';
+import BleTest from './BleTest';
 
 const SlideInput = (
     setVisible
@@ -71,7 +72,7 @@ const SlideInput = (
             <HStack space={50} justifyContent={"center"} alignItems={"center"} >
                 {/* InputData form BlueTooth */}
                 <VStack key={1} style={[styles.container, { width: windowWidth }]}>
-                    <VStack style={styles.inPutContainer}><Text>SlideInputBlueTooth</Text></VStack>
+                    <VStack style={styles.inPutContainer}><BleTest/></VStack>
                 </VStack>
 
                 {/* InputDataManually */}
@@ -156,6 +157,9 @@ const styles = StyleSheet.create({
     container: {
         height: "90%",
         padding: 15,
+        // borderWidth: 1,
+        // borderColor:"red",
+        paddingTop:0,
     },
     inPutContainer: {
         borderRadius: 35,

@@ -8,24 +8,59 @@ import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import Entypo from 'react-native-vector-icons/Entypo';
 import { VStack, HStack, NativeBaseProvider, Link } from 'native-base';
 import ImageViewer from 'react-native-image-zoom-viewer';
+import { firebase } from '@react-native-firebase/auth';
+import moment from 'moment';
 
 import SlideInput from '../../components/ProcessComponents/SlideInput';
 
 
 const Prosess = () => {
     const [openOverlayJNC7, setOpenOverlayJNC7] = useState(false);
-    const navigation = useNavigation();
     const [openImage, setOpenImage] = useState(false);
-    const scrollX = useRef(new Animated.Value(0)).current;
-    const { width: windowWidth } = useWindowDimensions();
     const [dotIndicator, setDotIndicator] = useState(0);
     const [visible, setVisible] = useState(false);
-
+    const [dataUser, setDataUser] = useState('');
     const images = [{
         props: {
             source: require('../../../assets/image/ClassificationBloodpressure.png')
         }
-    }]
+    }];
+
+    useEffect(() => {
+        const subscribe =
+            firebase.firestore().collection('dataUser')
+                .doc(firebase.auth().currentUser.uid)
+                .onSnapshot((doc) => {
+                    setDataUser(doc.data().username)
+                    console.log(doc.data().username);
+                });
+        return () => subscribe();
+    }, []);
+
+    const dateToTime = current => {
+        return moment(current).format('DD/MM/YYYY');
+    };
+
+    const dateToDays = current => {
+        return moment(current).format('dddd');
+    };
+
+    let ToDays;
+    if (dateToDays(Date.now()) == 'Sunday') {
+        ToDays = 'วันอาทิตย์'
+    } else if (dateToDays(Date.now()) == 'Monday') {
+        ToDays = 'วันจันทร์'
+    } else if (dateToDays(Date.now()) == 'Tuesday') {
+        ToDays = 'วันอังคาร'
+    } else if (dateToDays(Date.now()) == 'Wednesday') {
+        ToDays = 'วันพุธ'
+    } else if (dateToDays(Date.now()) == 'Thursday') {
+        ToDays = 'วันพฤหัสบดี'
+    } else if (dateToDays(Date.now()) == 'Friday') {
+        ToDays = 'วันศุกร์'
+    } else {
+        ToDays = 'วันเสาร์'
+    }
 
     return (
 
@@ -87,7 +122,18 @@ const Prosess = () => {
                         </VStack>
                     </Overlay>
 
-                    <VStack style={styles.inputDataBluetooth} alignItems={"center"} >
+                    <View style={styles.containerTitle}>
+                        <HStack>
+                            <Text style={[styles.textTitle, { color: "#5DB075" }]}>สวัสดี, </Text>
+                            <Text style={[styles.textTitle, { color: "#5DB075" }]}>{dataUser}</Text>
+                        </HStack>
+                        <HStack alignItems={"center"} space={2}>
+                            <Text style={styles.textTitle}>{ToDays}</Text>
+                            <Text style={{ fontFamily: "NotoSansThai-Regular", }}>{dateToTime(Date.now())}</Text>
+                        </HStack>
+                    </View>
+
+                    <VStack style={styles.inputDataBluetooth} alignItems={"center"}  >
                         <ScrollView
                             horizontal={true}
                             decelerationRate={"fast"}
@@ -125,8 +171,8 @@ const Prosess = () => {
                             </HStack>
                             <HStack style={styles.inforMationLayer} backgroundColor="#EF553C" alignItems={"center"}>
                                 <HStack width={"55%"}><Text style={styles.inforMationtext}>ความดันโลหิตสูง ระยะที่ 2</Text></HStack>
-                                <HStack width={"22.5%"} justifyContent={"center"}><Text style={styles.inforMationtext}>&gt; 160</Text></HStack>
-                                <HStack width={"22.5%"} justifyContent={"center"}><Text style={styles.inforMationtext}>&gt; 100</Text></HStack>
+                                <HStack width={"22.5%"} justifyContent={"center"}><Text style={styles.inforMationtext}>&lt; 160</Text></HStack>
+                                <HStack width={"22.5%"} justifyContent={"center"}><Text style={styles.inforMationtext}>&lt; 100</Text></HStack>
 
                             </HStack>
                             <HStack style={styles.inforMationLayer} backgroundColor="#F1815C" alignItems={"center"}>
@@ -146,12 +192,11 @@ const Prosess = () => {
                             </HStack>
                             <HStack style={styles.inforMationLayer} backgroundColor="#71C7E2" alignItems={"center"}>
                                 <HStack width={"55%"} ><Text style={styles.inforMationtext}>ความดันโลหิตต่ำ</Text></HStack>
-                                <HStack width={"22.5%"} justifyContent={"center"}><Text style={styles.inforMationtext}>&lt; 90</Text></HStack>
-                                <HStack width={"22.5%"} justifyContent={"center"}><Text style={styles.inforMationtext}>&lt; 60</Text></HStack>
+                                <HStack width={"22.5%"} justifyContent={"center"}><Text style={styles.inforMationtext}>&gt; 90</Text></HStack>
+                                <HStack width={"22.5%"} justifyContent={"center"}><Text style={styles.inforMationtext}>&gt; 60</Text></HStack>
                             </HStack>
                         </VStack>
                     </VStack >
-
                 </VStack>
             </ScrollView>
         </NativeBaseProvider>
@@ -165,11 +210,24 @@ const styles = StyleSheet.create({
         padding: 20,
         alignItems: 'center',
         height: 700,
+        marginTop: 20,
+    },
+    containerTitle: {
+        position: "absolute",
+        width: "100%",
+        height: "100%",
+        marginTop: 22,
+    },
+    textTitle: {
+        fontFamily: 'NotoSansThai-Bold',
+        fontSize: 25,
     },
     inputDataBluetooth: {
         width: "111%",
         height: "50%",
         backgroundColor: "white",
+        // borderWidth: 1,
+        marginTop: 10,
     },
     inforMation: {
         width: "100%",
