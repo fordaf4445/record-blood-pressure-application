@@ -155,3 +155,14 @@ cath( no error) 6:29 PM
 22/04/2023
     commit continue file from 24/02/2023
     Android 12 issue bluetooth can't start scan.
+
+29/04/2023
+    npm install 
+        -"react-native-device-info": "^10.6.0"
+        -"react-native-permissions": "^3.8.0"
+    add bluetooth permissions in AndoirdnManifest.xml 
+        -BLUETOOTH_SCAN
+        -BLUETOOTH_CONNECT
+    
+    add Permission in BleTest.tsx Line 
+    Android 12 support  availbale Now !

@@ -5,14 +5,16 @@ import {
   PermissionsAndroid,
   View,
   Text,
+  StyleSheet,
 } from 'react-native';
+
+import { VStack, HStack, NativeBaseProvider, } from 'native-base';
 
 import base64 from 'react-native-base64';
 
-import CheckBox from '@react-native-community/checkbox';
+// import CheckBox from '@react-native-community/checkbox';
 
 import {BleManager, Device} from 'react-native-ble-plx';
-import {styles} from './Styles/styles';
 import {LogBox} from 'react-native';
 
 LogBox.ignoreLogs(['new NativeEventEmitter']); // Ignore log notification by message
@@ -43,7 +45,7 @@ function BoolToString(input: boolean) {
   }
 }
 
-export default function BleTest() {
+const BleTest = () => {
   //Is a device connected?
   const [isConnected, setIsConnected] = useState(false);
 
@@ -83,6 +85,7 @@ export default function BleTest() {
       // stop scanning devices after 5 seconds
       setTimeout(() => {
         BLTManager.stopDeviceScan();
+        console.log("Not found Device stopDeviceScan!");
       }, 5000);
     });
   }
@@ -194,7 +197,8 @@ export default function BleTest() {
           },
           'boxtransaction',
         );
-
+        
+        //TemperatureValue   
         device.monitorCharacteristicForService(
           SERVICE_UUID, TEMPERATURE_UUID,
           (error , characteristic) => {
@@ -214,20 +218,9 @@ export default function BleTest() {
   }
 
   return (
-    <View>
-      <View style={{paddingBottom: 200}}></View>
-
-      {/* Title */}
-      <View style={styles.rowView}>
-        <Text style={styles.titleText}>BLE Example</Text>
-      </View>
-
-      <View style={{paddingBottom: 20}}></View>
-
-      {/* Connect Button */}
-      <View style={styles.rowView}>
-        <TouchableOpacity style={{width: 120}}>
-          {!isConnected ? (
+    <VStack borderWidth={1} width={"100%"} height={"100%"} alignItems={"center"} justifyContent={"center"} space={3}>
+        <TouchableOpacity>
+        {!isConnected ? (
             <Button
               title="Connect"
               onPress={() => {
@@ -245,34 +238,17 @@ export default function BleTest() {
             />
           )}
         </TouchableOpacity>
-      </View>
-
-      <View style={{paddingBottom: 20}}></View>
-
-      {/* Monitored Value */}
-
-      <View style={styles.rowView}>
-        <Text style={styles.baseText}>{message}</Text>
-      </View>
-
-      <View style={{paddingBottom: 20}}></View>
-
-      {/* Checkbox */}
-      <View style={styles.rowView}>
-        <CheckBox
-          disabled={false}
-          value={boxvalue}
-          onValueChange={newValue => {
-            // setBoxValue(newValue);
-            sendBoxValue(BoolToString(newValue));
-          }}
-        />
-      </View>
-
-      <View style={styles.rowView}>
-          <Text style={styles.baseText}>Temp : </Text>
-          <Text style={styles.baseText}>{temperature}</Text>
-      </View>
-    </View>
+        <Text>Waiting for Blutooth</Text>
+        <Text>Temperature</Text>
+        <Text>{temperature}</Text>
+    </VStack>
   );
-}
+};
+
+export default BleTest;
+
+const styles = StyleSheet.create({
+  contrainer : {
+    
+  },
+});
