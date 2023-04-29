@@ -12,6 +12,8 @@ import Profile from '../screens/TapScreens/Profile';
 
 import SettingComponent from '../components/ProfileComponents/SettingComponent';
 import AlarmComponent from '../components/ProfileComponents/AlarmComponents/AlarmComponent';
+import SaveComponent from '../components/ProfileComponents/SaveComponent/SaveComponent';
+import HelpAndAboutComponent from '../components/ProfileComponents/HelpAndAboutComponent';
 import BleTest from '../components/ProcessComponents/BleTest';
 
 const Tab = createBottomTabNavigator();
@@ -26,10 +28,10 @@ function ProsessInputData() {
                 name="Prosess"
                 component={Prosess}
                 options={{ headerShown: false }} />
-                <ProsessInputDataStack.Screen
+            <ProsessInputDataStack.Screen
                 name="BleTest"
                 component={BleTest}
-                 />
+            />
         </ProsessInputDataStack.Navigator>
     )
 };
@@ -40,40 +42,72 @@ function ProfileComponent() {
             <ProfileStack.Screen
                 name="Profile"
                 component={Profile}
-                options={{ headerShown: false }}/>
+                options={{ headerShown: false }} />
             <ProfileStack.Screen
                 name="SettingComponent"
                 component={SettingComponent}
                 options={{
                     title: "ตั้งค่าผู้ใช้งาน",
-                    headerTitleStyle:{
-                        fontFamily:"NotoSansThai-Bold",
-                        color:"white"
+                    headerTitleStyle: {
+                        fontFamily: "NotoSansThai-Bold",
+                        color: "white"
                     },
-                    headerStyle:{
+                    headerStyle: {
                         height: 60,
                         backgroundColor: "#5DB075"
                     },
                     // headerTintColor: "#fff",
-                    headerBackImage: () => (<FontAwesome name="chevron-left"  color={"white"} size={25} />),
-                }}/>
+                    headerBackImage: () => (<FontAwesome name="chevron-left" color={"white"} size={25} />),
+                }} />
             <ProfileStack.Screen
                 name="AlarmComponent"
                 component={AlarmComponent}
                 options={{
                     title: "การแจ้งเตือน",
-                    headerTitleStyle:{
-                        fontFamily:"NotoSansThai-Bold",
-                        color:"white"
+                    headerTitleStyle: {
+                        fontFamily: "NotoSansThai-Bold",
+                        color: "white"
                     },
-                    headerStyle:{
+                    headerStyle: {
                         height: 60,
                         backgroundColor: "#5DB075"
                     },
                     // headerTintColor: "#fff",
-                    headerBackImage: () => (<FontAwesome name="chevron-left"  color={"white"} size={25} />),
-                }}/>
-                
+                    headerBackImage: () => (<FontAwesome name="chevron-left" color={"white"} size={25} />),
+                }} />
+            <ProfileStack.Screen
+                name="SaveComponent"
+                component={SaveComponent}
+                options={{
+                    title: "บันทึกข้อมูล",
+                    headerTitleStyle: {
+                        fontFamily: "NotoSansThai-Bold",
+                        color: "white"
+                    },
+                    headerStyle: {
+                        height: 60,
+                        backgroundColor: "#5DB075"
+                    },
+                    // headerTintColor: "#fff",
+                    headerBackImage: () => (<FontAwesome name="chevron-left" color={"white"} size={25} />),
+                }} />
+            <ProfileStack.Screen
+                name="HelpAndAboutComponent"
+                component={HelpAndAboutComponent}
+                options={{
+                    title: "ช่วยเหลือ & เกี่ยวกับ",
+                    headerTitleStyle: {
+                        fontFamily: "NotoSansThai-Bold",
+                        color: "white"
+                    },
+                    headerStyle: {
+                        height: 60,
+                        backgroundColor: "#5DB075"
+                    },
+                    // headerTintColor: "#fff",
+                    headerBackImage: () => (<FontAwesome name="chevron-left" color={"white"} size={25} />),
+                }} />
+
         </ProfileStack.Navigator>
     )
 }
@@ -90,7 +124,7 @@ export default function TapStack() {
                 headerShown: false,
                 tabBarHideOnKeyboard: true,
             }}
-           
+
 
         >
             <Tab.Screen name='ProsessInputData' component={ProsessInputData}

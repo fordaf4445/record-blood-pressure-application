@@ -6,10 +6,11 @@ import {
   View,
   Text,
   StyleSheet,
-  Permission,
+  Animated,
+  Image,
 } from 'react-native';
 import DeviceInfo from 'react-native-device-info'
-
+import { Overlay } from '@rneui/base';
 import { VStack, HStack, NativeBaseProvider, } from 'native-base';
 
 import base64 from 'react-native-base64';
@@ -33,6 +34,9 @@ const TEMPERATURE_UUID = '29100b0e-b298-11ed-afa1-0242ac120002';
 
 
 const BleTest = () => {
+  const [overlayLoading, setOverlayLoading] = useState(false);
+  const [overlaySuccess, setOverlaySuccess] = useState(false);
+  const [overlayFail, setOverlayFail] = useState(false);
   //Is a device connected?
   const [isConnected, setIsConnected] = useState(false);
 
@@ -40,7 +44,7 @@ const BleTest = () => {
   const [connectedDevice, setConnectedDevice] = useState<Device>();
 
   const [message, setMessage] = useState('Nothing Yet');
-  const [temperature, setTemperature] = useState('Waiting for Temperature');
+  const [temperature, setTemperature] = useState("");
 
   // Scans availbale BLT Devices and then call connectDevice
   async function scanDevices() {
@@ -82,23 +86,31 @@ const BleTest = () => {
       };
     };
 
+    await setOverlayLoading(true);
 
     await BLTManager.startDeviceScan(null, null, (error, scannedDevice) => {
       if (error) {
         console.warn(error);
+        setOverlayFail(true);
+        setOverlayLoading(false);
       }
 
       if (scannedDevice && scannedDevice.name == 'BLEExample') {
         BLTManager.stopDeviceScan();
         connectDevice(scannedDevice);
+        setOverlaySuccess(true);
+        setOverlayLoading(false);
       }
     });
 
+    await new Promise(resolve => setTimeout(resolve, 10000));
+    await setOverlayLoading(false);
+    await setOverlayFail(true);
     // stop scanning devices after 5 seconds
-    await setTimeout(() => {
+    setTimeout(() => {
       BLTManager.stopDeviceScan();
-      console.log("Not found Device stopDeviceScan!");
-    }, 5000);
+      console.log("stopDeviceScan!");
+    }, 1000);
 
   }
 
@@ -196,29 +208,55 @@ const BleTest = () => {
   }
 
   return (
-    <VStack borderWidth={1} width={"100%"} height={"100%"} alignItems={"center"} justifyContent={"center"} space={3}>
-      <TouchableOpacity>
-        {!isConnected ? (
-          <Button
-            title="Connect"
-            onPress={() => {
-              scanDevices();
-            }}
-            disabled={false}
-          />
-        ) : (
-          <Button
-            title="Disonnect"
-            onPress={() => {
-              disconnectDevice();
-            }}
-            disabled={false}
-          />
-        )}
-      </TouchableOpacity>
-      <Text>Waiting for Blutooth</Text>
-      <Text>Temperature</Text>
-      <Text>{temperature}</Text>
+    <VStack width={"100%"} height={"100%"} alignItems={"center"} justifyContent={"center"} space={3}>
+      <Overlay isVisible={overlayLoading} overlayStyle={{ borderRadius: 25, backgroundColor: "#fff" }}>
+        <View style={{ alignItems: "center", width: 150 }}>
+          <Animated.Image
+            source={require("../../../assets/gif/heartLoading.gif")}
+            style={{ width: 70, height: 70 }}
+            resizeMode='cover' />
+          {/* <ActivityIndicator size='large' /> */}
+          <Text style={{ fontFamily: "NotoSansThai-Bold", fontSize: 18, color: "#000" }}>กรุณารอสักครู่..</Text>
+        </View>
+      </Overlay>
+      <Overlay isVisible={overlaySuccess} overlayStyle={{ borderRadius: 25, backgroundColor: "#fff" }} onPressOut={() => { setOverlaySuccess(false) }}>
+        <View style={{ alignItems: "center", justifyContent: "space-between", width: 150, }}>
+          <Animated.Image
+            source={require("../../../assets/gif/wired-outline-1103-confetti.gif")}
+            style={{ width: 70, height: 70 }}
+            resizeMode='cover' />
+          {/* <ActivityIndicator size='large' /> */}
+          <Text style={{ fontFamily: "NotoSansThai-Bold", fontSize: 18, color: "#000" }}>เชื่อมต่อสำเร็จ</Text>
+        </View>
+      </Overlay>
+      <Overlay isVisible={overlayFail} overlayStyle={{ borderRadius: 25, backgroundColor: "#fff" }} onPressOut={() => { setOverlayFail(false) }}>
+        <View style={{ alignItems: "center", width: 250 }}>
+          <Animated.Image
+            source={require("../../../assets/gif/wired-outline-1140-error.gif")}
+            style={{ width: 70, height: 70 }}
+            resizeMode='cover' />
+          {/* <ActivityIndicator size='large' /> */}
+          <Text style={{ fontFamily: "NotoSansThai-Bold", fontSize: 18, color: "#000" }}>เชื่อมต่อไม่สำเร็จ</Text>
+          <Text style={{ fontFamily: "NotoSansThai-Bold", fontSize: 16, color: "#000" }}>ตรวจสอบบลูทูธและเชื่อมต่ออีกครั้ง</Text>
+        </View>
+      </Overlay>
+      {!isConnected ? (
+        <VStack alignItems={"center"} space={3}>
+
+          <TouchableOpacity style={styles.buttonOpacity}
+            onPress={() => { scanDevices() }}>
+            <Text style={styles.buttonText}>เชื่อมต่อ</Text>
+          </TouchableOpacity>
+        </VStack>
+      ) : (
+        <VStack alignItems={"center"} space={3}>
+          <Text style={{ fontSize: 20, fontFamily: "NotoSansThai-Bold", color: " #000" }}>{temperature.substring(0,2)+" °C"}</Text>
+          <TouchableOpacity style={styles.buttonOpacity}
+            onPress={() => { disconnectDevice() }}>
+            <Text style={styles.buttonText}>ยกเลิกการเชื่อมต่อ</Text>
+          </TouchableOpacity>
+        </VStack>
+      )}
     </VStack>
   );
 };
@@ -228,6 +266,21 @@ export default BleTest;
 const styles = StyleSheet.create({
   contrainer: {
 
+  },
+  buttonOpacity: {
+    height: 45,
+    width: 150,
+    borderRadius: 25,
+    backgroundColor: "#5DB075",
+    shadowColor: "#000",
+    elevation: 10,
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  buttonText: {
+    fontFamily: "NotoSansThai-Bold",
+    fontSize: 16,
+    color: "#fff"
   },
 });
 

@@ -134,7 +134,7 @@ const Profile = () => {
                         </HStack>
                     </TouchableOpacity>
                     <TouchableOpacity style={styles.layer} activeOpacity={0.9}
-                        onPress={() => {}}>
+                        onPress={() => navigation.navigate('SaveComponent')}>
                         <HStack alignItems="center" width="100%" height="100%" paddingLeft={2} space={5} >
                             <View style={styles.borderIcon}>
                                <MaterialCommunityIcons
@@ -149,7 +149,7 @@ const Profile = () => {
                         </HStack>
                     </TouchableOpacity>
                     <TouchableOpacity style={styles.layer} activeOpacity={0.9}
-                        onPress={() => {}}>
+                        onPress={() => navigation.navigate('HelpAndAboutComponent')}>
                         <HStack alignItems="center" width="100%" height="100%" paddingLeft={2} space={5} >
                             <View style={styles.borderIcon}>
                                <MaterialCommunityIcons

@@ -166,3 +166,11 @@ cath( no error) 6:29 PM
     
     add Permission in BleTest.tsx Line 
     Android 12 support  availbale Now !
+
+29/04/2023 07:50 PM
+    add - OverlayLoading
+        - OverlaySuccess
+        - OverlayFail
+    add button Navigate 
+        - save file PDF.
+        - Help & About
