@@ -158,7 +158,7 @@ const Profile = () => {
                                color="#5DB075"/>
                             </View>
                             <VStack >
-                                <Text style={styles.textTitle}>Feedback & About </Text>
+                                <Text style={styles.textTitle}>ข้อเสนอแนะ</Text>
                                 <Text style={styles.textLitle}>ข้อเสนอแนะและเกี่ยวกับแอพ</Text>
                             </VStack>
                         </HStack>
