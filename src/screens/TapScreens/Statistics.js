@@ -516,11 +516,11 @@ const styles = StyleSheet.create({
   },
   borderStatistics: {
     flex: 1,
-    borderWidth: 1,
     borderRadius: 15,
     margin: 5,
-    borderColor: '#e8e8e8',
     backgroundColor: 'white',
+    shadowColor: "#000",
+    elevation: 10,
   },
   numberProgressChart: {
     fontSize: 20,

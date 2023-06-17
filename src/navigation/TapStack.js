@@ -13,7 +13,7 @@ import Profile from '../screens/TapScreens/Profile';
 import SettingComponent from '../components/ProfileComponents/SettingComponent';
 import AlarmComponent from '../components/ProfileComponents/AlarmComponents/AlarmComponent';
 import SaveComponent from '../components/ProfileComponents/SaveComponent/SaveComponent';
-import HelpAndAboutComponent from '../components/ProfileComponents/HelpAndAboutComponent';
+import FeedbackAndAboutComponent from '../components/ProfileComponents/FeedbackAndAboutComponent';
 import BleTest from '../components/ProcessComponents/BleTest';
 
 const Tab = createBottomTabNavigator();
@@ -92,10 +92,10 @@ function ProfileComponent() {
                     headerBackImage: () => (<FontAwesome name="chevron-left" color={"white"} size={25} />),
                 }} />
             <ProfileStack.Screen
-                name="HelpAndAboutComponent"
-                component={HelpAndAboutComponent}
+                name="FeedbackAndAboutComponent"
+                component={FeedbackAndAboutComponent}
                 options={{
-                    title: "ช่วยเหลือ & เกี่ยวกับ",
+                    title: "ข้อเสนอแนะ & เกี่ยวกับ",
                     headerTitleStyle: {
                         fontFamily: "NotoSansThai-Bold",
                         color: "white"
@@ -116,7 +116,7 @@ export default function TapStack() {
     return (
         <Tab.Navigator
 
-            initialRouteName='ProsessInputData'
+            initialRouteName='ProfileComponent'
             screenOptions={{
                 tabBarActiveTintColor: '#5DB075',
                 tabBarStyle: { height: 70 },

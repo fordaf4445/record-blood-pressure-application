@@ -100,18 +100,16 @@ const BleTest = () => {
         connectDevice(scannedDevice);
         setOverlaySuccess(true);
         setOverlayLoading(false);
+      } else {
+
+        BLTManager.stopDeviceScan();
+        setOverlayLoading(false);
+        setOverlayFail(true);
+        console.log("scannedDevice Failed");
+        console.log("stopScanningDevice");
+
       }
     });
-
-    await new Promise(resolve => setTimeout(resolve, 10000));
-    await setOverlayLoading(false);
-    await setOverlayFail(true);
-    // stop scanning devices after 5 seconds
-    setTimeout(() => {
-      BLTManager.stopDeviceScan();
-      console.log("stopDeviceScan!");
-    }, 1000);
-
   }
 
   // handle the device disconnection (poorly)
@@ -210,13 +208,14 @@ const BleTest = () => {
   return (
     <VStack width={"100%"} height={"100%"} alignItems={"center"} justifyContent={"center"} space={3}>
       <Overlay isVisible={overlayLoading} overlayStyle={{ borderRadius: 25, backgroundColor: "#fff" }}>
-        <View style={{ alignItems: "center", width: 150 }}>
+        <View style={{ alignItems: "center", width: 300 }}>
           <Animated.Image
             source={require("../../../assets/gif/heartLoading.gif")}
             style={{ width: 70, height: 70 }}
             resizeMode='cover' />
           {/* <ActivityIndicator size='large' /> */}
           <Text style={{ fontFamily: "NotoSansThai-Bold", fontSize: 18, color: "#000" }}>กรุณารอสักครู่..</Text>
+          <Text style={{ fontFamily: "NotoSansThai-Bold", fontSize: 15, color: "#000" }}>คำแนะนำ: หากรอนานเกินไปกรุณาเปิดปิดบลูทูธ</Text>
         </View>
       </Overlay>
       <Overlay isVisible={overlaySuccess} overlayStyle={{ borderRadius: 25, backgroundColor: "#fff" }} onPressOut={() => { setOverlaySuccess(false) }}>
@@ -250,7 +249,7 @@ const BleTest = () => {
         </VStack>
       ) : (
         <VStack alignItems={"center"} space={3}>
-          <Text style={{ fontSize: 20, fontFamily: "NotoSansThai-Bold", color: " #000" }}>{temperature.substring(0,2)+" °C"}</Text>
+          <Text style={{ fontSize: 20, fontFamily: "NotoSansThai-Bold", color: " #000" }}>{temperature.substring(0, 2) + " °C"}</Text>
           <TouchableOpacity style={styles.buttonOpacity}
             onPress={() => { disconnectDevice() }}>
             <Text style={styles.buttonText}>ยกเลิกการเชื่อมต่อ</Text>

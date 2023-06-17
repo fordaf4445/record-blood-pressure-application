@@ -34,7 +34,7 @@ const Signup = () => {
     //             weight: weight,
     //         }
     //     })
-    //     // navigation.navigate('TapStack')
+    //     // navigation.navigate('TapStack')exit
     // };
 
     const touchSignUp = () => {

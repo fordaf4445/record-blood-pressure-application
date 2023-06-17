@@ -115,7 +115,7 @@ const AlarmComponent = () => {
     <NativeBaseProvider>
 
       <Center>
-        <VStack style={{ height: "99%", width: "98%", alignItems: "center", }}>
+        <VStack style={{ height: "99%", width: "98%", alignItems: "center" }}>
           <VStack style={styles.borderAlarmComponent} >
             {AlarmModal(
               addAlarm,

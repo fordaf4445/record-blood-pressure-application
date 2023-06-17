@@ -149,7 +149,7 @@ const Profile = () => {
                         </HStack>
                     </TouchableOpacity>
                     <TouchableOpacity style={styles.layer} activeOpacity={0.9}
-                        onPress={() => navigation.navigate('HelpAndAboutComponent')}>
+                        onPress={() => navigation.navigate('FeedbackAndAboutComponent')}>
                         <HStack alignItems="center" width="100%" height="100%" paddingLeft={2} space={5} >
                             <View style={styles.borderIcon}>
                                <MaterialCommunityIcons
@@ -158,8 +158,8 @@ const Profile = () => {
                                color="#5DB075"/>
                             </View>
                             <VStack >
-                                <Text style={styles.textTitle}>Help & About </Text>
-                                <Text style={styles.textLitle}>เกี่ยวกับแอพและช่วยเหลือ</Text>
+                                <Text style={styles.textTitle}>Feedback & About </Text>
+                                <Text style={styles.textLitle}>ข้อเสนอแนะและเกี่ยวกับแอพ</Text>
                             </VStack>
                         </HStack>
                     </TouchableOpacity>

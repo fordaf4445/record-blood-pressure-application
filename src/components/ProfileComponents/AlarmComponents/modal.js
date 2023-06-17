@@ -119,6 +119,7 @@ const AlarmModal = (
                   onChangeText={createTitle => setCreateTitle(createTitle)}
                   value={createTitle}
                   style={styles.inputTitle}
+                  multiline={true}
                 />
                 <Text style={styles.fontMain}>รายละเอียด</Text>
                 <TextInput
@@ -126,6 +127,7 @@ const AlarmModal = (
                   onChangeText={createText => setCreateText(createText)}
                   value={createText}
                   style={styles.inputText}
+                  multiline={true}
                 />
                 <Radio.Group name="sexGroup" accessibilityLabel='sex' value={createRepeat}
                   onChange={nextValue => { setCreateRepeat(nextValue); }} flexDirection="row" marginTop={2.5}>
@@ -297,6 +299,7 @@ const EditAlarm = (
                   onChangeText={editTitle => setEditTitle(editTitle)}
                   value={editTitle}
                   style={styles.editInputTitle}
+                  multiline={true}
                 />
                 <Text style={styles.fontMain}>รายละเอียด</Text>
                 <TextInput
@@ -304,6 +307,7 @@ const EditAlarm = (
                   onChangeText={editText => setEditText(editText)}
                   value={editText}
                   style={styles.editInputText}
+                  multiline={true}
                 />
                 <Radio.Group name="sexGroup" accessibilityLabel='sex' value={editRepeat}
                   onChange={nextValue => { setEditRepeat(nextValue); }} flexDirection="row" marginTop={2.5}>
@@ -379,8 +383,6 @@ const styles = StyleSheet.create({
     borderColor: '#B8DE9A',
     fontSize: 15,
     paddingLeft: 15,
-    paddingBottom: 40,
-    height: 70,
   },
   fontMain: {
     fontFamily: "NotoSansThai-SemiBold",
@@ -402,7 +404,5 @@ const styles = StyleSheet.create({
     borderColor: '#71C7E2',
     fontSize: 15,
     paddingLeft: 15,
-    paddingBottom: 40,
-    height: 70,
   },
 });
