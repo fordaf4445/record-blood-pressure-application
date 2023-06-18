@@ -4,7 +4,7 @@ import { NativeBaseProvider, VStack, HStack, Center } from 'native-base';
 
 const FeedbackAndAboutComponent = () => {
   const [textFeedback, setTextFeedback] = useState('');
-  const emailAddress = 'fordaf4445@gmail.com';
+  const emailAddress = 'recordbloodpressure2023@gmail.com';
   const url = `mailto:${emailAddress}?subject=ข้อเสนอแนะเพิ่มเติม&body=${textFeedback}`;
   const submit = () => {
     const mailtoUrl = url;
