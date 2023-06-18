@@ -178,3 +178,7 @@ cath( no error) 6:29 PM
 06/06/2023
     add Permission 
         -<uses-permission android:name="android.permission.SCHEDULE_EXACT_ALARM" />
+
+17/06/2023
+    create feedback page complete
+        - FeedbackAndAboutComponent.js
