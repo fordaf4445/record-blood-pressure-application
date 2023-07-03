@@ -1,4 +1,4 @@
-import { View, Text, TextInput, StyleSheet, Image, ScrollView, TouchableOpacity, Linking } from 'react-native';
+import { View, Text, TextInput, StyleSheet, Image, ScrollView, TouchableOpacity, Linking, Alert } from 'react-native';
 import React, { useState, useEffect, useCallback } from 'react';
 import { NativeBaseProvider, VStack, HStack, Center } from 'native-base';
 
@@ -28,7 +28,11 @@ const FeedbackAndAboutComponent = () => {
               style={styles.inputFeedBackBorder}
             />
             <TouchableOpacity style={styles.sendButtonStyle}
-              onPress={submit}>
+              onPress={() =>{
+                if(textFeedback === ''){
+                  Alert.alert('ไม่สามารถเว้นว่างข้อเสนอแนะเพิ่มเติมได้')
+                }else{submit() , setTextFeedback('')}
+              }}>
               <Text style={{ fontFamily: "NotoSansThai-Bold", color: "white" }}>
                 ส่งข้อเสนอแนะ
               </Text>

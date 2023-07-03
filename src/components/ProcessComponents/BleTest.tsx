@@ -8,6 +8,8 @@ import {
   StyleSheet,
   Animated,
   Image,
+  Alert,
+  Linking,
 } from 'react-native';
 import DeviceInfo from 'react-native-device-info'
 import { Overlay } from '@rneui/base';
@@ -62,8 +64,13 @@ const BleTest = () => {
       );
       if (granted === PermissionsAndroid.RESULTS.GRANTED) {
         console.log('permission granted');
+        connectBluetooth();
       } else {
         console.log('permission denied');
+        Alert.alert('', 'หากต้องการเชื่อมต่อให้ไปที่การตั้งค่าและเปิดการอนุญาตทั้งหมด', [
+          { text: 'ไม่อนุญาต', style: 'cancel' },
+          { text: 'ไปที่การตั้งค่า', onPress: () => {Linking.openSettings();} }
+        ],{cancelable : true})
       }
 
     } else {
@@ -79,13 +86,19 @@ const BleTest = () => {
       if (bleScan === PermissionsAndroid.RESULTS.GRANTED && bleConnect === PermissionsAndroid.RESULTS.GRANTED
         && bleLocation === PermissionsAndroid.RESULTS.GRANTED) {
         console.log('Permission granted');
-
+        connectBluetooth();
       } else {
         console.log('Permission denied');
-
+        Alert.alert('', 'หากต้องการเชื่อมต่อให้ไปที่การตั้งค่าและเปิดการอนุญาตทั้งหมด', [
+          { text: 'ไม่อนุญาต', style: 'cancel' },
+          { text: 'ไปที่การตั้งค่า', onPress: () => {Linking.openSettings();} }
+        ],{cancelable : true})
       };
     };
-
+  };
+  //function connectBluetooth
+  const connectBluetooth = async () => {
+    
     await setOverlayLoading(true);
 
     await BLTManager.startDeviceScan(null, null, (error, scannedDevice) => {
@@ -110,7 +123,7 @@ const BleTest = () => {
 
       }
     });
-  }
+  };
 
   // handle the device disconnection (poorly)
   async function disconnectDevice() {

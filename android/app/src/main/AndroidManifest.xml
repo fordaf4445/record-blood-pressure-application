@@ -18,6 +18,11 @@
     <!--BlueTooth permission-->
     <!--Alarm permission-->
     <uses-permission android:name="android.permission.SCHEDULE_EXACT_ALARM" />
+    <!--Alarm permission-->
+    <!--PDF-->
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+    <!--PDF-->
     
     <application
       android:name=".MainApplication"

@@ -1,58 +1,98 @@
-import { View, Text, TextInput, StyleSheet, Button } from 'react-native';
+import { View, Text, TextInput, StyleSheet, Alert, PermissionsAndroid, Platform, Linking } from 'react-native';
 import React, { useState } from 'react';
-import { printToFileAsync } from 'expo-print';
-import { shareAsync } from 'expo-sharing';
-
+import { Button } from '@rneui/base';
+import { NativeBaseProvider, VStack, HStack } from 'native-base';
+import RNHTMLtoPDF from 'react-native-html-to-pdf';
+import FileViewer from "react-native-file-viewer";
 
 const SaveComponent = () => {
-  let [name, setName] = useState("");
 
-  const html = `
-    <html>
-      <body>
-        <h1>Hi </h1>
-        <p style="color: red;">Hello. Bonjour. Hola.</p>
-      </body>
-    </html>
-  `;
 
-  let generatePDF = async () => {
-    const file = await printToFileAsync({
-      html: html,
-      base64: false
-    });
+  async function requestExternalWritePermissions() {
 
-    await shareAsync(file.uri);
-    
+    try {
+      const granted = await PermissionsAndroid.request(
+        PermissionsAndroid.PERMISSIONS.WRITE_EXTERNAL_STORAGE,
+      );
+      if (granted === PermissionsAndroid.RESULTS.GRANTED) {
+        console.log('ได้รับสิทธิ์ในการเขียนไฟล์แล้ว');
+        createPDF();
+      } else {
+        console.log('ไม่ได้รับสิทธิ์ในการเขียนไฟล์');
+        Alert.alert('', 'หากต้องการบันทึกไฟล์ให้ไปที่การตั้งค่าและเปิดการอนุญาตสำหรับพื้นที่เก็บข้อมูล', [
+          { text: 'ไม่อนุญาต', style: 'cancel' },
+          { text: 'ไปที่การตั้งค่า', onPress: () => {Linking.openSettings();} }
+        ],{cancelable : true})
+      }
+    } catch (err) {
+      alert('เกิดข้อผิดพลาดในการขอสิทธิ์:', err);
+      console.warn(err);
+    }
+  }
+
+
+
+  const createPDF = async () => {
+    const option = {
+      html: '<h1>TANACH TAKHAMTIENG</h1>',
+      fileName: 'test',
+      directory: 'Download',
+    };
+    try {
+      const file = await RNHTMLtoPDF.convert(option)
+
+      console.log(file.filePath);
+
+      Alert.alert('Successfully Exported', 'Path:' + file.filePath, [
+        { text: 'ยกเลิก', style: 'cancel' },
+        { text: 'เปิด', onPress: () => openFile(file.filePath) }
+      ], { cancelable: true });
+    } catch (e) {
+      console.log('Save File Failed' + e.message);
+      Alert.alert('Save File Failed', '' + e.message);
+    }
+
+  };
+
+  const openFile = (filePath) => {
+    const path = filePath; //absolute-path-to-my-local-file.
+    FileViewer.open(path)
+      .then(() => {
+        console.log("open local success");
+      })
+      .catch(() => {
+        console.log("open local fail");
+      });
   };
 
   return (
-    <View style={styles.container}>
-      <TextInput
-      value={name}
-      placeholder='Name'
-      style={styles.inputTextName}
-      onChangeText={(value) => setName(value)}/>
-      <Button
-       title='GeneratePDF'
-       onPress={generatePDF}/>
-    </View>
-  );
+    <NativeBaseProvider>
+      <VStack style={styles.mainBorder}>
+        <VStack space={2} style={{ justifyContent: "center", flex: 1, alignItems: "center", }}>
+          <Text style={{ fontSize: 20 }}>TEST Genarete PDF</Text>
+          <Button
+            title={"GENERETE PDF"}
+            buttonStyle={{
+              borderRadius: 10,
+              height: 40,
+              justifyContent: "center",
+              alignItems: "center",
+              backgroundColor: "#5DB075",
+            }}
+            onPress={() => { requestExternalWritePermissions(); }} />
+        </VStack>
+      </VStack>
+    </NativeBaseProvider>
+  )
 }
 
 export default SaveComponent
 
-const styles = StyleSheet.create ({
-    container : {
-      flex : 1,
-      backgroundColor : "#fff",
-      justifyContent : "center",
-      alignItems : "center",
-    },
-    inputTextName : {
-      borderWidth : 1,
-      borderRadius : 10,
-      width: 200,
-      marginBottom : 20,
-    },
+const styles = StyleSheet.create({
+  mainBorder: {
+    flex: 1,
+    padding: 10,
+    paddingTop: 5,
+    backgroundColor: "#fff",
+  },
 });
