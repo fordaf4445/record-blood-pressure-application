@@ -182,3 +182,8 @@ cath( no error) 6:29 PM
 17/06/2023
     create feedback page complete
         - FeedbackAndAboutComponent.js
+
+03/07/2923
+    npm install react-native-html-to-pdf and react-native-file-viewer test on real android 12 is pass.
+    update code permissions button connectBluetooth in BleTest.tsx.
+    test save html to PDF on real android 12 is pass
