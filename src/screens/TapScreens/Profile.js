@@ -9,6 +9,7 @@ import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityI
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import Ionicons from 'react-native-vector-icons/Ionicons';
+import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 
 const Profile = () => {
 
@@ -17,6 +18,7 @@ const Profile = () => {
     const { signout } = useContext(AuthContext);
     const [name, setName] = useState('');
     const [loading, setLoading] = useState(true);
+
 
     useEffect(() => {
         const subscribe =
@@ -41,7 +43,21 @@ const Profile = () => {
             </View>)
     };
 
-
+    //get valuse weight, height and transfer hight cm. to m. 
+    const weight = name.weight;
+    const hightInMeter = parseFloat(name.hight) / 100;
+    //calculate BMI Value
+    const bmiValue = weight / (hightInMeter * hightInMeter);
+    let statusBMI;
+    if (bmiValue >= 30.0) {
+        statusBMI = 'อ้วนมาก';
+    } else if (bmiValue >= 25.00 && bmiValue <= 29.9) {
+        statusBMI = 'อ้วน';
+    } else if (bmiValue >= 18.6 && bmiValue <= 24.9) {
+        statusBMI = 'น้ำหนักปกติ เหมาะสม';
+    } else {
+        statusBMI = 'คุณผอมเกินไป';
+    };
 
     return (
         <NativeBaseProvider>
@@ -68,6 +84,7 @@ const Profile = () => {
                 </VStack>
                 <View style={{ width: "90%", height: "20%", marginTop: 65, alignItems: "center", }} >
                     <Text style={styles.textUsername} >{name.username}</Text>
+
                     <VStack alignItems="flex-start" width="90%" space={2} padding={3} paddingLeft={7} borderRadius={30} backgroundColor="#fff"
                         marginTop={1}
                         style={{
@@ -115,17 +132,29 @@ const Profile = () => {
                             </View>
                             <Text style={styles.textInfomation}>เพศ {name.sex}</Text>
                         </HStack>
+                        <HStack space={3} width="100%">
+                            <View style={styles.borderIconInfomation}>
+                                <FontAwesome5
+                                    name="weight"
+                                    size={12}
+                                    color="#fff"
+                                />
+                            </View>
+                            <Text style={styles.textInfomation}>
+                            ดัชนีมวลกาย = {bmiValue.toFixed(2) + " " + statusBMI}
+                            </Text>
+                        </HStack>
                     </VStack>
                 </View>
-                <VStack width="97%" height="38%"  alignItems="center" backgroundColor="#fff" space={3}>
+                <VStack width="97%" height="38%" alignItems="center" backgroundColor="#fff" space={3} top={3}>
                     <TouchableOpacity style={styles.layer} activeOpacity={0.9}
                         onPress={() => navigation.navigate('AlarmComponent')}>
                         <HStack alignItems="center" width="100%" height="100%" paddingLeft={2} space={5} >
                             <View style={styles.borderIcon}>
-                               <Ionicons
-                               name='alarm'
-                               size={30}
-                               color="#5DB075"/>
+                                <Ionicons
+                                    name='alarm'
+                                    size={30}
+                                    color="#5DB075" />
                             </View>
                             <VStack >
                                 <Text style={styles.textTitle}>การแจ้งเตือน</Text>
@@ -137,10 +166,10 @@ const Profile = () => {
                         onPress={() => navigation.navigate('SaveComponent')}>
                         <HStack alignItems="center" width="100%" height="100%" paddingLeft={2} space={5} >
                             <View style={styles.borderIcon}>
-                               <MaterialCommunityIcons
-                               name='file-move'
-                               size={30}
-                               color="#5DB075"/>
+                                <MaterialCommunityIcons
+                                    name='file-move'
+                                    size={30}
+                                    color="#5DB075" />
                             </View>
                             <VStack >
                                 <Text style={styles.textTitle}>บันทึกข้อมูลเป็นไฟล์เอกสาร</Text>
@@ -152,10 +181,10 @@ const Profile = () => {
                         onPress={() => navigation.navigate('FeedbackAndAboutComponent')}>
                         <HStack alignItems="center" width="100%" height="100%" paddingLeft={2} space={5} >
                             <View style={styles.borderIcon}>
-                               <MaterialCommunityIcons
-                               name='help-circle'
-                               size={30}
-                               color="#5DB075"/>
+                                <MaterialCommunityIcons
+                                    name='help-circle'
+                                    size={30}
+                                    color="#5DB075" />
                             </View>
                             <VStack >
                                 <Text style={styles.textTitle}>ข้อเสนอแนะ</Text>
