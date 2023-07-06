@@ -6,7 +6,7 @@ import {
 import { Button, color } from '@rneui/base';
 import React, { useState, useEffect } from 'react';
 import { firebase } from '@react-native-firebase/auth';
-import { NativeBaseProvider, VStack, HStack } from 'native-base';
+import { NativeBaseProvider, VStack, HStack, Center } from 'native-base';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import { launchImageLibrary } from 'react-native-image-picker';
 import storage from '@react-native-firebase/storage';
@@ -131,128 +131,132 @@ const SettingComponent = () => {
 
   return (
     <NativeBaseProvider>
-      <ScrollView showsVerticalScrollIndicator={false}>
-        <VStack justifyItems="center" alignItems="center" padding={25}>
-          <TouchableOpacity onPress={() => { selectImage() }}>
-            <HStack >
-              <ImageBackground
-                // require("../../../assets/image/blank-profile-picture-973460.png")
-                source={image == null ? ({ uri: userData.image }) : (image)}
-                style={{ height: 120, width: 120 }}
-                imageStyle={{ borderRadius: 100 }}>
-                <View style={{
-                  flex: 1,
-                  justifyContent: 'center',
-                  alignItems: 'center',
-                }}>
-                  <MaterialCommunityIcons
-                    name="camera"
-                    size={35}
-                    color="#fff"
-                    style={{
-                      opacity: 0.7,
-                      alignItems: 'center',
+      <Center>
+        <VStack style={styles.container}>
+          <ScrollView showsVerticalScrollIndicator={false}>
+            <VStack justifyItems="center" alignItems="center" padding={25}>
+              <TouchableOpacity onPress={() => { selectImage() }}>
+                <HStack >
+                  <ImageBackground
+                    // require("../../../assets/image/blank-profile-picture-973460.png")
+                    source={image == null ? ({ uri: userData.image }) : (image)}
+                    style={{ height: 120, width: 120 }}
+                    imageStyle={{ borderRadius: 100 }}>
+                    <View style={{
+                      flex: 1,
                       justifyContent: 'center',
-                      borderWidth: 1,
-                      borderColor: '#fff',
-                      borderRadius: 100,
-                    }}
+                      alignItems: 'center',
+                    }}>
+                      <MaterialCommunityIcons
+                        name="camera"
+                        size={35}
+                        color="#fff"
+                        style={{
+                          opacity: 0.7,
+                          alignItems: 'center',
+                          justifyContent: 'center',
+                          borderWidth: 1,
+                          borderColor: '#fff',
+                          borderRadius: 100,
+                        }}
+                      />
+                    </View>
+                  </ImageBackground>
+                </HStack>
+              </TouchableOpacity>
+              {uploading ? (
+                <View style={styles.progressBarContainer}>
+                  <Progress.Bar progress={transferred} width={100} color="#5DB075"
                   />
                 </View>
-              </ImageBackground>
-            </HStack>
-          </TouchableOpacity>
-          {uploading ? (
-            <View style={styles.progressBarContainer}>
-              <Progress.Bar progress={transferred} width={100} color="#5DB075"
-              />
-            </View>
-          ) : (
-            null
-          )}
-          <VStack justifyContent="flex-start" width="100%" space={1.5} marginTop={5}>
-            <Text style={styles.textcolor}>อีเมล</Text>
-            <Text style={{ fontSize: 20, color: "black", fontFamily: 'NotoSansThai-Bold' }}>{userData.email}</Text>
-            <Text style={styles.textcolor}>ยูสเซอร์เนม</Text>
-            <TextInput
-              value={userData ? userData.username : ''}
-              onChangeText={(txt) => setUserData({ ...userData, username: txt })}
-              style={styles.inputView}
-            />
-            <HStack space={125}>
-              <Text style={styles.textcolor}>น้ำหนัก</Text>
-              <Text style={styles.textcolor}>ส่วนสูง</Text>
-            </HStack>
-            <HStack>
-              <HStack alignItems="center">
-                <TextInput style={styles.inputSmall}
-                  keyboardType='numeric'
-                  maxLength={3}
-                  value={userData ? userData.weight : ''}
-                  onChangeText={(txt) => setUserData({ ...userData, weight: txt })}
+              ) : (
+                null
+              )}
+              <VStack justifyContent="flex-start" width="100%" space={1.5} marginTop={5}>
+                <Text style={styles.textcolor}>อีเมล</Text>
+                <Text style={{ fontSize: 20, color: "black", fontFamily: 'NotoSansThai-Bold' }}>{userData.email}</Text>
+                <Text style={styles.textcolor}>ยูสเซอร์เนม</Text>
+                <TextInput
+                  value={userData ? userData.username : ''}
+                  onChangeText={(txt) => setUserData({ ...userData, username: txt })}
+                  style={styles.inputView}
                 />
-                <Text style={styles.textSmall}>kg.</Text>
-              </HStack>
-              <HStack alignItems="center">
-                <TextInput style={[styles.inputSmall, { marginLeft: 30 }]}
-                  keyboardType='numeric'
-                  maxLength={3}
-                  value={userData ? userData.hight : ''}
-                  onChangeText={(txt) => setUserData({ ...userData, hight: txt })}
-                />
-                <Text style={styles.textSmall}>cm.</Text>
-              </HStack>
-            </HStack>
-            <HStack space={145}>
-              <Text style={styles.textcolor}>อายุ</Text>
-              <Text style={styles.textcolor}>เพศ</Text>
-            </HStack>
-            <HStack space={50}>
-              <TextInput style={styles.inputSmall}
-                keyboardType='numeric'
-                maxLength={3}
-                value={userData ? userData.age : ''}
-                onChangeText={(txt) => setUserData({ ...userData, age: txt })}
+                <HStack space={125}>
+                  <Text style={styles.textcolor}>น้ำหนัก</Text>
+                  <Text style={styles.textcolor}>ส่วนสูง</Text>
+                </HStack>
+                <HStack>
+                  <HStack alignItems="center">
+                    <TextInput style={styles.inputSmall}
+                      keyboardType='numeric'
+                      maxLength={3}
+                      value={userData ? userData.weight : ''}
+                      onChangeText={(txt) => setUserData({ ...userData, weight: txt })}
+                    />
+                    <Text style={styles.textSmall}>kg.</Text>
+                  </HStack>
+                  <HStack alignItems="center">
+                    <TextInput style={[styles.inputSmall, { marginLeft: 30 }]}
+                      keyboardType='numeric'
+                      maxLength={3}
+                      value={userData ? userData.hight : ''}
+                      onChangeText={(txt) => setUserData({ ...userData, hight: txt })}
+                    />
+                    <Text style={styles.textSmall}>cm.</Text>
+                  </HStack>
+                </HStack>
+                <HStack space={145}>
+                  <Text style={styles.textcolor}>อายุ</Text>
+                  <Text style={styles.textcolor}>เพศ</Text>
+                </HStack>
+                <HStack space={50}>
+                  <TextInput style={styles.inputSmall}
+                    keyboardType='numeric'
+                    maxLength={3}
+                    value={userData ? userData.age : ''}
+                    onChangeText={(txt) => setUserData({ ...userData, age: txt })}
+                  />
+                  <Text style={styles.inputSmall2}>{userData.sex}</Text>
+                </HStack>
+              </VStack>
+              <Button
+                title="รีเซ็ตรหัสผ่าน"
+                buttonStyle={{
+                  backgroundColor: 'red',
+                  borderRadius: 30,
+                  height: 50,
+                  width: 343,
+                }}
+                containerStyle={{
+                  // marginHorizontal: 50,
+                  marginVertical: 10,
+                  marginTop: 20,
+                  alignItems: 'center',
+                }}
+                titleStyle={{ fontFamily: 'NotoSansThai-SemiBold' }}
+                onPress={touchResetPasswords}
               />
-              <Text style={styles.inputSmall2}>{userData.sex}</Text>
-            </HStack>
-          </VStack>
-          <Button
-            title="รีเซ็ตรหัสผ่าน"
-            buttonStyle={{
-              backgroundColor: 'red',
-              borderRadius: 30,
-              height: 50,
-              width: 343,
-            }}
-            containerStyle={{
-              // marginHorizontal: 50,
-              marginVertical: 10,
-              marginTop: 20,
-              alignItems: 'center',
-            }}
-            titleStyle={{ fontFamily: 'NotoSansThai-SemiBold' }}
-            onPress={touchResetPasswords}
-          />
-          <Button
-            title="ยืนยัน"
-            buttonStyle={{
-              backgroundColor: '#5DB075',
-              borderRadius: 30,
-              height: 50,
-              width: 343,
-            }}
-            containerStyle={{
-              // marginHorizontal: 50,
-              marginVertical: 10,
-              marginTop: 20,
-              alignItems: 'center',
-            }}
-            titleStyle={{ fontFamily: 'NotoSansThai-SemiBold' }}
-            onPress={touchUpdate}
-          />
+              <Button
+                title="ยืนยัน"
+                buttonStyle={{
+                  backgroundColor: '#5DB075',
+                  borderRadius: 30,
+                  height: 50,
+                  width: 343,
+                }}
+                containerStyle={{
+                  // marginHorizontal: 50,
+                  marginVertical: 10,
+                  marginTop: 20,
+                  alignItems: 'center',
+                }}
+                titleStyle={{ fontFamily: 'NotoSansThai-SemiBold' }}
+                onPress={touchUpdate}
+              />
+            </VStack>
+          </ScrollView>
         </VStack>
-      </ScrollView>
+      </Center>
     </NativeBaseProvider>
   )
 };
@@ -260,15 +264,15 @@ const SettingComponent = () => {
 export default SettingComponent
 
 const styles = StyleSheet.create({
-  ActivityIndicatorContainer: {
-    alignItems: 'center',
-    justifyContent: 'center',
-    fontSize: "large",
-  },
   container: {
-    flex: 1,
-    padding: 35,
-    alignItems: 'center',
+    borderWidth: 1,
+    borderRadius: 15,
+    borderColor: '#e8e8e8',
+    backgroundColor: "white",
+    height: "99%",
+    width: "98%",
+    shadowColor: "#000",
+    elevation: 10,
   },
   inputView: {
     backgroundColor: '#F6F6F6',
@@ -279,6 +283,8 @@ const styles = StyleSheet.create({
     padding: 10,
     width: 343,
     fontSize: 20,
+    shadowColor: "#000",
+    elevation: 10,
   },
   textcolor: {
     color: '#5DB075',
@@ -306,9 +312,12 @@ const styles = StyleSheet.create({
     padding: 10,
     width: 112,
     fontSize: 20,
+    shadowColor: "#000",
+    elevation: 10,
   },
   inputSmall2: {
     borderRadius: 15,
+    borderColor: '#E8E8E8',
     height: 50,
     padding: 10,
     width: 112,
