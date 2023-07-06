@@ -69,12 +69,12 @@ const FeedbackAndAboutComponent = () => {
             </HStack>
             <HStack space={2}>
               <Image
-                source={require("../../../assets/image/profile1.png")}
+                source={require("../../../assets/image/profile2.png")}
                 style={{ height: 125, width: 82 }}
                 resizeMode='stretch' />
               <VStack>
                 <Text style={styles.proFileFont}>
-                  {'นาย ธนัช ตาคำเที่ยง'}
+                  {'นาย ศุภวิชญ์ อวดดี'}
                   {'\n'}
                   {'มหาวิทยาลัยเทคโนโลยีราชมงคลล้านนา ตาก'}
                   {'\n'}
