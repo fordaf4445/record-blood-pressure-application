@@ -48,7 +48,7 @@ const SettingComponent = () => {
         })
         .then(() => {
           console.log('User Update Success');
-          alert('User Update Success');
+          Alert.alert('อัพเดทข้อมูลสำเร็จ');
         });
     } catch (e) {
       alert("error: " + e.message)

@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useContext } from 'react';
-import { View, StyleSheet, TextInput, ScrollView, CheckBox, Image, TouchableOpacity, ActivityIndicator, Animated, Text } from 'react-native';
+import { View, StyleSheet, TextInput, ScrollView, CheckBox, Image, TouchableOpacity, ActivityIndicator, Animated, Text, Alert } from 'react-native';
 // import { Button, Text, } from '@rneui/base';
 import { AuthContext } from '../../auth/AuthProvider';
 import { firebase } from '@react-native-firebase/auth';
@@ -10,6 +10,9 @@ import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
+import FileViewer from "react-native-file-viewer";
+import RNFS from "react-native-fs";
+
 
 const Profile = () => {
 
@@ -50,13 +53,32 @@ const Profile = () => {
     const bmiValue = weight / (hightInMeter * hightInMeter);
     let statusBMI;
     if (bmiValue >= 30.0) {
-        statusBMI = 'อ้วนมาก';
-    } else if (bmiValue >= 25.00 && bmiValue <= 29.9) {
-        statusBMI = 'อ้วน';
-    } else if (bmiValue >= 18.6 && bmiValue <= 24.9) {
-        statusBMI = 'น้ำหนักปกติ เหมาะสม';
+        statusBMI = 'อ้วนมาก/โรคอ้วนระดับ 3*';
+    } else if (bmiValue >= 25.0 && bmiValue <= 29.9) {
+        statusBMI = 'อ้วน/โรคอ้วนระดับ 2*';
+    } else if (bmiValue >= 23.0 && bmiValue <= 24.9) {
+        statusBMI = 'ท้วม/โรคอ้วนระดับ 1*';
+    } else if (bmiValue >= 18.5 && bmiValue <= 22.9) {
+        statusBMI = 'ปกติ (สุขภาพดี)*';
     } else {
-        statusBMI = 'คุณผอมเกินไป';
+        statusBMI = 'น้ำหนักน้อย/ผอม*';
+    };
+
+    const BMIDetail = () => {
+        const filepath = 'KnowYourNumners.pdf';
+        const destPath = `${RNFS.DocumentDirectoryPath}/${filepath}`
+
+        RNFS.copyFileAssets(filepath, destPath)
+            .then(() => {
+                FileViewer.open(destPath);
+                console.log('Successfully copied' + destPath);
+            })
+            .catch((err) => {
+                console.log(err);
+                alert(err)
+            });
+        // console.log(destPath);
+
     };
 
     return (
@@ -140,9 +162,12 @@ const Profile = () => {
                                     color="#fff"
                                 />
                             </View>
-                            <Text style={styles.textInfomation}>
-                            ดัชนีมวลกาย = {bmiValue.toFixed(2) + " " + statusBMI}
-                            </Text>
+                            <TouchableOpacity
+                                onPress={() => { BMIDetail() }}>
+                                <Text style={styles.textInfomation}>
+                                    ดัชนีมวลกาย = {bmiValue.toFixed(2) + " " + statusBMI}
+                                </Text>
+                            </TouchableOpacity>
                         </HStack>
                     </VStack>
                 </View>
