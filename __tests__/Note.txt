@@ -190,7 +190,7 @@ cath( no error) 6:29 PM
 
 07/07/2023
     - npm install react-native-fs test on real android 12 is pass.
-    - add KnowYourNumbers.pdf \android\app\src\main\assets\KnowYourNumners.pdf
+    - add KnowYourNumbers.pdf \android\app\src\main\assets\KnowYourNumners.pdf reference https://ddc.moph.go.th/uploads/publish/1064820201022081932.pdf
     - update SettingComponent.js change Alert language eng to thai.
     - update Profile.js BMI info.
 
