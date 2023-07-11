@@ -194,3 +194,5 @@ cath( no error) 6:29 PM
     - update SettingComponent.js change Alert language eng to thai.
     - update Profile.js BMI info.
 
+11/07/2023
+    - update html on SaveComponent.js 
