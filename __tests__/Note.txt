@@ -196,3 +196,7 @@ cath( no error) 6:29 PM
 
 11/07/2023
     - update html on SaveComponent.js 
+
+14/07/2023
+    -update backgoundColor to White on History.js , Statistics.js 
+    -create a new ui SaveComponent.js

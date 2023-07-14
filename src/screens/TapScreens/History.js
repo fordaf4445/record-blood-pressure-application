@@ -136,6 +136,7 @@ export default History
 const styles = StyleSheet.create({
     container: {
         flex: 1,
+        backgroundColor:"#fff",
     },
     titleBar: {
         alignItems: 'center',

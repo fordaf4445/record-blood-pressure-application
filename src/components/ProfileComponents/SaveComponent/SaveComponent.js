@@ -1,4 +1,4 @@
-import { View, Text, TextInput, StyleSheet, Alert, PermissionsAndroid, Platform, Linking } from 'react-native';
+import { View, Text, TextInput, StyleSheet, Alert, PermissionsAndroid, Linking, Image } from 'react-native';
 import React, { useState, useEffect } from 'react';
 import { Button } from '@rneui/base';
 import { NativeBaseProvider, VStack, HStack } from 'native-base';
@@ -90,7 +90,7 @@ const SaveComponent = () => {
   const currentDate = Date.now();
   const formatDate = (current, format) => {
     if (format === 'time') {
-      return moment(current).format('hh:mm A');
+      return moment(current).format('HH:MM น.');
     } else if (format === 'date') {
       return moment(current).format('DD-MM-YYYY');
     } else {
@@ -460,7 +460,7 @@ const SaveComponent = () => {
                     <tr>
                         <th>วันเวลา</th>
                         ${bloodPressure.slice(0, 5).map((data) => `<td>${formatDate(data.timestamp,
-          'time')}<br />${formatDate(data.timestamp, 'date')}</td>`).join('')}
+      'time')}<br />${formatDate(data.timestamp, 'date')}</td>`).join('')}
                     </tr>
                     <tr>
                         <th>ความดันตัวบน<br>(SYS)</th>
@@ -596,7 +596,7 @@ const SaveComponent = () => {
 
       console.log(file.filePath);
 
-      Alert.alert('ส่งออกไฟล์สำเร็จ!', 'ที่อยู่:' + file.filePath, [
+      Alert.alert('บันทึกข้อมูลสำเร็จ!', 'ที่อยู่:' + file.filePath, [
         { text: 'ยกเลิก', style: 'cancel' },
         { text: 'เปิด', onPress: () => openFile(file.filePath) }
       ], { cancelable: true });
@@ -621,41 +621,35 @@ const SaveComponent = () => {
 
   return (
     <NativeBaseProvider>
-      <VStack style={styles.mainBorder}>
-        <VStack space={2} style={{ justifyContent: "center", flex: 1, alignItems: "center", }}>
-          <Text style={{ fontSize: 20 }}>TEST Genarete PDF</Text>
-          <Button
-            title={"GENERETE PDF"}
-            buttonStyle={{
-              borderRadius: 10,
-              height: 40,
-              justifyContent: "center",
-              alignItems: "center",
-              backgroundColor: "#5DB075",
-            }}
-            onPress={() => { requestExternalWritePermissions(); }} />
-          <Button
-            title={"testdate"}
-            buttonStyle={{
-              borderRadius: 10,
-              height: 40,
-              justifyContent: "center",
-              alignItems: "center",
-              backgroundColor: "#5DB075",
-            }}
-            onPress={() => { console.log(calculatePersen(Week.length, WeekLength('low'), WeekLength('normal'), WeekLength('elevate'), WeekLength('high1'), WeekLength('high2'))); }} />
-          <Button
-            title={"testlength"}
-            buttonStyle={{
-              borderRadius: 10,
-              height: 40,
-              justifyContent: "center",
-              alignItems: "center",
-              backgroundColor: "#5DB075",
-            }}
-            onPress={() => { console.log(); }} />
+      <View style={styles.container}>
+        <VStack space={2} style={styles.mainBorder}>
+          <View style={{alignItems: "center",}}>
+          <Image
+              source={require("../../../../assets/image/Hands-Synced.png")}
+              style={{ height: 148, width: 200 }}
+              resizeMode='stretch' />
+          </View>
+            <VStack style={styles.secoundBorder}>
+              <Text style={{  marginBottom: 20, fontFamily: 'NotoSansThai-Regular', color: "#000" , }}>
+                กดบันทึกเพื่อบักทึกข้อมูลเป็นไฟล์เอกสาร
+              </Text>
+              <Button
+                title={"บันทึกข้อมูล"}
+                buttonStyle={{
+                  borderRadius: 10,
+                  height: 40,
+                  width: 250,
+                  justifyContent: "center",
+                  alignItems: "center",
+                  backgroundColor: "#5DB075",
+                }}
+                titleStyle={{
+                  fontFamily:"NotoSansThai-Regular",
+                }}
+                onPress={() => { requestExternalWritePermissions(); }} />
+            </VStack>
         </VStack>
-      </VStack>
+      </View>
     </NativeBaseProvider>
   )
 }
@@ -663,11 +657,31 @@ const SaveComponent = () => {
 export default SaveComponent
 
 const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: "white",
+  },
+
   mainBorder: {
     flex: 1,
     padding: 10,
     paddingTop: 5,
     backgroundColor: "#fff",
+    margin: 10,
+    borderRadius: 10,
+    shadowColor: '#000',
+    elevation: 10,
+  },
+
+  secoundBorder: {
+    padding: 10,
+    backgroundColor: "#fff",
+    borderRadius: 10,
+    shadowColor: '#000',
+    elevation: 10,
+    alignItems: 'center',
+    marginLeft: 30,
+    marginRight: 30,
   },
 });
 
