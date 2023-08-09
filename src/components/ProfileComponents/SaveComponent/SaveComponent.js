@@ -272,6 +272,9 @@ const SaveComponent = () => {
         <meta charset="UTF-8">
         <!-- <meta name="viewport" content="width=device-width, initial-scale=1.0"> -->
         <title>Document</title>
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Thai&display=swap" rel="stylesheet">
         <style>
             * {
                 border: 0;
@@ -290,7 +293,7 @@ const SaveComponent = () => {
             }
     
             h1 {
-                font: bold 100% sans-serif;
+                font: bold 100% Noto Sans Thai;
                 letter-spacing: 0.2em;
                 text-align: center;
     
@@ -312,12 +315,15 @@ const SaveComponent = () => {
                 margin: 0 auto;
                 overflow: hidden;
                 padding: 0.25in;
+                font-family: 'Noto Sans Thai', sans-serif;
+                
             }
     
             body {
                 background: #FFF;
                 border-radius: 1px;
                 box-shadow: 0 0 1in -0.25in rgba(0, 0, 0, 0.5);
+                
             }
     
             /* header */
@@ -460,7 +466,7 @@ const SaveComponent = () => {
                     <tr>
                         <th>วันเวลา</th>
                         ${bloodPressure.slice(0, 5).map((data) => `<td>${formatDate(data.timestamp,
-      'time')}<br />${formatDate(data.timestamp, 'date')}</td>`).join('')}
+                            'time')}<br />${formatDate(data.timestamp, 'date')}</td>`).join('')}
                     </tr>
                     <tr>
                         <th>ความดันตัวบน<br>(SYS)</th>
@@ -482,7 +488,7 @@ const SaveComponent = () => {
             <p>ค่าเฉลี่ยความดันโลหิต</p>
             <br>
             <div class="tableAvg">
-                    <p>ค่าเฉลี่ยสัปดาห์</p>
+                <p>ค่าเฉลี่ยสัปดาห์</p>
                 <br>
                 <div class="flex">
                     <table class="tableAvg">
@@ -514,7 +520,7 @@ const SaveComponent = () => {
             </div>
             <br>
             <div class="tableAvg">
-                    <p>ค่าเฉลี่ยเดือน</p>
+                <p>ค่าเฉลี่ยเดือน</p>
                 <br>
                 <div class="flex">
                     <table class="tableAvg">
@@ -546,7 +552,7 @@ const SaveComponent = () => {
             </div>
             <br>
             <div class="tableAvg">
-                    <p>ค่าเฉลี่ยทั้งหมด</p>
+                <p>ค่าเฉลี่ยทั้งหมด</p>
                 <br>
                 <div class="flex">
                     <table class="tableAvg">
@@ -574,8 +580,8 @@ const SaveComponent = () => {
                         <p>${allPersen.persen4}% ความดันโลหิตสูง ระยะที่ 1</p>
                         <p>${allPersen.persen5}% ความดันโลหิตสูง ระยะที่ 2</p>
                     </div>
-                    </div>
                 </div>
+            </div>
             </div>
         </article>
     
