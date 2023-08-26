@@ -39,9 +39,9 @@ const History = () => {
                 <Animated.Image
                     source={require("../../../assets/gif/heartLoading.gif")}
                     style={{ width: 70, height: 70 }}
-                    resizeMode='cover'/>
+                    resizeMode='cover' />
                 {/* <ActivityIndicator size='large' /> */}
-                <Text style={{fontFamily:"NotoSansThai-Bold",fontSize:18, color:"#000"}}>กำลังโหลด..</Text>
+                <Text style={{ fontFamily: "NotoSansThai-Bold", fontSize: 18, color: "#000" }}>กำลังโหลด..</Text>
             </View>)
     };
 
@@ -136,7 +136,7 @@ export default History
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor:"#fff",
+        backgroundColor: "#fff",
     },
     titleBar: {
         alignItems: 'center',
@@ -209,8 +209,9 @@ const styles = StyleSheet.create({
         justifyContent: "center",
         alignItems: "center",
         backgroundColor: "red",
-        width: "15%",
+        width: "18%",
         height: "100%",
-
+        borderRadius: 100,
+        marginRight: "2%",
     }
 });

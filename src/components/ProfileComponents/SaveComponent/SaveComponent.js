@@ -90,7 +90,7 @@ const SaveComponent = () => {
   const currentDate = Date.now();
   const formatDate = (current, format) => {
     if (format === 'time') {
-      return moment(current).format('HH:MM น.');
+      return moment(current).format('HH:mm น.');
     } else if (format === 'date') {
       return moment(current).format('DD-MM-YYYY');
     } else {

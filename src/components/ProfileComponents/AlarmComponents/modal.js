@@ -16,7 +16,7 @@ import {
   Radio,
 } from 'native-base';
 import { TimePicker } from 'react-native-wheel-picker-android';
-import moment from 'moment';
+import moment, { now } from 'moment';
 import PushNotification from 'react-native-push-notification';
 
 const AlarmModal = (
@@ -49,13 +49,11 @@ const AlarmModal = (
 
     const date = new Date(createDate);
     date.setSeconds(0)
-    if (new Date().getHours() + '' + new Date().getMinutes() >
-      createDate.getHours() + '' + createDate.getMinutes()) {
+    if (new Date() > createDate) {
       date.setDate(date.getDate() + 1);
     }
     console.log(date);
-    console.log(new Date().getHours() + '' + new Date().getMinutes() + "=" +
-      createDate.getHours() + '' + createDate.getMinutes());
+    console.log(new Date() + "=" + createDate);
     try {
       PushNotification.localNotificationSchedule({
         channelId: "alarm",
@@ -230,13 +228,13 @@ const EditAlarm = (
 
     const date = new Date(editCreateDate);
     date.setSeconds(0)
-    if (new Date().getHours() + '' + new Date().getMinutes() >
-      editCreateDate.getHours() + '' + editCreateDate.getMinutes()) {
-      date.setDate(date.getDate() + 1);
-    }
+    if (new Date() < editCreateDate) {
+      date.setDate(date.getDate() - 1);
+    } else {
+      date.setDate(date.getDate() + 1)
+    };
     console.log(date);
-    console.log(new Date().getHours() + '' + new Date().getMinutes() + "=" +
-      editCreateDate.getHours() + '' + editCreateDate.getMinutes());
+    console.log(new Date() + "=" + editCreateDate);
     try {
       PushNotification.localNotificationSchedule({
         channelId: "alarm",
@@ -318,6 +316,21 @@ const EditAlarm = (
                     วันเดียว
                   </Radio>
                 </Radio.Group>
+                <Button
+                  title="Try!"
+                  titleStyle={{ fontFamily: 'NotoSansThai-Bold', fontSize: 13 }}
+                  buttonStyle={{
+                    backgroundColor: 'red',
+                    borderRadius: 30,
+                    height: 40,
+                    width: 80,
+                  }}
+                  containerStyle={{
+                    marginRight: 25,
+                  }}
+                  onPress={() => {
+                    console.log(new Date());
+                  }} />
                 <HStack marginTop={200} ></HStack>
               </VStack>
             </Center>

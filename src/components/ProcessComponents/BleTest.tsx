@@ -96,6 +96,7 @@ const BleTest = () => {
       };
     };
   };
+
   //function connectBluetooth
   const connectBluetooth = async () => {
     
@@ -133,8 +134,8 @@ const BleTest = () => {
       const isDeviceConnected = await connectedDevice.isConnected();
       if (isDeviceConnected) {
         BLTManager.cancelTransaction('messagetransaction');
-        BLTManager.cancelTransaction('nightmodetransaction');
-
+        BLTManager.cancelTransaction('temperaturetransaction');
+        
         BLTManager.cancelDeviceConnection(connectedDevice.id).then(() =>
           console.log('Disconnect completed'),
         );
@@ -262,10 +263,15 @@ const BleTest = () => {
         </VStack>
       ) : (
         <VStack alignItems={"center"} space={3}>
-          <Text style={{ fontSize: 20, fontFamily: "NotoSansThai-Bold", color: " #000" }}>{temperature.substring(0, 2) + " °C"}</Text>
+          <Text style={{ fontSize: 20, fontFamily: "NotoSansThai-Bold", color: " #000" }}>{temperature.substring(0, 6) + " mmHg"}</Text>
           <TouchableOpacity style={styles.buttonOpacity}
             onPress={() => { disconnectDevice() }}>
             <Text style={styles.buttonText}>ยกเลิกการเชื่อมต่อ</Text>
+          </TouchableOpacity>
+          <TouchableOpacity style={styles.buttonOpacity}
+            onPress={() => { console.log(connectedDevice?.id );
+             }}>
+            <Text style={styles.buttonText}>try!</Text>
           </TouchableOpacity>
         </VStack>
       )}
