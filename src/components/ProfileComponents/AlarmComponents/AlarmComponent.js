@@ -138,6 +138,7 @@ const AlarmComponent = () => {
               setEditText,
               setEditRepeat,
             )}
+            
             {alarmList.length != 0 ?
               (<HStack justifyContent="flex-end" marginRight={17}>
                 <TouchableOpacity
@@ -145,11 +146,19 @@ const AlarmComponent = () => {
                   <Text fontFamily="NotoSansThai-Bold" color="#5DB075" fontSize={15}>ล้างการแจ้งเตือน</Text>
                 </TouchableOpacity>
               </HStack>) : (<HStack></HStack>)}
-            <ScrollView>
+            <ScrollView showsVerticalScrollIndicator={false}>
+
               {alarmList.length != 0 ? (
-
-                alarmList.sort((a, b) => a.id - b.id).map((alarm) => {
-
+                alarmList.sort((a, b) => {
+                  const dateA = new Date(a.date);
+                  const dateB = new Date(b.date);
+                
+                  if (dateA.getHours() === dateB.getHours()) {
+                    return dateA.getMinutes() - dateB.getMinutes();
+                  }
+                
+                  return dateA.getHours() - dateB.getHours();
+                }).map((alarm) => {
                   return (
                     <HStack style={styles.cradList} justifyContent="space-between" key={alarm.id}>
                       <TouchableOpacity style={{ flexDirection: "row" }}
@@ -203,6 +212,7 @@ const AlarmComponent = () => {
               width: 170,
             }}
             onPress={() => { setAddAlarm(true) }}
+            // onPress={() => { console.log(new Date().getMinutes()); }}
           />
         </VStack>
       </Center>
