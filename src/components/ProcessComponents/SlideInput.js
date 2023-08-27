@@ -72,11 +72,17 @@ const SlideInput = (
             <HStack space={50} justifyContent={"center"} alignItems={"center"} >
                 {/* InputData form BlueTooth */}
                 <VStack key={1} style={[styles.container, { width: windowWidth }]}>
-                    <VStack style={styles.inPutContainer}><BleTest/></VStack>
+                    <VStack paddingLeft={15}>
+                        <Text style={styles.textMode}>เพิ่มข้อมูลจากเครื่องวัดความดันโลหิต</Text>
+                    </VStack>
+                    <VStack style={styles.inPutContainer}><BleTest /></VStack>
                 </VStack>
 
                 {/* InputDataManually */}
                 <VStack key={2} style={[styles.container, { width: windowWidth }]}>
+                    <VStack paddingLeft={15}>
+                        <Text style={styles.textMode}>เพิ่มข้อมูลความดันโลหิตด้วยตัวเอง</Text>
+                    </VStack>
                     <HStack style={styles.inPutContainer}>
                         <VStack width={"80%"} padding={2} space={3} justifyContent={"space-around"}>
                             <HStack style={styles.inPutDataManualLayer} space={3} >
@@ -158,8 +164,8 @@ const styles = StyleSheet.create({
         height: "90%",
         padding: 15,
         // borderWidth: 1,
-        // borderColor:"red",
-        paddingTop:0,
+        // borderColor: "red",
+        paddingTop: 0,
     },
     inPutContainer: {
         borderRadius: 35,
@@ -167,8 +173,9 @@ const styles = StyleSheet.create({
         height: "100%",
         width: "100%",
         shadowColor: "#000",
-        elevation: 10,
+        elevation: 5,
         backgroundColor: "#fff",
+        // borderWidth: 1,
     },
     inPutDataManualLayer: {
         borderRadius: 20,
@@ -208,5 +215,10 @@ const styles = StyleSheet.create({
         height: 50,
         shadowColor: "#000",
         elevation: 10,
+    },
+    textMode: {
+        fontFamily: "NotoSansThai-Bold",
+        fontSize: 15,
+        color: "#5DB075"
     },
 });

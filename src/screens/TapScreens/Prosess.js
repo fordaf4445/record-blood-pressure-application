@@ -67,7 +67,8 @@ const Prosess = () => {
         <NativeBaseProvider>
             <ScrollView style={{ flex: 1, backgroundColor: "#fff" }} >
                 <VStack style={styles.container} space={5} backgroundColor={"#fff"}>
-
+                    
+                    {/* OverlayLoading */}
                     <Overlay isVisible={visible} overlayStyle={{ borderColor: "red", borderRadius: 25, backgroundColor: "#fff" }}>
                         <View style={{ alignItems: "center", width: 150 }}>
                             <Animated.Image
@@ -121,7 +122,8 @@ const Prosess = () => {
                             </VStack>
                         </VStack>
                     </Overlay>
-
+                    
+                    {/* HeadBody */}
                     <View style={styles.containerTitle}>
                         <HStack>
                             <Text style={[styles.textTitle, { color: "#5DB075" }]}>สวัสดี, </Text>
@@ -133,6 +135,7 @@ const Prosess = () => {
                         </HStack>
                     </View>
 
+                    {/* SlideLnputContainer */}
                     <VStack style={styles.inputDataBluetooth} alignItems={"center"}  >
                         <ScrollView
                             horizontal={true}
@@ -153,7 +156,8 @@ const Prosess = () => {
                             <HStack style={[styles.normalDot, { width: dotIndicator >= 230 ? (16) : (8) }]} />
                         </VStack>
                     </VStack>
-
+                    
+                    {/* LastBody */}
                     <VStack height="35%" width="100%" space={1.5} alignItems="center" >
                         <HStack alignItems="center" space={2} >
                             <Text style={{ fontFamily: "NotoSansThai-Regular", color: "#000", }}>
@@ -257,7 +261,6 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         alignItems: 'center',
         justifyContent: 'center',
-
     },
     normalDot: {
         height: 8,

@@ -58,7 +58,7 @@ const AlarmComponent = () => {
   }
 
   const dateToTime = currDate => {
-    return moment(currDate).format('hh:mm A');
+    return moment(currDate).format('HH:mm น.');
   };
 
   const getNotification = () => {

@@ -34,7 +34,10 @@ const AlarmModal = (
   const [createRepeat, setCreateRepeat] = useState("day");
 
 
-  for (let i = 1; i <= 12; i++) hours.push(i + '');
+  for (let i = 0; i <= 23; i++) {
+    if (i >= 0 && i < 10) hours.push('0' + i);
+    else hours.push(i + '');
+  };
 
   for (let i = 0; i < 60; i++) {
     if (i >= 0 && i < 10) minutes.push('0' + i);
@@ -42,7 +45,7 @@ const AlarmModal = (
   };
 
   const dateToTime = currDate => {
-    return moment(currDate).format('LT');
+    return moment(currDate).format('HH:mm น.');
   };
 
   function createAlarm() {
@@ -103,13 +106,13 @@ const AlarmModal = (
                   hours={hours}
                   minutes={minutes}
                   onTimeSelected={currDate => setCreateDate(currDate)}
-                  style={{ height: 200, width: 100 }}
+                  style={{ height: 200, width: 160 }}
                   itemTextSize={25}
                   selectedItemTextSize={30}
                   selectedItemTextColor={'#333333'}
                   itemTextColor={'#bbbbbb'}
                   hideIndicator={true}
-                // format24={true}
+                  format24={true}
                 />
                 <Text style={[styles.fontMain, { marginTop: 15, }]}>หัวข้อ</Text>
                 <TextInput
@@ -213,7 +216,10 @@ const EditAlarm = (
   const hours = [];
   const minutes = [];
 
-  for (let i = 1; i <= 12; i++) hours.push(i + '');
+  for (let i = 0; i <= 23; i++) {
+    if (i >= 0 && i < 10) hours.push('0' + i);
+    else hours.push(i + '');
+  };
 
   for (let i = 0; i < 60; i++) {
     if (i >= 0 && i < 10) minutes.push('0' + i);
@@ -221,18 +227,16 @@ const EditAlarm = (
   };
 
   const dateToTime = currDate => {
-    return moment(currDate).format('LT');
+    return moment(currDate).format('HH:mm น.');
   };
 
   function createAlarm() {
 
     const date = new Date(editCreateDate);
     date.setSeconds(0)
-    if (new Date() < editCreateDate) {
+    if (new Date().getDate() < new Date(editCreateDate).getDate()) {
       date.setDate(date.getDate() - 1);
-    } else {
-      date.setDate(date.getDate() + 1)
-    };
+    }
     console.log(date);
     console.log(new Date() + "=" + editCreateDate);
     try {
@@ -283,13 +287,13 @@ const EditAlarm = (
                   hours={hours}
                   minutes={minutes}
                   onTimeSelected={currDate => setEditCreateDate(currDate)}
-                  style={{ height: 200, width: 100 }}
+                  style={{ height: 200, width: 160 }}
                   itemTextSize={25}
-                  selectedItemTextSize={30}
+                  selectedItemTextSize={40}
                   selectedItemTextColor={'#333333'}
                   itemTextColor={'#bbbbbb'}
                   hideIndicator={true}
-                // format24={true}
+                  format24={true}
                 />
                 <Text style={[styles.fontMain, { marginTop: 15, }]}>หัวข้อ</Text>
                 <TextInput

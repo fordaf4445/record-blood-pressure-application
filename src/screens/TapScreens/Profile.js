@@ -92,7 +92,7 @@ const Profile = () => {
                         <TouchableOpacity onPress={() => { navigation.navigate('SettingComponent') }}>
                             <Text style={styles.text}>ตั้งค่าผู้ใช้</Text>
                         </TouchableOpacity>
-                        <Text style={styles.textHeader}>Profile</Text>
+                        <Text style={styles.textHeader}>โปรไฟล์</Text>
                         <TouchableOpacity onPress={touchSignout}>
                             <Text style={styles.text}>ออกระบบ</Text>
                         </TouchableOpacity>

@@ -221,6 +221,8 @@ const BleTest = () => {
 
   return (
     <VStack width={"100%"} height={"100%"} alignItems={"center"} justifyContent={"center"} space={3}>
+      
+      {/* OverlayLoading */}
       <Overlay isVisible={overlayLoading} overlayStyle={{ borderRadius: 25, backgroundColor: "#fff" }}>
         <View style={{ alignItems: "center", width: 300 }}>
           <Animated.Image
@@ -253,6 +255,8 @@ const BleTest = () => {
           <Text style={{ fontFamily: "NotoSansThai-Bold", fontSize: 16, color: "#000" }}>ตรวจสอบบลูทูธและเชื่อมต่ออีกครั้ง</Text>
         </View>
       </Overlay>
+
+      {/* Body */}
       {!isConnected ? (
         <VStack alignItems={"center"} space={3}>
 

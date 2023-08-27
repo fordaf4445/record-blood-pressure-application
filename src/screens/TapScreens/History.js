@@ -46,7 +46,7 @@ const History = () => {
     };
 
     const DatetoTime = currDate => {
-        return moment(currDate).format('DD/MM/YY hh:mm A');
+        return moment(currDate).format('DD/MM/YY HH:mm น.');
     }
 
     function renderItem(item) {
