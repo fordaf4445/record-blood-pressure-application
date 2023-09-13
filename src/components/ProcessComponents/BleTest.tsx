@@ -219,6 +219,14 @@ const BleTest = () => {
       });
   }
 
+  //update pressure
+  function updatePressure () {
+    if (Number(temperature.substring(0, 6)) < 10) {
+      return 0;
+    } else {
+      return Number(temperature.substring(0, 6)).toFixed(0);
+    }
+  }
   return (
     <VStack width={"100%"} height={"100%"} alignItems={"center"} justifyContent={"center"} space={3}>
       
@@ -267,7 +275,7 @@ const BleTest = () => {
         </VStack>
       ) : (
         <VStack alignItems={"center"} space={3}>
-          <Text style={{ fontSize: 20, fontFamily: "NotoSansThai-Bold", color: " #000" }}>{temperature.substring(0, 6) + " mmHg"}</Text>
+          <Text style={{ fontSize: 20, fontFamily: "NotoSansThai-Bold", color: " #000" }}>{updatePressure() + " mmHg"}</Text>
           <TouchableOpacity style={styles.buttonOpacity}
             onPress={() => { disconnectDevice() }}>
             <Text style={styles.buttonText}>ยกเลิกการเชื่อมต่อ</Text>
