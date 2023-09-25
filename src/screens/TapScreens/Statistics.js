@@ -21,8 +21,8 @@ const Statistics = () => {
   const [avgSYS, setAvgSYS] = useState(0);
   const [avgDIA, setAvgDIA] = useState(0);
   const [avgBPM, setAvgBPM] = useState(0);
-  const [colorSelectWeek, setColorSelectWeek] = useState();
-  const [colorSelectMonth, setColorSelectMonth] = useState();
+  const [colorSelectWeek, setColorSelectWeek] = useState('#fff');
+  const [colorSelectMonth, setColorSelectMonth] = useState('#fff');
   const [colorSelectAll, setColorSelectAll] = useState('#5DB075');
   const [textcolorSelectWeek, setTextColorSelectWeek] = useState('black');
   const [textcolorSelectMonth, setTextColorSelectMonth] = useState('black');

@@ -20,6 +20,8 @@ import moment from 'moment';
 import base64 from 'react-native-base64';
 import '@react-native-firebase/auth';
 import '@react-native-firebase/firestore';
+import FileViewer from "react-native-file-viewer";
+import RNFS from "react-native-fs";
 
 // import CheckBox from '@react-native-community/checkbox';
 import { BleManager, Device } from 'react-native-ble-plx';
@@ -49,7 +51,7 @@ const BleTest = () => {
   const [overlaySuccess, setOverlaySuccess] = useState(false);
   const [overlayFail, setOverlayFail] = useState(false);
   const [overlayAddData, setOverlayAddData] = useState(false);
-  const [visible , setVisible] = useState(false);
+  const [visible, setVisible] = useState(false);
   //Is a device connected?
   const [isConnected, setIsConnected] = useState(false);
 
@@ -359,7 +361,25 @@ const BleTest = () => {
     } else {
 
       console.log("currentUser = null ");
-    }
+    };
+
+
+  }
+
+  const BMIDetail = () => {
+    const filepath = 'KnowYourNumners.pdf';
+    const destPath = `${RNFS.DocumentDirectoryPath}/${filepath}`
+
+    RNFS.copyFileAssets(filepath, destPath)
+      .then(() => {
+        FileViewer.open(destPath);
+        console.log('Successfully copied' + destPath);
+      })
+      .catch((err) => {
+        console.log(err);
+        alert(err)
+      });
+    // console.log(destPath);
 
   };
 
@@ -401,15 +421,15 @@ const BleTest = () => {
         </View>
       </Overlay>
       <Overlay isVisible={visible} overlayStyle={{ borderColor: "red", borderRadius: 25, backgroundColor: "#fff" }}>
-                        <View style={{ alignItems: "center", width: 150 }}>
-                            <Animated.Image
-                                source={require("../../../assets/gif/heartLoading.gif")}
-                                style={{ width: 70, height: 70 }}
-                                resizeMode='cover' />
-                            {/* <ActivityIndicator size='large' /> */}
-                            <Text style={{ fontFamily: "NotoSansThai-Bold", fontSize: 18, color: "#000" }}>กรุณารอสักครู่..</Text>
-                        </View>
-                    </Overlay>
+        <View style={{ alignItems: "center", width: 150 }}>
+          <Animated.Image
+            source={require("../../../assets/gif/heartLoading.gif")}
+            style={{ width: 70, height: 70 }}
+            resizeMode='cover' />
+          {/* <ActivityIndicator size='large' /> */}
+          <Text style={{ fontFamily: "NotoSansThai-Bold", fontSize: 18, color: "#000" }}>กรุณารอสักครู่..</Text>
+        </View>
+      </Overlay>
 
       {/* Overlay add data */}
 
@@ -491,15 +511,21 @@ const BleTest = () => {
 
       {/* Body */}
       {!isConnected ? (
-        <VStack alignItems={"center"} space={3}>
-
+        <VStack alignItems={"center"} space={3} >
+          <VStack style={styles.contrainerDisConnected}>
+            <Text style={{ fontFamily: "NotoSansThai-Bold", fontSize: 18, color: "#000" }}>กรุณากดเชื่อมต่อเพื่อเชื่อมต่อแอพพลิเคชันกับเครื่องวัดความดันโลหิต</Text>
+          </VStack>
           <TouchableOpacity style={styles.buttonOpacity}
             onPress={() => { scanDevices() }}>
             <Text style={styles.buttonText}>เชื่อมต่อ</Text>
           </TouchableOpacity>
+          <TouchableOpacity style={styles.contrainerDetail}
+          onPress={() => {BMIDetail()}}>
+            <Text style={{ fontFamily: "NotoSansThai-Regular", fontSize: 15, color: "#000" }}>กดตรงนี้เพื่อดูข้อมูลเกี่ยวกับวิธีการวัดความดันโลหิต*</Text>
+          </TouchableOpacity>
         </VStack>
       ) : (
-        <VStack alignItems={"center"} space={3} style={styles.contrainerIsConnected}>
+        <VStack alignItems={"center"} space={3} style={styles.contrainerIsConnected} >
           <HStack width={"100%"}>
             <Text style={{ fontSize: 35, fontFamily: "NotoSansThai-Bold", color: "black" }}>ระดับความดัน</Text>
           </HStack>
@@ -545,6 +571,10 @@ const styles = StyleSheet.create({
   contrainerIsConnected: {
     height: "90%",
     width: "90%",
+  },
+  contrainerDisConnected: {
+    height: "40%",
+    width: 315,
   },
   contrainerOverlayaddData: {
     alignItems: "center",
@@ -602,6 +632,15 @@ const styles = StyleSheet.create({
     fontFamily: "NotoSansThai-Bold",
     fontSize: 16,
     color: "#000"
+  },
+  contrainerDetail : {
+    marginTop: 30 , 
+    borderRadius:15,
+    width:350,
+    height:30,
+    backgroundColor:"#B8DE9A",
+    alignItems: "center",
+    justifyContent: "center",
   },
 });
 
