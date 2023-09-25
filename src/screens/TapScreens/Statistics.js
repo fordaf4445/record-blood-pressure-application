@@ -24,6 +24,9 @@ const Statistics = () => {
   const [colorSelectWeek, setColorSelectWeek] = useState();
   const [colorSelectMonth, setColorSelectMonth] = useState();
   const [colorSelectAll, setColorSelectAll] = useState('#5DB075');
+  const [textcolorSelectWeek, setTextColorSelectWeek] = useState('black');
+  const [textcolorSelectMonth, setTextColorSelectMonth] = useState('black');
+  const [textcolorSelectAll, setTextColorSelectAll] = useState('#fff');
   const [lineChartSYS, setLineChartSYS] = useState([0]);
   const [lineChartDIA, setLineChartDIA] = useState([0]);
   const [lineChartBPM, setLineChartBPM] = useState([0]);
@@ -171,8 +174,11 @@ const Statistics = () => {
       setHighBloodPressure2(Week.filter(item => { return (item.TYPE === 'ความดันโลหิตสูง ระยะที่ 2') }).length)
       setLineChartCount(Week.length)
       setColorSelectWeek('#5DB075')
-      setColorSelectMonth('#838383')
-      setColorSelectAll('#838383')
+      setColorSelectMonth('#fff')
+      setColorSelectAll('#fff')
+      setTextColorSelectWeek('#fff')
+      setTextColorSelectMonth('black')
+      setTextColorSelectAll('black')
     };
 
     Week.length != 0 ? (avg())
@@ -213,9 +219,12 @@ const Statistics = () => {
       setHighBloodPressure1(Month.filter(item => { return (item.TYPE === 'ความดันโลหิตสูง ระยะที่ 1') }).length)
       setHighBloodPressure2(Month.filter(item => { return (item.TYPE === 'ความดันโลหิตสูง ระยะที่ 2') }).length)
       setLineChartCount(Month.length)
-      setColorSelectWeek('#838383')
+      setColorSelectWeek('#fff')
       setColorSelectMonth('#5DB075')
-      setColorSelectAll('#838383')
+      setColorSelectAll('#fff')
+      setTextColorSelectWeek('black')
+      setTextColorSelectMonth('#fff')
+      setTextColorSelectAll('black')
     };
 
     Month.length != 0 ? (avg())
@@ -255,9 +264,12 @@ const Statistics = () => {
       setHighBloodPressure1(bloodPressure.filter(item => { return (item.TYPE === 'ความดันโลหิตสูง ระยะที่ 1') }).length)
       setHighBloodPressure2(bloodPressure.filter(item => { return (item.TYPE === 'ความดันโลหิตสูง ระยะที่ 2') }).length)
       setLineChartCount(bloodPressure.length)
-      setColorSelectWeek('#838383')
-      setColorSelectMonth('#838383')
+      setColorSelectWeek('#fff')
+      setColorSelectMonth('#fff')
       setColorSelectAll('#5DB075')
+      setTextColorSelectWeek('black')
+      setTextColorSelectMonth('black')
+      setTextColorSelectAll('#fff')
     };
     bloodPressure.length != 0 ? (avg()) : (Alert.alert("โอ๊ะโอ !", "ดูเหมือนว่าคุณยังไม่ได้เพิ่มข้อมูลเลย"));
   };
@@ -328,35 +340,35 @@ const Statistics = () => {
       name: "ความดันโลหิตต่ำ",
       count: lowBloodPressure,
       color: "#23AFD6",
-      legendFontColor: "#7F7F7F",
+      legendFontColor: "black",
       legendFontSize: 12
     },
     {
       name: "ปกติ",
       count: normalBloodPressure,
       color: "#A4BF43",
-      legendFontColor: "#7F7F7F",
+      legendFontColor: "black",
       legendFontSize: 12
     },
     {
       name: "ความดันโลหิตสูงขั้นต้น",
       count: elevatedBloodPressure,
       color: "#EEC151",
-      legendFontColor: "#7F7F7F",
+      legendFontColor: "black",
       legendFontSize: 12
     },
     {
       name: "ความดันโลหิตสูง ระยะที่ 1",
       count: highBloodPressure1,
       color: "#F1815C",
-      legendFontColor: "#7F7F7F",
+      legendFontColor: "black",
       legendFontSize: 12
     },
     {
       name: "ความดันโลหิตสูง ระยะที่ 2",
       count: highBloodPressure2,
       color: "#FF0000",
-      legendFontColor: "#7F7F7F",
+      legendFontColor: "black",
       legendFontSize: 12
     }
   ];
@@ -413,7 +425,7 @@ const Statistics = () => {
               <View style={{ flex: 1, alignItems: "center" }}>
                 <Text style={[styles.titleProgressChart, { color: "#A4BF43" }]}>DIA</Text></View>
               <View style={{ flex: 1, alignItems: "center" }}>
-                <Text style={[styles.titleProgressChart, { color: "#23AFD6" }]}>BPM</Text></View>
+                <Text style={[styles.titleProgressChart, { color: "#23AFD6" }]}>PULSE</Text></View>
             </HStack>
             <HStack position="absolute"
               width="100%" marginTop="10%" flex={1}>
@@ -433,22 +445,22 @@ const Statistics = () => {
               <View style={{ flex: 1, alignItems: "center" }}>
                 <Text style={styles.avgTitle}>ค่าเฉลี่ย</Text></View>
             </HStack>
-            <HStack space="22%" justifyContent="center" marginTop="2%" marginBottom="3%" >
-              <TouchableOpacity
+            <HStack space={16} justifyContent="center" marginTop="2%" marginBottom="3%" >
+              <TouchableOpacity style={[styles.contrainerSelected,{backgroundColor :colorSelectWeek}]}
                 onPress={() => { getDataWeekAvg() }}>
-                <Text style={[styles.selectContainer, { color: colorSelectWeek, }]}>
+                <Text style={[styles.selectContainer, { color: textcolorSelectWeek, }]}>
                   สัปดาห์
                 </Text>
-              </TouchableOpacity>
-              <TouchableOpacity
+              </TouchableOpacity >
+              <TouchableOpacity style={[styles.contrainerSelected,{backgroundColor :colorSelectMonth}]}
                 onPress={() => { getDataMonthAvg() }}>
-                <Text style={[styles.selectContainer, { color: colorSelectMonth, }]}>
+                <Text style={[styles.selectContainer, { color: textcolorSelectMonth, }]}>
                   เดือน
                 </Text>
               </TouchableOpacity>
-              <TouchableOpacity
+              <TouchableOpacity style={[styles.contrainerSelected,{backgroundColor :colorSelectAll}]}
                 onPress={() => { getDataAllAvg() }}>
-                <Text style={[styles.selectContainer, { color: colorSelectAll, }]}>
+                <Text style={[styles.selectContainer, { color: textcolorSelectAll, }]}>
                   ทั้งหมด
                 </Text>
               </TouchableOpacity>
@@ -467,14 +479,18 @@ const Statistics = () => {
                 withShadow={true}
                 withVerticalLines={false}
               />
-              <HStack position="absolute" alignItems="center" marginTop={205} >
-                <FontAwesome name='circle' color="#FF0000" />
-                <Text style={styles.lineChartTitles}> SYS    </Text>
-                <FontAwesome name='circle' color="#A4BF43" />
-                <Text style={styles.lineChartTitles}> DIA    </Text>
-                <FontAwesome name='circle' color="#23AFD6" />
-                <Text style={styles.lineChartTitles}> BPM  </Text>
-              </HStack>
+              <VStack position="absolute" alignItems="flex-start" marginTop={210} >
+                <HStack>
+                  <FontAwesome name='circle' color="#FF0000" style={{marginTop:3.5}} />
+                  <Text style={styles.lineChartTitles}> ความดันโลหิตตัวบน (SYS)  </Text>
+                  <FontAwesome name='circle' color="#A4BF43" style={{marginTop:3.5}}/>
+                  <Text style={styles.lineChartTitles}> ความดันโลหิตตัวล่าง (DIA) </Text>
+                </HStack>
+                <HStack>
+                  <FontAwesome name='circle' color="#23AFD6" style={{marginTop:3.5}}/>
+                  <Text style={styles.lineChartTitles}> อัตราการเต้นของหัวใจ (PULSE)  </Text>
+                </HStack>
+              </VStack>
             </View>
             <VStack alignItems="center" marginTop={4}>
               <PieChart
@@ -504,7 +520,7 @@ export default Statistics
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor:"#fff",
+    backgroundColor: "#fff",
   },
   titleBar: {
     alignItems: 'center',
@@ -525,8 +541,8 @@ const styles = StyleSheet.create({
   },
   numberProgressChart: {
     fontSize: 20,
-    fontFamily: 'NotoSansThai-SemiBold'
-
+    fontFamily: 'NotoSansThai-SemiBold',
+    color:"black",
   },
   titleProgressChart: {
     fontSize: 18,
@@ -534,7 +550,8 @@ const styles = StyleSheet.create({
   },
   avgTitle: {
     fontSize: 12,
-    fontFamily: 'NotoSansThai-Regular'
+    fontFamily: 'NotoSansThai-Regular',
+    color:"black",
   },
   selectContainer: {
     fontSize: 17,
@@ -544,5 +561,15 @@ const styles = StyleSheet.create({
   lineChartTitles: {
     fontFamily: "NotoSansThai-Regular",
     color: "black",
+  },
+  contrainerSelected: {
+    // borderWidth:1, 
+    width:70 ,
+    height:35,
+    alignItems:"center",
+    justifyContent: "center",
+    borderRadius:25,
+    shadowColor: "#000",
+    elevation: 10,
   },
 });
