@@ -55,8 +55,8 @@ export const AuthProvider = ({ children }) => {
                         await setVisible(false);
                     } catch (err) {
                         setVisible(false);
-                        console.log(err.messege);
-                        Alert.alert("ลงทะเบียนไม่สำเร็จ");
+                        console.log(err);
+                        Alert.alert("ลงทะเบียนไม่สำเร็จ","อีเมลนี้ถูกใช้ไปแล้วหรือรูปแบบอีเมลไม่ถูกต้อง โปรดตรวจสอบ");
                     }
 
                 },
