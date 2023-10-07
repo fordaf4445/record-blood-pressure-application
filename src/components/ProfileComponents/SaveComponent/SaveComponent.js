@@ -434,7 +434,7 @@ const SaveComponent = () => {
     <body>
     
         <header>
-            <h1>record blood pressure</h1>
+            <h1>บันทึกความดันโลหิต</h1>
             <div>
                 <p>${userData.username}</p>
                 <p>เพศ ${userData.sex} อายุ ${userData.age} ปี</p>
