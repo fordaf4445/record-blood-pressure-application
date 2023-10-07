@@ -53,6 +53,7 @@ export const AuthProvider = ({ children }) => {
                                     })
                             })
                         await setVisible(false);
+                        Alert.alert("ลงทะเบียนสำเร็จ");
                     } catch (err) {
                         setVisible(false);
                         console.log(err);
