@@ -251,7 +251,10 @@ const SettingComponent = () => {
                   alignItems: 'center',
                 }}
                 titleStyle={{ fontFamily: 'NotoSansThai-SemiBold' }}
-                onPress={touchUpdate}
+                onPress={() => {
+                  userData.username == '' || userData.weight == '' || userData.hight == '' || userData.age == '' ?
+                  (Alert.alert("อัพเดทข้อมูลไม่สำเร็จ", "ไม่สามารถเว้นช่องว่างได้")) : (touchUpdate())
+                }}
               />
             </VStack>
           </ScrollView>
