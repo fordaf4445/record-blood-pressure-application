@@ -156,7 +156,7 @@ export default function TapStack() {
             />
             <Tab.Screen name='ProfileComponent' component={ProfileComponent}
                 options={{
-                    tabBarLabel: 'Profile',
+                    tabBarLabel: 'โปรไฟล์',
                     // tabBarShowLabel: false,
                     tabBarIcon: ({ color, size }) => (
                         <Icon name="user" color={color} size={30} />

@@ -4,12 +4,11 @@ import { firebase } from '@react-native-firebase/auth';
 import { GestureHandlerRootView, Swipeable } from 'react-native-gesture-handler';
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 import moment from 'moment';
+import { Overlay } from '@rneui/base';
+import { VStack, HStack, NativeBaseProvider } from 'native-base';
+import { Calendar, LocaleConfig } from 'react-native-calendars';
 
 const History = () => {
-    const db = firebase.firestore()
-    const [loading, setLoading] = useState(true);
-    const [bloodPressure, setloodPressure] = useState([]);
-
     useEffect(() => {
         const subscriber = db.collection("dataUser")
             .doc(firebase.auth().currentUser.uid)
@@ -33,6 +32,40 @@ const History = () => {
         return () => subscriber();
     }, []);
 
+    const db = firebase.firestore()
+    const [loading, setLoading] = useState(true);
+    const [bloodPressure, setloodPressure] = useState([]);
+    const [calendarOverlay, setCalendarOverlay] = useState(false);
+    const [selected, setSelected] = useState('');
+    const [filteredBloodPressure, setFilteredBloodPressure] = useState(bloodPressure);
+    const [filterDays, setFilterDays] = useState(7);
+    const currentDate = moment().format('YYYY-MM-DD');
+
+    // อัปเดตข้อมูลที่จะแสดงใน FlatList เมื่อวันที่ถูกเลือกในปฎิทิน
+    useEffect(() => {
+        if (selected) {
+            const filteredData = bloodPressure.filter(item => moment(item.timestamp).format('YYYY-MM-DD') === selected);
+            setFilteredBloodPressure(filteredData);
+        } else {
+            setFilteredBloodPressure(bloodPressure);
+        }
+    }, [selected, bloodPressure]);
+
+    // อัปเดตข้อมูลที่จะแสดงใน FlatList เมื่อวันที่ถูกเลือกใน 7 , 30 วัน
+    useEffect(() => {
+        if (filterDays === 7) {
+            const startDate = moment(currentDate).subtract(7, 'days').format('YYYY-MM-DD');
+            const filteredData = bloodPressure.filter(item => moment(item.timestamp).isSameOrAfter(startDate));
+            setFilteredBloodPressure(filteredData);
+        } else if (filterDays === 30) {
+            const startDate = moment(currentDate).subtract(30, 'days').format('YYYY-MM-DD');
+            const filteredData = bloodPressure.filter(item => moment(item.timestamp).isSameOrAfter(startDate));
+            setFilteredBloodPressure(filteredData);
+        } else {
+            setFilteredBloodPressure(bloodPressure);
+        }
+    }, [filterDays, bloodPressure]);
+
     if (loading) {
         return (
             <View style={{ alignItems: "center", justifyContent: "center", flex: 1, }}>
@@ -48,6 +81,28 @@ const History = () => {
     const DatetoTime = currDate => {
         return moment(currDate).format('DD/MM/YY HH:mm น.');
     }
+
+    LocaleConfig.locales['en'] = {
+        monthNames: [
+            'มกราคม',
+            'กุมภาพันธ์',
+            'มีนาคม ',
+            'เมษายน',
+            'พฤษภาคม ',
+            'มิถุนายน',
+            'กรกฎาคม ',
+            'สิงหาคม',
+            'กันยายน',
+            'ตุลาคม',
+            'พฤศจิกายน',
+            'ธันวาคม'
+        ],
+        monthNamesShort: ['ม.ค.', 'ก.พ.', 'ก.พ.', 'เม.ย.', 'พ.ค.', 'มิ.ย.', 'ก.ค.', 'ส.ค.', 'ก.ย.', 'ต.ค.', 'พ.ย.', 'ธ.ค.'],
+        dayNames: ['อาทิตย์', 'จันทร์', 'อังคาร', 'พุธ', 'พฤหัสบดี', 'ศุกร์', 'เสาร์'],
+        dayNamesShort: ['อา.', 'จ.', 'อ.', 'พ.', 'พฤ.', 'ศ.', 'ส.'],
+        today: "วันนี้"
+    };
+    LocaleConfig.defaultLocale = 'en';
 
     function renderItem(item) {
 
@@ -116,18 +171,55 @@ const History = () => {
     }
 
     return (
-        <View style={styles.container}>
-            <View style={styles.titleBar}>
-                <Text style={styles.textHeader}>ประวัติ</Text>
+        <NativeBaseProvider>
+            <View style={styles.container}>
+                <View style={styles.titleBar}>
+                    <Text style={styles.textHeader}>ประวัติ</Text>
+                </View>
+                <Overlay isVisible={calendarOverlay} overlayStyle={{ borderRadius: 25, backgroundColor: "#fff" }} onPressOut={() => { setCalendarOverlay(!calendarOverlay) }}>
+                    <View >
+                        <Calendar
+                            onDayPress={day => {
+                                setSelected(day.dateString);
+                            }}
+                            markedDates={{
+                                [selected]: { selected: true, disableTouchEvent: true, selectedColor: '#5DB075' }
+                            }}
+                            theme={{
+                                dayTextColor: 'black',
+                                todayTextColor: '#5DB075',
+                                selectedDotColor: '#5DB075',
+                                arrowColor: '#5DB075',
+                                textDayFontFamily: 'NotoSansThai-Regular',
+                                textMonthFontFamily: 'NotoSansThai-Regular',
+                                textDayHeaderFontFamily: 'NotoSansThai-Regular',
+                            }}
+                        />
+                    </View>
+                </Overlay>
+                <HStack justifyContent={"space-between"} style={styles.selectDate}>
+                    <TouchableOpacity style={[styles.contrainerSelected, { backgroundColor: filterDays === "All" ? '#5DB075' : '#fff' }]} onPress={() => { setFilterDays("All") }}>
+                        <Text style={[styles.textSelectDate, { color: filterDays === "All" ? '#fff' : '#000' }]}>ทั้งหมด</Text>
+                    </TouchableOpacity>
+                    <TouchableOpacity style={[styles.contrainerSelected, { backgroundColor: filterDays === 7 ? '#5DB075' : '#fff' }]} onPress={() => { setFilterDays(7) }}>
+                        <Text style={[styles.textSelectDate, { color: filterDays === 7 ? '#fff' : '#000' }]}>7 วัน</Text>
+                    </TouchableOpacity>
+                    <TouchableOpacity style={[styles.contrainerSelected, { backgroundColor: filterDays === 30 ? '#5DB075' : '#fff' }]} onPress={() => { setFilterDays(30) }}>
+                        <Text style={[styles.textSelectDate, { color: filterDays === 30 ? '#fff' : '#000' }]}>30 วัน</Text>
+                    </TouchableOpacity>
+                    <TouchableOpacity style={[styles.contrainerSelected, { backgroundColor: filterDays === "calendarSelect" ? '#5DB075' : '#fff' }]} onPress={() => { setCalendarOverlay(!calendarOverlay), setFilterDays("calendarSelect") }}>
+                        <Text style={[styles.textSelectDate, { color: filterDays === "calendarSelect" ? '#fff' : '#000' }]}>เลือกเอง</Text>
+                    </TouchableOpacity>
+                </HStack>
+                <View style={styles.borderHistory}>
+                    <FlatList
+                        data={filteredBloodPressure}
+                        renderItem={({ item }) => renderItem(item)}
+                        keyExtractor={(item) => item.key}
+                    />
+                </View>
             </View>
-            <View style={styles.borderHistory}>
-                <FlatList
-                    data={bloodPressure}
-                    renderItem={({ item }) => renderItem(item)}
-                    keyExtractor={(item) => item.key}
-                />
-            </View>
-        </View>
+        </NativeBaseProvider>
     )
 }
 
@@ -151,9 +243,29 @@ const styles = StyleSheet.create({
         flex: 1,
         borderRadius: 15,
         margin: 20,
+        marginTop: 10,
         paddingTop: 10,
         paddingBottom: 5,
         backgroundColor: 'white',
+        shadowColor: "#000",
+        elevation: 10,
+    },
+    selectDate: {
+        paddingLeft: 20,
+        paddingRight: 20,
+        // borderWidth: 1,
+    },
+    textSelectDate: {
+        fontSize: 17,
+        fontFamily: "NotoSansThai-SemiBold",
+    },
+    contrainerSelected: {
+        // borderWidth: 1,
+        width: 75,
+        height: 35,
+        alignItems: "center",
+        justifyContent: "center",
+        borderRadius: 15,
         shadowColor: "#000",
         elevation: 10,
     },
