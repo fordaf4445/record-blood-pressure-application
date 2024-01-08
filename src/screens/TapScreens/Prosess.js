@@ -131,7 +131,7 @@ const Prosess = () => {
                         </HStack>
                         <HStack alignItems={"center"} space={2}>
                             <Text style={styles.textTitle}>{ToDays}</Text>
-                            <Text style={{ fontFamily: "NotoSansThai-Regular", }}>{dateToTime(Date.now())}</Text>
+                            <Text style={{ fontFamily: "NotoSansThai-SemiBold", }}>{dateToTime(Date.now())}</Text>
                         </HStack>
                     </View>
 
