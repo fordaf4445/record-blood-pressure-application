@@ -42,7 +42,7 @@ const FeedbackAndAboutComponent = () => {
             <Text style={styles.fontTitle}>เกี่ยวกับแอพพลิเคชัน</Text>
             <View>
               <Text>app_name = record blood pressure</Text>
-              <Text>version = 1.0.2</Text>
+              <Text>version = 1.1.1</Text>
               <Text>create by react-native</Text>
             </View>
           </VStack>

@@ -61,7 +61,7 @@ const Signup = () => {
                     <Text style={[styles.textcolor, { top: 15, right: 136 }]}>ชื่อผู้ใช้งาน</Text>
                     <TextInput
                         style={styles.inputView}
-                        placeholder="Username"
+                        placeholder="ชื่อผู้ใช้งาน"
                         placeholderTextColor="gray"
                         value={username}
                         onChangeText={(username) => { setUsername(username) }}
@@ -69,7 +69,7 @@ const Signup = () => {
                     <Text style={[styles.textcolor, { top: 15, right: 153 }]}>อีเมล</Text>
                     <TextInput
                         style={styles.inputView}
-                        placeholder="Email"
+                        placeholder="อีเมล"
                         placeholderTextColor="gray"
                         value={email}
                         onChangeText={(email) => { setEmail(email) }}
@@ -77,7 +77,7 @@ const Signup = () => {
                     <Text style={[styles.textcolor, { top: 15, right: 141 }]}>รหัสผ่าน</Text>
                     <TextInput
                         style={styles.inputView}
-                        placeholder="Password"
+                        placeholder="รหัสผ่าน"
                         placeholderTextColor="gray"
                         name="password"
                         autoCapitalize="none"
@@ -103,7 +103,7 @@ const Signup = () => {
                             value={weight}
                             onChangeText={(weight) => { setWeight(weight) }}></TextInput>
                         <View style={styles.textSmall}>
-                            <Text style={styles.textSmall}>kg.</Text>
+                            <Text style={{fontFamily: "NotoSansThai-Regular",}}>กก.</Text>
                         </View>
                         <TextInput style={[styles.inputSmall, { marginLeft: 30 }]}
                             keyboardType='numeric'
@@ -111,7 +111,7 @@ const Signup = () => {
                             value={hight}
                             onChangeText={(hight) => { setHight(hight) }}></TextInput>
                         <View style={styles.textSmall}>
-                            <Text>cm.</Text>
+                            <Text style={{fontFamily: "NotoSansThai-Regular",}}>ซม.</Text>
                         </View>
                     </View>
                     <View style={styles.innerContainer}>
@@ -201,10 +201,14 @@ const styles = StyleSheet.create({
         height: 50,
         borderWidth: 1,
         borderColor: '#E8E8E8',
-        padding: 15,
+        padding: 10,
+        paddingLeft: 15,
         marginTop: 20,
         width: 343,
-        fontSize: 20,
+        fontSize: 16,
+        fontFamily: "NotoSansThai-Regular",
+        justifyContent: 'center',
+        
     },
     textcolor: {
         color: '#5DB075',
@@ -240,6 +244,7 @@ const styles = StyleSheet.create({
     textSmall: {
         marginLeft: 5,
         justifyContent: 'center',
+        
     },
     secureIcon: {
         position: 'absolute',

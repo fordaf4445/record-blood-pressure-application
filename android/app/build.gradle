@@ -139,10 +139,11 @@ android {
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 1
-        versionName "1.0.2"
+        versionName "1.1.1"
         // Read detail update __tests__/Note.txt
         // version 1.0.1 add PushNotification
         // version 1.0.2 add react-native-chart-kit
+        // version 1.1.1 full release
         buildConfigField "boolean", "IS_NEW_ARCHITECTURE_ENABLED", isNewArchitectureEnabled().toString()
 
         if (isNewArchitectureEnabled()) {
