@@ -58,7 +58,7 @@ const Signup = () => {
                 </Overlay>
                 <View style={styles.container}>
                     {/* <Text style={styles.textMain}> ลงทะเบียน </Text> */}
-                    <Text style={[styles.textcolor, { top: 15, right: 132 }]}>ยูสเซอร์เนม</Text>
+                    <Text style={[styles.textcolor, { top: 15, right: 136 }]}>ชื่อผู้ใช้งาน</Text>
                     <TextInput
                         style={styles.inputView}
                         placeholder="Username"
@@ -74,7 +74,7 @@ const Signup = () => {
                         value={email}
                         onChangeText={(email) => { setEmail(email) }}
                     />
-                    <Text style={[styles.textcolor, { top: 15, right: 141 }]}>พาสเวิร์ด</Text>
+                    <Text style={[styles.textcolor, { top: 15, right: 141 }]}>รหัสผ่าน</Text>
                     <TextInput
                         style={styles.inputView}
                         placeholder="Password"

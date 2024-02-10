@@ -29,7 +29,7 @@ const Welcome = () => {
             .then(() => {
                 Alert.alert(
                     "เราได้ส่งอีเมลไปให้คุณแล้ว",
-                    "โปรดตรวจสอบอีเมลทั้งหมดของคุณหรือจดหมายขยะเพื่อรีเซ็ตรหัสผ่าน",
+                    "โปรดตรวจสอบอีเมลทั้งหมดของคุณหรือจดหมายขยะเพื่อตั้งรหัสผ่านใหม่",
                     [
                         { text: "OK", onPress: () => console.log("OK Pressed") }
                     ]
@@ -67,7 +67,7 @@ const Welcome = () => {
                             <VStack width="100%">
                                 <TextInput
                                     style={styles.inputView}
-                                    placeholder="Email"
+                                    placeholder="อีเมล"
                                     placeholderTextColor="gray"
                                     value={email}
                                     onChangeText={(email) => { setEmail(email) }}
@@ -76,7 +76,7 @@ const Welcome = () => {
                             <VStack width="100%">
                                 <TextInput
                                     style={[styles.inputView, { marginTop: 15 }]}
-                                    placeholder="Password"
+                                    placeholder="รหัสผ่าน"
                                     placeholderTextColor="gray"
                                     name="password"
                                     autoCapitalize="none"

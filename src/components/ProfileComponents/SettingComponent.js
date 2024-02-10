@@ -60,7 +60,7 @@ const SettingComponent = () => {
       .then(() => {
         Alert.alert(
           "เราได้ส่งอีเมลไปให้คุณที่ : " + userData.email,
-          "โปรดตรวจสอบอีเมลทั้งหมดของคุณหรือจดหมายขยะเพื่อรีเซ็ตรหัสผ่าน",
+          "โปรดตรวจสอบอีเมลทั้งหมดของคุณหรือจดหมายขยะเพื่อตั้งรหัสผ่านใหม่",
           [
             { text: "OK", onPress: () => console.log("OK Pressed") }
           ]
@@ -220,7 +220,7 @@ const SettingComponent = () => {
                 </HStack>
               </VStack>
               <Button
-                title="รีเซ็ตรหัสผ่าน"
+                title="ตั้งรหัสผ่านใหม่"
                 buttonStyle={{
                   backgroundColor: 'red',
                   borderRadius: 30,

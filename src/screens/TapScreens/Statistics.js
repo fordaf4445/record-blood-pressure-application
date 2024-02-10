@@ -9,7 +9,7 @@ import {
 import { firebase } from '@react-native-firebase/auth';
 import moment from 'moment';
 import { ProgressChart, LineChart, PieChart } from 'react-native-chart-kit';
-import FontAwesome from 'react-native-vector-icons/FontAwesome';
+import Ionicons from 'react-native-vector-icons/Ionicons';
 
 const Statistics = () => {
   const startofWeek = moment().startOf('week').valueOf();
@@ -274,6 +274,7 @@ const Statistics = () => {
     bloodPressure.length != 0 ? (avg()) : (Alert.alert("โอ๊ะโอ !", "ดูเหมือนว่าคุณยังไม่ได้เพิ่มข้อมูลเลย"));
   };
 
+  <>config Progress Ring </>
   const configProgressChartSYS = {
     backgroundGradientFrom: "#ffff",
     backgroundGradientTo: "#ffff",
@@ -303,6 +304,7 @@ const Statistics = () => {
     data: [avgBPM / 210]
   };
 
+  <>config LineChart</>
   const chartConfigLine = {
     backgroundGradientFrom: "#fff",
     backgroundGradientTo: "#fff",
@@ -311,7 +313,7 @@ const Statistics = () => {
     barPercentage: 0.5,
     useShadowColorFromDataset: false, // optional
     useShadowColorFromDataset: true,
-
+    decimalPlaces: 0,
   };
 
   const dataChartLine = {
@@ -333,8 +335,10 @@ const Statistics = () => {
         strokeWidth: 2 // optional
       },
     ],
+
   };
 
+  <>config Pie chart</>
   const dataPie = [
     {
       name: "ความดันโลหิตต่ำ",
@@ -446,26 +450,26 @@ const Statistics = () => {
                 <Text style={styles.avgTitle}>ค่าเฉลี่ย</Text></View>
             </HStack>
             <HStack space={16} justifyContent="center" marginTop="2%" marginBottom="3%" >
-              <TouchableOpacity style={[styles.contrainerSelected,{backgroundColor :colorSelectWeek}]}
+              <TouchableOpacity style={[styles.contrainerSelected, { backgroundColor: colorSelectWeek }]}
                 onPress={() => { getDataWeekAvg() }}>
                 <Text style={[styles.selectContainer, { color: textcolorSelectWeek, }]}>
                   สัปดาห์
                 </Text>
               </TouchableOpacity >
-              <TouchableOpacity style={[styles.contrainerSelected,{backgroundColor :colorSelectMonth}]}
+              <TouchableOpacity style={[styles.contrainerSelected, { backgroundColor: colorSelectMonth }]}
                 onPress={() => { getDataMonthAvg() }}>
                 <Text style={[styles.selectContainer, { color: textcolorSelectMonth, }]}>
                   เดือน
                 </Text>
               </TouchableOpacity>
-              <TouchableOpacity style={[styles.contrainerSelected,{backgroundColor :colorSelectAll}]}
+              <TouchableOpacity style={[styles.contrainerSelected, { backgroundColor: colorSelectAll }]}
                 onPress={() => { getDataAllAvg() }}>
                 <Text style={[styles.selectContainer, { color: textcolorSelectAll, }]}>
                   ทั้งหมด
                 </Text>
               </TouchableOpacity>
             </HStack>
-            <View style={{ alignItems: "center", marginTop: 10 }}>
+            <View style={{ alignItems: "center", marginTop: 10, }}>
               <Text style={{ fontFamily: "NotoSansThai-Regular", color: "black", fontSize: 12 }}>
                 {"ทั้งหมด " + LineChartCount + " ครั้ง"}
               </Text>
@@ -478,21 +482,22 @@ const Statistics = () => {
                 // fromNumber={220}
                 withShadow={true}
                 withVerticalLines={false}
+
               />
               <VStack position="absolute" alignItems="flex-start" marginTop={210} >
                 <HStack>
-                  <FontAwesome name='circle' color="#FF0000" style={{marginTop:3.5}} />
+                  <Ionicons name='remove-outline' color="#FF0000"  size={20} />
                   <Text style={styles.lineChartTitles}> ความดันโลหิตตัวบน (SYS)  </Text>
-                  <FontAwesome name='circle' color="#A4BF43" style={{marginTop:3.5}}/>
+                  <Ionicons name='remove-outline' color="#A4BF43"  size={20} />
                   <Text style={styles.lineChartTitles}> ความดันโลหิตตัวล่าง (DIA) </Text>
                 </HStack>
                 <HStack>
-                  <FontAwesome name='circle' color="#23AFD6" style={{marginTop:3.5}}/>
+                  <Ionicons name='remove-outline' color="#23AFD6"  size={20} />
                   <Text style={styles.lineChartTitles}> อัตราการเต้นของหัวใจ (PULSE)  </Text>
                 </HStack>
               </VStack>
             </View>
-            <VStack alignItems="center" marginTop={4}>
+            <VStack alignItems="center" marginTop={4} >
               <PieChart
                 data={dataPie}
                 width={360}
@@ -542,7 +547,7 @@ const styles = StyleSheet.create({
   numberProgressChart: {
     fontSize: 20,
     fontFamily: 'NotoSansThai-SemiBold',
-    color:"black",
+    color: "black",
   },
   titleProgressChart: {
     fontSize: 18,
@@ -551,7 +556,7 @@ const styles = StyleSheet.create({
   avgTitle: {
     fontSize: 12,
     fontFamily: 'NotoSansThai-Regular',
-    color:"black",
+    color: "black",
   },
   selectContainer: {
     fontSize: 17,
@@ -564,11 +569,11 @@ const styles = StyleSheet.create({
   },
   contrainerSelected: {
     // borderWidth:1, 
-    width:70 ,
-    height:35,
-    alignItems:"center",
+    width: 70,
+    height: 35,
+    alignItems: "center",
     justifyContent: "center",
-    borderRadius:25,
+    borderRadius: 25,
     shadowColor: "#000",
     elevation: 10,
   },
