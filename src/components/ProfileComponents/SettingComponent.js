@@ -175,7 +175,7 @@ const SettingComponent = () => {
               <VStack justifyContent="flex-start" width="100%" space={1.5} marginTop={5}>
                 <Text style={styles.textcolor}>อีเมล</Text>
                 <Text style={{ fontSize: 20, color: "black", fontFamily: 'NotoSansThai-Bold' }}>{userData.email}</Text>
-                <Text style={styles.textcolor}>ยูสเซอร์เนม</Text>
+                <Text style={styles.textcolor}>ชื่อผู้ใช้งาน</Text>
                 <TextInput
                   value={userData ? userData.username : ''}
                   onChangeText={(txt) => setUserData({ ...userData, username: txt })}
